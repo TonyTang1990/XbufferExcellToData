@@ -76,7 +76,7 @@
 
 导表耗时:
 
-	![XbuuferExcelToDataTimeConsume](/Images/XbufferExcelToDataTimeConsume.png)
+![XbuuferExcelToDataTimeConsume](/Images/XbufferExcelToDataTimeConsume.png)
 
 导表后的二进制文件大小(未压缩):
 	二进制数据总大小我统计了下未压缩共1.3M。
@@ -87,11 +87,11 @@
 
 PC:
 
-	![Profiler_GetMonoUsedSizeLong_MemoryUsing](/Images/Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
+![Profiler_GetMonoUsedSizeLong_MemoryUsing](/Images/Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
 
 小米Mix2一代:
 
-	![AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing](/Images/AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
+![AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing](/Images/AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
 
 Unity API统计的堆内存内存开销在5M左右。
 时间开销PC在100ms左右,Android真机在200ms左右。
