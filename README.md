@@ -1,2 +1,101 @@
 # XbufferExcellToData
 基于Xbuffer的自动化导表工具
+
+## 功能支持
+1. 支持常见基础数据类型配置(e.g int, bool, long, float, string)配置(可自行修改源码快速支持double之类的基础数据)
+2. 支持一维数据的快速配置(支持配置一个分割符(分隔符支持范围:"+;,|"))(可自行修改源码快速支持)
+3. 自动化生成表格数据快速访问相关代码
+4. 基于Xbuffer的高效序列化反序列化性能以及内存占用
+
+## Excel文件支持
+1. *.xlsx(实际上我只测试了这个，下面两个是理论上支持的)
+2. *.xls
+3. *.csv
+
+## 配置表规则
+1. 导表工具相关配置通过配置ExportConfig.xml文件即可
+    - ExcelInputPath(Excel目录配置)
+    - TemplatePath(代码模板文件目录配置)
+    - DesFileOutputPath(Excel对应的描述文件输出目录配置)
+    - ByteDataOutputPath(序列化数据输出目录配置)
+    - CSClassCodeOutputPath(CS类代码输出目录配置)
+    - CSBufferCodeOutputPath(CS序列化代码输出目录配置)
+    - CSTemplateOutputPath(CS模板文件代码输出目录配置)
+    - OtherLanguageCodeOutputPath(其他语言代码输出目录配置 -- 扩展支持其他语言的话(暂未做支持))
+    Note:
+    支持相对路径配置。
+2. 配置规则限制
+    - 第一行表示字段名字
+    - 第二行表示字段注释
+    - 第三行表示字段数据类型
+    - 第四行分隔符信息配置
+    - 第五行占位符1(未来扩展用)
+    - 第六行占位符2(未来扩展用)
+    - 第七行以及以后(数据配置)
+3. Excel的Sheet名字限制
+    - 不允许重名的Sheet名字
+4. 字段名要求
+    - 非注释类型字段必须配置字段名
+    - 非注释类型配置的字段名不能为空
+    - 非注释类型字段名在同一个Excel里不允许重名
+    - 注释类型不可以配置字段名
+5. 字段类型配置限制(只支持以下类型)
+    - int
+    - bool
+    - long
+    - float
+    - string
+    - 上面各基础类型的一维数组类型 T[]
+    - notation(注释类型，不会参与序列化和反序列化的数据，仅供Excel查看使用)
+6. 分隔符配置限制
+    - 只支持配置了T[]类型的数据配置分割符
+    - 分隔符只能指定一个
+    - 分隔符必须是以下分隔符里的一个:+;,|(可自行修改源码支持更多)
+    - T[]类型数据必须指定分隔符 
+7. 数据配置限制
+    - 第一列必须为int类型，用于配置id
+    - 第一列id配置不能为空
+    - 第一列id不能重复
+
+多语言扩展:
+理论上通过自定义对应模板生成对应语言反序列化相关代码即可。
+
+## Demo
+双击XbufferExcelToData.exe即可。
+会看到所有的输出目录:
+![FilesFolderStructure](../../../Images/FilesFolderStructure.png)
+
+测试用例:
+两张表（author_info.xlsx和global_config.xlsx），各配置了1000行数据，然后复制两张表9次并改名(文件名和Excel内部sheet名都得改)(总计20张表 X 994行数据)。
+
+测试平台：
+PC Windows & 小米 Mix2一代
+
+游戏引擎:
+Unity 2017.4.3f1
+
+导表耗时:
+![XbuuferExcelToDataTimeConsume](../../../Images/XbufferExcelToDataTimeConsume.png)
+
+导表后的二进制文件大小(未压缩):
+二进制数据总大小我统计了下未压缩共1.3M。
+
+表格数据读取内存以及反序列化时间开销：
+统计方式:
+Unity的Profiler.GetMonoUsedSizeLong()
+
+PC:
+![Profiler_GetMonoUsedSizeLong_MemoryUsing](../../../Images/Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
+
+小米Mix2一代:
+![AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing](../../../Images/AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
+
+Unity API统计的堆内存内存开销在5M左右。
+时间开销PC在100ms左右,Android真机在200ms左右。
+
+从20张表，每张表大概4-7个字段，各1000行数据来看，内存和序列化，反序列化速度都还是相当可观的。
+这里因为没有集成支持其他序列化方式，所以没法做详细的对比，详细各序列化库性能对比参考Xbuffer作者在Github上的对比[Xbuffer](https://github.com/CodeZeg/xbuffer)。
+
+# 鸣谢
+感谢Xbuffer作者的无私分享，Xbuffer的Github链接:
+[Xbuffer](https://github.com/CodeZeg/xbuffer)
