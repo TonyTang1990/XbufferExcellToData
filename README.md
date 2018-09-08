@@ -66,29 +66,32 @@
 ![FilesFolderStructure](/Images/FilesFolderStructure.png)
 
 测试用例:
-两张表（author_info.xlsx和global_config.xlsx），各配置了1000行数据，然后复制两张表9次并改名(文件名和Excel内部sheet名都得改)(总计20张表 X 994行数据)。
+	两张表（author_info.xlsx和global_config.xlsx），各配置了1000行数据，然后复制两张表9次并改名(文件名和Excel内部sheet名都得改)(总计20张表 X 994行数据)。
 
 测试平台：
-PC Windows & 小米 Mix2一代
+	PC Windows & 小米 Mix2一代
 
 游戏引擎:
-Unity 2017.4.3f1
+	Unity 2017.4.3f1
 
 导表耗时:
-![XbuuferExcelToDataTimeConsume](/Images/XbufferExcelToDataTimeConsume.png)
+
+	![XbuuferExcelToDataTimeConsume](/Images/XbufferExcelToDataTimeConsume.png)
 
 导表后的二进制文件大小(未压缩):
-二进制数据总大小我统计了下未压缩共1.3M。
+	二进制数据总大小我统计了下未压缩共1.3M。
 
 表格数据读取内存以及反序列化时间开销：
-统计方式:
-Unity的Profiler.GetMonoUsedSizeLong()
+	统计方式:
+		Unity的Profiler.GetMonoUsedSizeLong()
 
 PC:
-![Profiler_GetMonoUsedSizeLong_MemoryUsing](/Images/Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
+
+	![Profiler_GetMonoUsedSizeLong_MemoryUsing](/Images/Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
 
 小米Mix2一代:
-![AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing](../../../Images/AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
+
+	![AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing](../../../Images/AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
 
 Unity API统计的堆内存内存开销在5M左右。
 时间开销PC在100ms左右,Android真机在200ms左右。
