@@ -63,7 +63,7 @@
 ## Demo
 双击XbufferExcelToData.exe即可。
 会看到所有的输出目录:
-![FilesFolderStructure](../../../Images/FilesFolderStructure.png)
+![FilesFolderStructure](/Images/FilesFolderStructure.png)
 
 测试用例:
 两张表（author_info.xlsx和global_config.xlsx），各配置了1000行数据，然后复制两张表9次并改名(文件名和Excel内部sheet名都得改)(总计20张表 X 994行数据)。
@@ -75,7 +75,7 @@ PC Windows & 小米 Mix2一代
 Unity 2017.4.3f1
 
 导表耗时:
-![XbuuferExcelToDataTimeConsume](../../../Images/XbufferExcelToDataTimeConsume.png)
+![XbuuferExcelToDataTimeConsume](/Images/XbufferExcelToDataTimeConsume.png)
 
 导表后的二进制文件大小(未压缩):
 二进制数据总大小我统计了下未压缩共1.3M。
@@ -85,7 +85,7 @@ Unity 2017.4.3f1
 Unity的Profiler.GetMonoUsedSizeLong()
 
 PC:
-![Profiler_GetMonoUsedSizeLong_MemoryUsing](../../../Images/Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
+![Profiler_GetMonoUsedSizeLong_MemoryUsing](/Images/Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
 
 小米Mix2一代:
 ![AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing](../../../Images/AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
