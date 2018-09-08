@@ -91,7 +91,7 @@ PC:
 
 小米Mix2一代:
 
-	![AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing](../../../Images/AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
+	![AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing](/Images/AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
 
 Unity API统计的堆内存内存开销在5M左右。
 时间开销PC在100ms左右,Android真机在200ms左右。
