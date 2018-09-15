@@ -129,23 +129,24 @@ Demo使用流程：
     ![PrintAuthorInfoExcelData](/Images/PrintAuthorInfoExcelData.png)
 
 
-    表格数据读取内存以及反序列化时间开销：
-	   统计方式:
-	       Unity的Profiler.GetMonoUsedSizeLong()
+表格数据读取内存以及反序列化时间开销：
+	   
+   统计方式:
+       Unity的Profiler.GetMonoUsedSizeLong()
 
-PC:
+    PC:
 
-    ![Profiler_GetMonoUsedSizeLong_MemoryUsing](/Images/Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
+        ![Profiler_GetMonoUsedSizeLong_MemoryUsing](/Images/Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
 
-小米Mix2一代:
+    小米Mix2一代:
 
-    ![AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing](/Images/AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
+        ![AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing](/Images/AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
 
-Unity API统计的堆内存内存开销在5M左右。
-时间开销PC在100ms左右,Android真机在200ms左右。
+    Unity API统计的堆内存内存开销在5M左右。
+    时间开销PC在100ms左右,Android真机在200ms左右。
 
-从20张表，每张表大概4-7个字段，各1000行数据来看，内存和序列化，反序列化速度都还是相当可观的。
-这里因为没有集成支持其他序列化方式，所以没法做详细的对比，详细各序列化库性能对比参考Xbuffer作者在Github上的对比[Xbuffer](https://github.com/CodeZeg/xbuffer)。
+    从20张表，每张表大概4-7个字段，各1000行数据来看，内存和序列化，反序列化速度都还是相当可观的。
+    这里因为没有集成支持其他序列化方式，所以没法做详细的对比，详细各序列化库性能对比参考Xbuffer作者在Github上的对比[Xbuffer](https://github.com/CodeZeg/xbuffer)。
 
 Note:
 *理论上扩展支持其他语言只需要定义对应语言的模板文件然后生成对应所需代码即可。*
