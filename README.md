@@ -77,6 +77,7 @@ Github链接：
 本Github项目实现的以Xbuffer为序列化核心，ExcelDataReader作为Excel表格数据读取完成的一个自动化导表读取工具。
 
 C#工程里：
+
 核心文件(这里的流程顺序也相当于导表工具流程):
 1. ExportConfig.xml(导表工具相关路径配置文件)
 2. ExportConfig.cs(工具路径配置信息抽象类) &  XbufferExcelExportConfig.cs(工具路径配置信息读取管理类)
@@ -106,17 +107,17 @@ Demo使用流程：
 1. 配置ExportConfig.xml(保持默认配好的即可)
 2. 打开Unity工程项目XbufferExcelToDataUnityProject(Unity 2017.4.3.f1版本)
 
-Unity下的导表工具目录：
+    Unity下的导表工具目录：
 
 ![FilesFolderStructure](/Images/FilesFolderStructure.png)
 3. 双击使用Conf目录下的XbufferExcelToData.exe(导表工具触发导表)
 
-导表耗时:
+    导表耗时:
 
 ![XbuuferExcelToDataTimeConsume](/Images/XbufferExcelToDataTimeConsume.png)
 
-导表后的二进制文件大小(未压缩):
-    二进制数据总大小我统计了下未压缩共1.3M。
+    导表后的二进制文件大小(未压缩):
+        二进制数据总大小我统计了下未压缩共1.3M。
 4. 运行项目
 
 ![RunUnityProject](/Images/RunUnityProject.png)
@@ -128,9 +129,9 @@ Unity下的导表工具目录：
 ![PrintAuthorInfoExcelData](/Images/PrintAuthorInfoExcelData.png)
 
 
-表格数据读取内存以及反序列化时间开销：
-	统计方式:
-		Unity的Profiler.GetMonoUsedSizeLong()
+    表格数据读取内存以及反序列化时间开销：
+	   统计方式:
+	       Unity的Profiler.GetMonoUsedSizeLong()
 
 PC:
 
