@@ -151,10 +151,12 @@ Unity API统计的堆内存内存开销在5M左右。
 这里因为没有集成支持其他序列化方式，所以没法做详细的对比，详细各序列化库性能对比参考Xbuffer作者在Github上的对比[Xbuffer](https://github.com/CodeZeg/xbuffer)。
 
 Note:
+
 *理论上扩展支持其他语言只需要定义对应语言的模板文件然后生成对应所需代码即可。*
 
 ## 个人博客
 详细的博客记录学习:
+
 [Data-Config-Automation](http://tonytang1990.github.io/2018/03/18/Data-Config-Automation/#%E5%9F%BA%E4%BA%8EXbuffer%E7%9A%84%E5%AF%BC%E8%A1%A8%E5%B7%A5%E5%85%B7)
 
 # 鸣谢
