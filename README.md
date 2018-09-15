@@ -159,7 +159,9 @@ Note:
 
 # 鸣谢
 感谢Xbuffer作者的无私分享，Xbuffer的Github链接:
+
 [Xbuffer](https://github.com/CodeZeg/xbuffer)
 
-ExcelDataReader作者分享的Excel快速读取跨平台库，Github链接：
+感谢ExcelDataReader作者分享的Excel快速读取跨平台库，Github链接：
+
 [ExcelDataReader](https://github.com/ExcelDataReader/ExcelDataReader)
