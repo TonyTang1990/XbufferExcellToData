@@ -93,7 +93,7 @@ Unity工程：
 ## Demo使用说明
 测试数据:
     
-    两张表（author_info.xlsx和global_config.xlsx），各配置了1000行数据，然后复制两张表9次并改名(文件名和Excel内部sheet名都得改)(总计20张表 X 994行数据)。
+    两张表（author_info.xlsx和global_config.xlsx），各配置了1000行数据，然后复制两张表9次并改名(文件名和Excel内部sheet名都得改)(总计20张表 X 1000行数据)。
 
 测试平台：
     
@@ -137,11 +137,11 @@ Demo使用流程：
 
 PC:
 
-    ![Profiler_GetMonoUsedSizeLong_MemoryUsing](/Images/Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
+![Profiler_GetMonoUsedSizeLong_MemoryUsing](/Images/Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
 
 小米Mix2一代:
 
-    ![AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing](/Images/AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
+![AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing](/Images/AndroidDevice_Profiler_GetMonoUsedSizeLong_MemoryUsing.png)
 
 Unity API统计的堆内存内存开销在5M左右。
 时间开销PC在100ms左右,Android真机在200ms左右。
