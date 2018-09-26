@@ -18,3 +18,13 @@ G:\Projects\CSProjects\VS2017Projects\XbufferExcelToData\XbufferExcelToData\obj\
 G:\Projects\CSProjects\VS2017Projects\XbufferExcelToData\XbufferExcelToData\obj\Release\XbufferExcelToData.csproj.CopyComplete
 G:\Projects\CSProjects\VS2017Projects\XbufferExcelToData\XbufferExcelToData\obj\Release\XbufferExcelToData.exe
 G:\Projects\CSProjects\VS2017Projects\XbufferExcelToData\XbufferExcelToData\obj\Release\XbufferExcelToData.pdb
+G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Release\XbufferExcelToData.exe.config
+G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Release\XbufferExcelToData.exe
+G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Release\XbufferExcelToData.pdb
+G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Release\Excel.dll
+G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Release\ICSharpCode.SharpZipLib.dll
+G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\obj\Release\XbufferExcelToData.csprojAssemblyReference.cache
+G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\obj\Release\XbufferExcelToData.csproj.CoreCompileInputs.cache
+G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\obj\Release\XbufferExcelToData.csproj.CopyComplete
+G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\obj\Release\XbufferExcelToData.exe
+G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\obj\Release\XbufferExcelToData.pdb

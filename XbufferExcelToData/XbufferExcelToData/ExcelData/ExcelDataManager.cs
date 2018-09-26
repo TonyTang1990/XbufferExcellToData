@@ -180,7 +180,18 @@ namespace XbufferExcelToData
                 AllExcelFilesList.Clear();
                 foreach (var postfixfilter in ValideExcelPostFixFilter)
                 {
-                    AllExcelFilesList.AddRange(Directory.GetFiles(ExcelFolderPath, postfixfilter));
+                    var files = Directory.GetFiles(ExcelFolderPath, postfixfilter);
+                    foreach(var file in files)
+                    {
+                        if(AllExcelFilesList.Contains(file))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            AllExcelFilesList.Add(file);
+                        }
+                    }
                 }
                 return true;
             }
