@@ -244,6 +244,7 @@
     <Compile Include="Assets\Scripts\Core\Config\GameConfig\GameConfigManager.cs" />
     <Compile Include="Assets\Scripts\Core\Config\GameConfig\VersionConfig.cs" />
     <Compile Include="Assets\Scripts\Core\Resource\ConfLoader.cs" />
+    <Compile Include="Assets\Scripts\Core\Resource\ResourceManager.cs" />
     <Compile Include="Assets\Scripts\Core\Singleton\SingletonMonoBehaviourTemplate.cs" />
     <Compile Include="Assets\Scripts\Core\Singleton\SingletonTemplate.cs" />
     <Compile Include="Assets\Scripts\Data\CSOutput\BufferCode\t_AuthorInfo10Buffer.cs" />

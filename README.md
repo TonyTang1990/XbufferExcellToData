@@ -154,7 +154,24 @@ Note:
 
 *理论上扩展支持其他语言只需要定义对应语言的模板文件然后生成对应所需代码即可。*
 
+## 小技巧
+
+问题：
+
+每次导表格后生成CS代码导致Unity转圈圈转很久。
+
+解决方案：
+
+支持配置是否生成CS代码来优化Unity转圈圈问题
+
+使用方式：
+
+ExportExcel_DisableCSOuput.bat -- 关闭生成CS代码功能的导表快捷方式
+
+ExportExcel_EnableCSOuput.bat -- 开启生成CS代码功能的导表快捷方式
+
 ## 个人博客
+
 详细的博客记录学习:
 
 [Data-Config-Automation](http://tonytang1990.github.io/2018/03/18/Data-Config-Automation/#%E5%9F%BA%E4%BA%8EXbuffer%E7%9A%84%E5%AF%BC%E8%A1%A8%E5%B7%A5%E5%85%B7)

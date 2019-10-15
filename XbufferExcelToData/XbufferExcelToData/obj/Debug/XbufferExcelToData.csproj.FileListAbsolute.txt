@@ -36,9 +36,9 @@ G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelTo
 G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Debug\XbufferExcelToData.pdb
 G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Debug\Excel.dll
 G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Debug\ICSharpCode.SharpZipLib.dll
-G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Debug\xbuffer_runtime.pdb
 G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\obj\Debug\XbufferExcelToData.csprojAssemblyReference.cache
 G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\obj\Debug\XbufferExcelToData.csproj.CoreCompileInputs.cache
 G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\obj\Debug\XbufferExcelToData.csproj.CopyComplete
 G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\obj\Debug\XbufferExcelToData.exe
 G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\obj\Debug\XbufferExcelToData.pdb
+G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Debug\xbuffer_runtime.pdb

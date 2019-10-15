@@ -10,3 +10,8 @@ E:\TonyTang\Work\MyPorjects\CS\XbufferExcelToData\XbufferExcelToData\Core\Xbuffe
 E:\TonyTang\Work\MyPorjects\CS\XbufferExcelToData\XbufferExcelToData\Core\Xbuffer\xbuffer_runtime\obj\Debug\xbuffer_runtime.csproj.CoreCompileInputs.cache
 E:\TonyTang\Work\MyPorjects\CS\XbufferExcelToData\XbufferExcelToData\Core\Xbuffer\xbuffer_runtime\obj\Debug\xbuffer_runtime.dll
 E:\TonyTang\Work\MyPorjects\CS\XbufferExcelToData\XbufferExcelToData\Core\Xbuffer\xbuffer_runtime\obj\Debug\xbuffer_runtime.pdb
+G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Debug\xbuffer_runtime.dll
+G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Debug\xbuffer_runtime.pdb
+G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\Core\Xbuffer\xbuffer_runtime\obj\Debug\xbuffer_runtime.csproj.CoreCompileInputs.cache
+G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\Core\Xbuffer\xbuffer_runtime\obj\Debug\xbuffer_runtime.dll
+G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\Core\Xbuffer\xbuffer_runtime\obj\Debug\xbuffer_runtime.pdb
