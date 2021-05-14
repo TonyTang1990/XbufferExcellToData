@@ -15,3 +15,9 @@ G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelTo
 G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\Core\Xbuffer\xbuffer_runtime\obj\Debug\xbuffer_runtime.csproj.CoreCompileInputs.cache
 G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\Core\Xbuffer\xbuffer_runtime\obj\Debug\xbuffer_runtime.dll
 G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\Core\Xbuffer\xbuffer_runtime\obj\Debug\xbuffer_runtime.pdb
+E:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Debug\xbuffer_runtime.dll
+E:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Debug\xbuffer_runtime.pdb
+E:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\Core\Xbuffer\xbuffer_runtime\obj\Debug\xbuffer_runtime.csprojAssemblyReference.cache
+E:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\Core\Xbuffer\xbuffer_runtime\obj\Debug\xbuffer_runtime.csproj.CoreCompileInputs.cache
+E:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\Core\Xbuffer\xbuffer_runtime\obj\Debug\xbuffer_runtime.dll
+E:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\Core\Xbuffer\xbuffer_runtime\obj\Debug\xbuffer_runtime.pdb
