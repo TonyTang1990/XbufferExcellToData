@@ -141,6 +141,16 @@ namespace XbufferExcelToData
                 }
                 mTemplateInstance.endLoop();
 
+                // 循环替换配置获取List和Map方法接口定义
+                mTemplateInstance.beginLoop("#CONTAINER_GET_LOOP#");
+                foreach (var excelinfo in mExcelInfoList)
+                {
+                    // 替换配置获取List和Map循环里的类名
+                    mTemplateInstance.setValue("#LOOP_CLASS_NAME#", excelinfo.ExcelName);
+                    mTemplateInstance.nextLoop();
+                }
+                mTemplateInstance.endLoop();
+
                 // 输出生成内容到文件
                 var outputfilefullpath = TemplateCSOutputPath + "GameDataManager.cs";
                 File.WriteAllText(outputfilefullpath, mTemplateInstance.getContent());

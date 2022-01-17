@@ -76,7 +76,7 @@ public class GameLauncher : MonoBehaviour {
     public void onPrintAuthorInfoExcelData()
     {
         Debug.Log("onPrintAuthorInfoExcelData()");
-        foreach(var authorinfo in GameDataManager.Instance.t_AuthorInfocontainer.getList())
+        foreach(var authorinfo in GameDataManager.Instance.Gett_AuthorInfoList())
         {
             Debug.Log(string.Format("authorinfo.id : {0}", authorinfo.id));
             Debug.Log(string.Format("authorinfo.author : {0}", authorinfo.author));
