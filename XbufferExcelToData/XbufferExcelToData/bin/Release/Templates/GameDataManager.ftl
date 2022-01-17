@@ -28,12 +28,12 @@ namespace Data
 		#CONTAINER_GET_LOOP#
 		public #LOOP_CLASS_NAME#Container Get#LOOP_CLASS_NAME#List()
 		{
-			return m#LOOP_CLASS_NAME#Container.getList()
+			return m#LOOP_CLASS_NAME#Container.getList();
 		}
 
 		public #LOOP_CLASS_NAME#Container Get#LOOP_CLASS_NAME#Map()
 		{
-			return m#LOOP_CLASS_NAME#Container.getMap()
+			return m#LOOP_CLASS_NAME#Container.getMap();
 		}
 		#CONTAINER_GET_LOOP#
 	}
