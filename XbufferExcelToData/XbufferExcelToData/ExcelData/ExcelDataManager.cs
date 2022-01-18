@@ -32,6 +32,11 @@ namespace XbufferExcelToData
 
         #region Excel数据规则
         /// <summary>
+        /// 不参与导表的sheet名开头标识
+        /// </summary>
+        private const string BLACK_LIST_PREFIX = "blacklist";
+
+        /// <summary>
         /// 字段名字行号
         /// </summary>
         private const int FieldNameLineNumber = 1;
@@ -225,136 +230,139 @@ namespace XbufferExcelToData
                     Console.WriteLine(string.Format("Excel文件.Name:{0}", excelreader.Name));
                     #endif
                     var dataset = excelreader.AsDataSet();
-                    if (dataset.Tables.Count > 1)
+                    for (int index = 0, length = dataset.Tables.Count; index < length; index++)
                     {
-                        Console.WriteLine(string.Format("Excel文件:{0},不允许一个Excel多张Table!", excelreader.Name));
-                        issuccess = false;
-                        break;
-                    }
-                    else if (ExcelsInfoMap.ContainsKey(excelreader.Name))
-                    {
-                        Console.WriteLine(string.Format("有同名的Excel Table存在!同名Excel:{0}!", excelreader.Name));
-                        issuccess = false;
-                        break;
-                    }
-                    else
-                    {
-                        var excelinfo = new ExcelInfo();
-                        excelinfo.ExcelName = excelreader.Name;
-                        int currentlinenumber = 1;
-                        while (excelreader.Read())
+                        // 如果配置有问题，直接退出
+                        if (issuccess == false)
                         {
-                            //读取每一行的数据
-                            string[] datas = new string[excelreader.FieldCount];
-                            for (int i = 0; i < excelreader.FieldCount; i++)
+                            Console.WriteLine("配置有问题，请先修正配置后再导出!");
+                            break;
+                        }
+                        if (IsValideSheet(excelreader.Name))
+                        {
+                            if (ExcelsInfoMap.ContainsKey(excelreader.Name))
                             {
-                                datas[i] = excelreader.GetString(i);
-                            }
-
-                            // 字段信息行
-                            if (currentlinenumber == FieldNameLineNumber)
-                            {
-                                excelinfo.FieldNames = datas;
-                            }
-                            // 字段注释信息行
-                            else if (currentlinenumber == FieldNotationLineNumber)
-                            {
-                                excelinfo.FieldNotations = datas;
-                            }
-                            // 字段类型信息行
-                            else if (currentlinenumber == FieldTypeLineNumber)
-                            {
-                                excelinfo.FieldTypes = datas;
-                            }
-                            // 字段分隔符信息行
-                            else if (currentlinenumber == FieldSpliterLineNumber)
-                            {
-                                excelinfo.FieldSpliters = datas;
-                            }
-                            // 字段占位符1信息行
-                            else if (currentlinenumber == FieldPlaceHolder1LineNumber)
-                            {
-                                excelinfo.FieldPlaceholder1s = datas;
-                            }
-                            // 字段占位符2信息行
-                            else if (currentlinenumber == FieldPlaceHolder2LineNumber)
-                            {
-                                excelinfo.FieldPlaceholder2s = datas;
-                            }
-                            else if (currentlinenumber >= DataLineNumber)
-                            {
-                                // 存储数据之前，检查一次各字段名字，字段信息等配置是否正确
-                                if (currentlinenumber == DataLineNumber)
-                                {
-                                    if (hasInvalideName(excelinfo.FieldNames, excelinfo.FieldTypes))
-                                    {
-                                        Console.WriteLine(string.Format("Excel Table:{0}", excelreader.Name));
-                                        issuccess = false;
-                                        break;
-                                    }
-                                    if (hasInvalideType(excelinfo.FieldTypes))
-                                    {
-                                        Console.WriteLine(string.Format("Excel Table:{0}", excelreader.Name));
-                                        issuccess = false;
-                                        break;
-                                    }
-                                    if (hasInvalideSpliter(excelinfo.FieldSpliters))
-                                    {
-                                        Console.WriteLine(string.Format("Excel Table:{0}", excelreader.Name));
-                                        issuccess = false;
-                                        break;
-                                    }
-                                }
-
-                                if (hasInvalideData(datas, currentlinenumber))
-                                {
-                                    Console.WriteLine(string.Format("Excel Table:{0}", excelreader.Name));
-                                    issuccess = false;
-                                    break;
-                                }                                
-                                // 记录每一行所有数据的字段名，字段类型，字段数据
-                                ExcelData[] exceldatas = new ExcelData[datas.Length];
-                                for (int m = 0; m < datas.Length; m++)
-                                {
-                                    ExcelData cd = new ExcelData();
-                                    cd.Type = excelinfo.FieldTypes[m];
-                                    cd.Name = excelinfo.FieldNames[m];
-                                    cd.Spliter = excelinfo.FieldSpliters[m];
-                                    cd.Data = datas[m];
-                                    exceldatas[m] = cd;
-                                }
-
-                                if(issuccess == false)
-                                {
-                                    break;
-                                }
-                                else
-                                {
-                                    excelinfo.addData(exceldatas);
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine(string.Format("无效的行号:{0}", currentlinenumber));
+                                Console.WriteLine(string.Format("有同名的Excel Table存在!同名Excel:{0}!", excelreader.Name));
                                 issuccess = false;
                                 break;
                             }
-                            currentlinenumber++;
-                        }
+                            else
+                            {
+                                var excelinfo = new ExcelInfo();
+                                excelinfo.ExcelName = excelreader.Name;
+                                int currentlinenumber = 1;
+                                while (excelreader.Read())
+                                {
+                                    //读取每一行的数据
+                                    string[] datas = new string[excelreader.FieldCount];
+                                    for (int i = 0; i < excelreader.FieldCount; i++)
+                                    {
+                                        datas[i] = excelreader.GetString(i);
+                                    }
 
-                        // 检查是否有重复的id
-                        if(hasDuplicatedId(excelinfo))
-                        {
-                            Console.WriteLine("不允许配置重复的id!");
-                            issuccess = false;
-                            break;
-                        }
+                                    // 字段信息行
+                                    if (currentlinenumber == FieldNameLineNumber)
+                                    {
+                                        excelinfo.FieldNames = datas;
+                                    }
+                                    // 字段注释信息行
+                                    else if (currentlinenumber == FieldNotationLineNumber)
+                                    {
+                                        excelinfo.FieldNotations = datas;
+                                    }
+                                    // 字段类型信息行
+                                    else if (currentlinenumber == FieldTypeLineNumber)
+                                    {
+                                        excelinfo.FieldTypes = datas;
+                                    }
+                                    // 字段分隔符信息行
+                                    else if (currentlinenumber == FieldSpliterLineNumber)
+                                    {
+                                        excelinfo.FieldSpliters = datas;
+                                    }
+                                    // 字段占位符1信息行
+                                    else if (currentlinenumber == FieldPlaceHolder1LineNumber)
+                                    {
+                                        excelinfo.FieldPlaceholder1s = datas;
+                                    }
+                                    // 字段占位符2信息行
+                                    else if (currentlinenumber == FieldPlaceHolder2LineNumber)
+                                    {
+                                        excelinfo.FieldPlaceholder2s = datas;
+                                    }
+                                    else if (currentlinenumber >= DataLineNumber)
+                                    {
+                                        // 存储数据之前，检查一次各字段名字，字段信息等配置是否正确
+                                        if (currentlinenumber == DataLineNumber)
+                                        {
+                                            if (hasInvalideName(excelinfo.FieldNames, excelinfo.FieldTypes))
+                                            {
+                                                Console.WriteLine(string.Format("Excel Table:{0}", excelreader.Name));
+                                                issuccess = false;
+                                                break;
+                                            }
+                                            if (hasInvalideType(excelinfo.FieldTypes))
+                                            {
+                                                Console.WriteLine(string.Format("Excel Table:{0}", excelreader.Name));
+                                                issuccess = false;
+                                                break;
+                                            }
+                                            if (hasInvalideSpliter(excelinfo.FieldSpliters))
+                                            {
+                                                Console.WriteLine(string.Format("Excel Table:{0}", excelreader.Name));
+                                                issuccess = false;
+                                                break;
+                                            }
+                                        }
 
-                        if (issuccess == false)
-                        {
-                            break;
+                                        if (hasInvalideData(datas, currentlinenumber))
+                                        {
+                                            Console.WriteLine(string.Format("Excel Table:{0}", excelreader.Name));
+                                            issuccess = false;
+                                            break;
+                                        }
+                                        // 记录每一行所有数据的字段名，字段类型，字段数据
+                                        ExcelData[] exceldatas = new ExcelData[datas.Length];
+                                        for (int m = 0; m < datas.Length; m++)
+                                        {
+                                            ExcelData cd = new ExcelData();
+                                            cd.Type = excelinfo.FieldTypes[m];
+                                            cd.Name = excelinfo.FieldNames[m];
+                                            cd.Spliter = excelinfo.FieldSpliters[m];
+                                            cd.Data = datas[m];
+                                            exceldatas[m] = cd;
+                                        }
+
+                                        if (issuccess == false)
+                                        {
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            excelinfo.addData(exceldatas);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine(string.Format("无效的行号:{0}", currentlinenumber));
+                                        issuccess = false;
+                                        break;
+                                    }
+                                    currentlinenumber++;
+                                }
+
+                                // 检查是否有重复的id
+                                if (hasDuplicatedId(excelinfo))
+                                {
+                                    Console.WriteLine("不允许配置重复的id!");
+                                    issuccess = false;
+                                    break;
+                                }
+
+                                ExcelsInfoMap.Add(excelreader.Name, excelinfo);
+                            }
                         }
-                        ExcelsInfoMap.Add(excelreader.Name, excelinfo);
+                        excelreader.NextResult();
                     }
                 }
             }
@@ -375,6 +383,16 @@ namespace XbufferExcelToData
 #endif
                 return true;
             }
+        }
+
+        /// <summary>
+        /// 是否是有效Sheet
+        /// </summary>
+        /// <param name="sheetname"></param>
+        /// <returns></returns>
+        private bool IsValideSheet(string sheetname)
+        {
+            return !sheetname.StartsWith(BLACK_LIST_PREFIX);
         }
 
         /// <summary>
