@@ -1,85 +1,53 @@
 namespace xbuffer
 {
-    public static class t_GlobalBuffer
+    public static class t_globalBuffer
     {
-        public static t_Global deserialize(byte[] buffer, ref uint offset)
+        public static t_global deserialize(byte[] buffer, ref uint offset)
         {
 
             // null
             bool _null = boolBuffer.deserialize(buffer, ref offset);
             if (_null) return null;
 
-			// id
-			int _id = intBuffer.deserialize(buffer, ref offset);
+			// Id
+			int _Id = intBuffer.deserialize(buffer, ref offset);
 
-			// stringvalue
-			string _stringvalue = stringBuffer.deserialize(buffer, ref offset);
+			// string_value
+			string _string_value = stringBuffer.deserialize(buffer, ref offset);
 
-			// intvalue
-			int _intvalue = intBuffer.deserialize(buffer, ref offset);
+			// int_value
+			int _int_value = intBuffer.deserialize(buffer, ref offset);
 
-			// floatvalue
-			float _floatvalue = floatBuffer.deserialize(buffer, ref offset);
-
-			// intarrayvalue
-			int _intarrayvalue_length = intBuffer.deserialize(buffer, ref offset);
-            int[] _intarrayvalue = new int[_intarrayvalue_length];
-            for (int i = 0; i < _intarrayvalue_length; i++)
-            {
-                _intarrayvalue[i] = intBuffer.deserialize(buffer, ref offset);
-            }
-
-			// stringarrayvalue
-			int _stringarrayvalue_length = intBuffer.deserialize(buffer, ref offset);
-            string[] _stringarrayvalue = new string[_stringarrayvalue_length];
-            for (int i = 0; i < _stringarrayvalue_length; i++)
-            {
-                _stringarrayvalue[i] = stringBuffer.deserialize(buffer, ref offset);
-            }
+			// bool_value
+			bool _bool_value = boolBuffer.deserialize(buffer, ref offset);
 
 			// value
-			return new t_Global() {
-				id = _id,
-				stringvalue = _stringvalue,
-				intvalue = _intvalue,
-				floatvalue = _floatvalue,
-				intarrayvalue = _intarrayvalue,
-				stringarrayvalue = _stringarrayvalue,
+			return new t_global() {
+				Id = _Id,
+				string_value = _string_value,
+				int_value = _int_value,
+				bool_value = _bool_value,
             };
         }
 
-        public static void serialize(t_Global value, XSteam steam)
+        public static void serialize(t_global value, XSteam steam)
         {
 
             // null
             boolBuffer.serialize(value == null, steam);
             if (value == null) return;
 
-			// id
-			intBuffer.serialize(value.id, steam);
+			// Id
+			intBuffer.serialize(value.Id, steam);
 
-			// stringvalue
-			stringBuffer.serialize(value.stringvalue, steam);
+			// string_value
+			stringBuffer.serialize(value.string_value, steam);
 
-			// intvalue
-			intBuffer.serialize(value.intvalue, steam);
+			// int_value
+			intBuffer.serialize(value.int_value, steam);
 
-			// floatvalue
-			floatBuffer.serialize(value.floatvalue, steam);
-
-			// intarrayvalue
-            intBuffer.serialize(value.intarrayvalue.Length, steam);
-            for (int i = 0; i < value.intarrayvalue.Length; i++)
-            {
-                intBuffer.serialize(value.intarrayvalue[i], steam);
-            }
-
-			// stringarrayvalue
-            intBuffer.serialize(value.stringarrayvalue.Length, steam);
-            for (int i = 0; i < value.stringarrayvalue.Length; i++)
-            {
-                stringBuffer.serialize(value.stringarrayvalue[i], steam);
-            }
+			// bool_value
+			boolBuffer.serialize(value.bool_value, steam);
         }
     }
 }

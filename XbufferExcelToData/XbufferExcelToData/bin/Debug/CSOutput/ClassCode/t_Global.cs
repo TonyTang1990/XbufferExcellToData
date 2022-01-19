@@ -1,15 +1,11 @@
-// t_Global的注释
-public partial class t_Global
+// t_global的注释
+public partial class t_global
 {
-	public int id;				// 唯一id
+	public int Id;				// 唯一id
 
-	public string stringvalue;				// 字符串数据
+	public string string_value;				// 字符串值
 
-	public int intvalue;				// 整形数据
+	public int int_value;				// 整形值
 
-	public float floatvalue;				// 浮点数数据
-
-	public int[] intarrayvalue;				// 整形数组数据
-
-	public string[] stringarrayvalue;				// 字符串数组数据
+	public bool bool_value;				// bool值
 }

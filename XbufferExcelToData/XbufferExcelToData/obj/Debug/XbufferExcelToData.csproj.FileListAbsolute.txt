@@ -57,8 +57,8 @@ E:\TonyTang\Work\Projects\MyGitHubProjects\XbuffExcelToData\XbufferExcelToData\X
 E:\TonyTang\Work\Projects\MyGitHubProjects\XbuffExcelToData\XbufferExcelToData\XbufferExcelToData\bin\Debug\XbufferExcelToData.pdb
 E:\TonyTang\Work\Projects\MyGitHubProjects\XbuffExcelToData\XbufferExcelToData\XbufferExcelToData\bin\Debug\Excel.dll
 E:\TonyTang\Work\Projects\MyGitHubProjects\XbuffExcelToData\XbufferExcelToData\XbufferExcelToData\bin\Debug\ICSharpCode.SharpZipLib.dll
-E:\TonyTang\Work\Projects\MyGitHubProjects\XbuffExcelToData\XbufferExcelToData\XbufferExcelToData\bin\Debug\xbuffer_runtime.pdb
 E:\TonyTang\Work\Projects\MyGitHubProjects\XbuffExcelToData\XbufferExcelToData\XbufferExcelToData\obj\Debug\XbufferExcelToData.csproj.AssemblyReference.cache
 E:\TonyTang\Work\Projects\MyGitHubProjects\XbuffExcelToData\XbufferExcelToData\XbufferExcelToData\obj\Debug\XbufferExcelToData.csproj.CoreCompileInputs.cache
 E:\TonyTang\Work\Projects\MyGitHubProjects\XbuffExcelToData\XbufferExcelToData\XbufferExcelToData\obj\Debug\XbufferExcelToData.exe
 E:\TonyTang\Work\Projects\MyGitHubProjects\XbuffExcelToData\XbufferExcelToData\XbufferExcelToData\obj\Debug\XbufferExcelToData.pdb
+E:\TonyTang\Work\Projects\MyGitHubProjects\XbuffExcelToData\XbufferExcelToData\XbufferExcelToData\obj\Debug\XbufferExcelToData.csproj.CopyComplete

@@ -85,6 +85,8 @@ namespace XbufferExcelToData
                     mTemplateInstance.resetContent(templatecontent);
                     // 替换表格加载管理里的类名
                     mTemplateInstance.setValue("#CLASS_NAME#", excelinfo.ExcelName);
+                    mTemplateInstance.setValue("#ID_TYPE#", excelinfo.getIdType());
+                    mTemplateInstance.setValue("#ID_NAME#", ExcelDataManager.ID_NAME);
                     // 输出生成内容到文件
                     var outputfilefullpath = TemplateCSOutputPath + excelinfo.ExcelName + "Container.cs";
                     File.WriteAllText(outputfilefullpath, mTemplateInstance.getContent());
@@ -147,6 +149,7 @@ namespace XbufferExcelToData
                 {
                     // 替换配置获取List和Map循环里的类名
                     mTemplateInstance.setValue("#LOOP_CLASS_NAME#", excelinfo.ExcelName);
+                    mTemplateInstance.setValue("#ID_TYPE#", excelinfo.getIdType());
                     mTemplateInstance.nextLoop();
                 }
                 mTemplateInstance.endLoop();

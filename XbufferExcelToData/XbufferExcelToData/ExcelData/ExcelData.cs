@@ -62,6 +62,15 @@ namespace XbufferExcelToData
         }
 
         /// <summary>
+        /// 获取Id的类型(仅支持int和string)
+        /// </summary>
+        /// <returns></returns>
+        public string getIdType()
+        {
+            return FieldTypes != null ? FieldTypes[0] : string.Empty;
+        }
+
+        /// <summary>
         /// 打印所有Excel信息
         /// </summary>
         public void printOutAllExcelInfo()

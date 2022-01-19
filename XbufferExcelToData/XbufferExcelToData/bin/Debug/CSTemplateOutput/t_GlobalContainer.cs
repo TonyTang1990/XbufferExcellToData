@@ -10,19 +10,19 @@ using xbuffer;
 
 namespace Data
 {
-    public class t_GlobalContainer
+    public class t_globalContainer
     {
-        private List<t_Global> list = null;
-        private Dictionary<int, t_Global> map = null;
+        private List<t_global> list = null;
+        private Dictionary<int, t_global> map = null;
 
-        public List<t_Global> getList()
+        public List<t_global> getList()
         {
             if (list == null || list.Count <= 0)
                 loadDataFromBin();
             return list;
         }
 
-        public Dictionary<int, t_Global> getMap()
+        public Dictionary<int, t_global> getMap()
         {
             if (map == null || map.Count <= 0)
                 loadDataFromBin();
@@ -39,7 +39,7 @@ namespace Data
 
         public void loadDataFromBin()
         {   
-            Stream fs = ConfLoader.Singleton.getStreamByteName(typeof(t_Global).Name);
+            Stream fs = ConfLoader.Singleton.getStreamByteName(typeof(t_global).Name);
             if(fs != null)
             {
                 BinaryReader br = new BinaryReader(fs);
@@ -53,13 +53,13 @@ namespace Data
                             frist = false;
                             ClearList();
                             var count = br.ReadInt32();
-                            list =  new List<t_Global>(count);
-                            map = new Dictionary<int, t_Global>(count);
+                            list =  new List<t_global>(count);
+                            map = new Dictionary<int, t_global>(count);
                         }
 
                         var length = br.ReadInt32();
                         var data = br.ReadBytes(length);
-                        var obj= t_GlobalBuffer.deserialize(data, ref offset);
+                        var obj= t_globalBuffer.deserialize(data, ref offset);
                         offset = 0;
                         list.Add(obj);
                         map.Add(obj.id, obj); 
