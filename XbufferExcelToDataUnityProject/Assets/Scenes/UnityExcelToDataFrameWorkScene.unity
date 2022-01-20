@@ -706,7 +706,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1095610681}
-        m_MethodName: onPrintAuthorInfoExcelData
+        m_MethodName: onPrintUIExcelData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1000,7 +1000,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1095610681}
-        m_MethodName: onPrintAuthorInfoExcelData
+        m_MethodName: onPrintGlobal_SExcelData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1621,7 +1621,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1095610681}
-        m_MethodName: onPrintAuthorInfoExcelData
+        m_MethodName: onPrintLanguageExcelData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
