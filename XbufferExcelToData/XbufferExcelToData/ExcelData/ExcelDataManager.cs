@@ -369,7 +369,7 @@ namespace XbufferExcelToData
                                 // 检查是否有重复的id
                                 if (!isIdValide(excelinfo))
                                 {
-                                    Console.WriteLine($"Excel Sheet:{excelinfo.ExcelName}的Id配置无效!");
+                                    Console.WriteLine($"Excel Sheet:{excelinfo.ExcelName}的配置有问题!");
                                     issuccess = false;
                                     break;
                                 }
@@ -440,11 +440,6 @@ namespace XbufferExcelToData
             if(length == 0)
             {
                 Console.WriteLine($"未配置有效字段和类型信息!");
-                return true;
-            }
-            if(!names[0].Equals(ID_NAME))
-            {
-                Console.WriteLine($"第一列字段名必须是:{ID_NAME},当前配置字段名为:{names[0]}");
                 return true;
             }
             for (int i = 0; i < length; i++)

@@ -78,7 +78,7 @@ public class GameLauncher : MonoBehaviour {
         Debug.Log("onPrintAuthorInfoExcelData()");
         foreach(var authorinfo in GameDataManager.Instance.Gett_AuthorInfoList())
         {
-            Debug.Log(string.Format("authorinfo.id : {0}", authorinfo.id));
+            Debug.Log(string.Format("authorinfo.Id : {0}", authorinfo.Id));
             Debug.Log(string.Format("authorinfo.author : {0}", authorinfo.author));
             Debug.Log(string.Format("authorinfo.age : {0}", authorinfo.age));
             Debug.Log(string.Format("authorinfo.hashouse : {0}", authorinfo.hashouse));
@@ -88,6 +88,47 @@ public class GameLauncher : MonoBehaviour {
             {
                 Debug.Log(string.Format("authorinfo.lucknumber : {0}", lucknumber));
             }
+        }
+    }
+
+    /// <summary>
+    /// 打印GlobalS
+    /// </summary>
+    public void onPrintGlobal_SExcelData()
+    {
+        Debug.Log("onPrintAuthorInfoExcelData()");
+        foreach (var globalS in GameDataManager.Instance.Gett_global_sMap())
+        {
+            Debug.Log(string.Format("globalS.Key : {0}", globalS.Value.Key));
+            Debug.Log(string.Format("globalS.Value : {0}", globalS.Value.Value));
+        }
+    }
+
+    /// <summary>
+    /// 打印UI表
+    /// </summary>
+    public void onPrintUIExcelData()
+    {
+        Debug.Log("onPrintUIExcelData()");
+        foreach (var ui in GameDataManager.Instance.Gett_uiMap())
+        {
+            Debug.Log(string.Format("ui.WinName : {0}", ui.Value.WinName));
+            Debug.Log(string.Format("ui.ResPath : {0}", ui.Value.ResPath));
+            Debug.Log(string.Format("ui.IsFullScreen : {0}", ui.Value.IsFullScreen));
+            Debug.Log(string.Format("ui.Layer : {0}", ui.Value.Layer));
+        }
+    }
+
+    /// <summary>
+    /// 打印语言表
+    /// </summary>
+    public void onPrintLanguageExcelData()
+    {
+        Debug.Log("onPrintLanguageExcelData()");
+        foreach (var languageCn in GameDataManager.Instance.Gett_language_cnMap())
+        {
+            Debug.Log(string.Format("ui.Key : {0}", languageCn.Value.Key));
+            Debug.Log(string.Format("ui.Value : {0}", languageCn.Value.Value));
         }
     }
 }

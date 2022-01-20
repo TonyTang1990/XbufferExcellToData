@@ -9,8 +9,8 @@ namespace xbuffer
             bool _null = boolBuffer.deserialize(buffer, ref offset);
             if (_null) return null;
 
-			// id
-			int _id = intBuffer.deserialize(buffer, ref offset);
+			// Id
+			int _Id = intBuffer.deserialize(buffer, ref offset);
 
 			// author
 			string _author = stringBuffer.deserialize(buffer, ref offset);
@@ -37,7 +37,7 @@ namespace xbuffer
 
 			// value
 			return new t_AuthorInfo10() {
-				id = _id,
+				Id = _Id,
 				author = _author,
 				age = _age,
 				money = _money,
@@ -54,8 +54,8 @@ namespace xbuffer
             boolBuffer.serialize(value == null, steam);
             if (value == null) return;
 
-			// id
-			intBuffer.serialize(value.id, steam);
+			// Id
+			intBuffer.serialize(value.Id, steam);
 
 			// author
 			stringBuffer.serialize(value.author, steam);

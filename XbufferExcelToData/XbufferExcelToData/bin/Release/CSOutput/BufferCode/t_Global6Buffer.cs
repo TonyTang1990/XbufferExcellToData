@@ -9,8 +9,8 @@ namespace xbuffer
             bool _null = boolBuffer.deserialize(buffer, ref offset);
             if (_null) return null;
 
-			// id
-			int _id = intBuffer.deserialize(buffer, ref offset);
+			// Id
+			int _Id = intBuffer.deserialize(buffer, ref offset);
 
 			// stringvalue
 			string _stringvalue = stringBuffer.deserialize(buffer, ref offset);
@@ -39,7 +39,7 @@ namespace xbuffer
 
 			// value
 			return new t_Global6() {
-				id = _id,
+				Id = _Id,
 				stringvalue = _stringvalue,
 				intvalue = _intvalue,
 				floatvalue = _floatvalue,
@@ -55,8 +55,8 @@ namespace xbuffer
             boolBuffer.serialize(value == null, steam);
             if (value == null) return;
 
-			// id
-			intBuffer.serialize(value.id, steam);
+			// Id
+			intBuffer.serialize(value.Id, steam);
 
 			// stringvalue
 			stringBuffer.serialize(value.stringvalue, steam);

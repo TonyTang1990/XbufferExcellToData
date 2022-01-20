@@ -1,8 +1,0 @@
-// t_global的注释
-class t_global
-{
-	Id:int;			                             //唯一id
-	string_value:string;			                //字符串值
-	int_value:int;			                      //整形值
-	bool_value:bool;			                    //bool值
-}

@@ -62,6 +62,15 @@ namespace XbufferExcelToData
         }
 
         /// <summary>
+        /// 获取Id字段名字
+        /// </summary>
+        /// <returns></returns>
+        public string getIdName()
+        {
+            return FieldNames != null ? FieldNames[0] : string.Empty;
+        }
+
+        /// <summary>
         /// 获取Id的类型(仅支持int和string)
         /// </summary>
         /// <returns></returns>

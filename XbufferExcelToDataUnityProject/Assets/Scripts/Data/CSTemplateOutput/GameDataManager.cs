@@ -1,6 +1,7 @@
 /**
  * Auto generated, do not edit it
  */
+using System.Collections.Generic;
 using xbuffer;
 
 namespace Data
@@ -30,7 +31,7 @@ namespace Data
         
         private t_AuthorInfo9Container mt_AuthorInfo9Container = new t_AuthorInfo9Container();
         
-        private t_GlobalContainer mt_GlobalContainer = new t_GlobalContainer();
+        private t_global_bContainer mt_global_bContainer = new t_global_bContainer();
         
         private t_Global10Container mt_Global10Container = new t_Global10Container();
         
@@ -49,6 +50,14 @@ namespace Data
         private t_Global8Container mt_Global8Container = new t_Global8Container();
         
         private t_Global9Container mt_Global9Container = new t_Global9Container();
+        
+        private t_global_iContainer mt_global_iContainer = new t_global_iContainer();
+        
+        private t_global_sContainer mt_global_sContainer = new t_global_sContainer();
+        
+        private t_language_cnContainer mt_language_cnContainer = new t_language_cnContainer();
+        
+        private t_uiContainer mt_uiContainer = new t_uiContainer();
         
 
 		private GameDataManager()
@@ -79,7 +88,7 @@ namespace Data
 			
 			mt_AuthorInfo9Container.loadDataFromBin();
 			
-			mt_GlobalContainer.loadDataFromBin();
+			mt_global_bContainer.loadDataFromBin();
 			
 			mt_Global10Container.loadDataFromBin();
 			
@@ -99,207 +108,255 @@ namespace Data
 			
 			mt_Global9Container.loadDataFromBin();
 			
+			mt_global_iContainer.loadDataFromBin();
+			
+			mt_global_sContainer.loadDataFromBin();
+			
+			mt_language_cnContainer.loadDataFromBin();
+			
+			mt_uiContainer.loadDataFromBin();
+			
 		}
 
 		
-		public t_AuthorInfoContainer Gett_AuthorInfoList()
+		public List<t_AuthorInfo> Gett_AuthorInfoList()
 		{
 			return mt_AuthorInfoContainer.getList();
 		}
 
-		public t_AuthorInfoContainer Gett_AuthorInfoMap()
+		public Dictionary<int, t_AuthorInfo> Gett_AuthorInfoMap()
 		{
 			return mt_AuthorInfoContainer.getMap();
 		}
 		
-		public t_AuthorInfo10Container Gett_AuthorInfo10List()
+		public List<t_AuthorInfo10> Gett_AuthorInfo10List()
 		{
 			return mt_AuthorInfo10Container.getList();
 		}
 
-		public t_AuthorInfo10Container Gett_AuthorInfo10Map()
+		public Dictionary<int, t_AuthorInfo10> Gett_AuthorInfo10Map()
 		{
 			return mt_AuthorInfo10Container.getMap();
 		}
 		
-		public t_AuthorInfo2Container Gett_AuthorInfo2List()
+		public List<t_AuthorInfo2> Gett_AuthorInfo2List()
 		{
 			return mt_AuthorInfo2Container.getList();
 		}
 
-		public t_AuthorInfo2Container Gett_AuthorInfo2Map()
+		public Dictionary<int, t_AuthorInfo2> Gett_AuthorInfo2Map()
 		{
 			return mt_AuthorInfo2Container.getMap();
 		}
 		
-		public t_AuthorInfo3Container Gett_AuthorInfo3List()
+		public List<t_AuthorInfo3> Gett_AuthorInfo3List()
 		{
 			return mt_AuthorInfo3Container.getList();
 		}
 
-		public t_AuthorInfo3Container Gett_AuthorInfo3Map()
+		public Dictionary<int, t_AuthorInfo3> Gett_AuthorInfo3Map()
 		{
 			return mt_AuthorInfo3Container.getMap();
 		}
 		
-		public t_AuthorInfo4Container Gett_AuthorInfo4List()
+		public List<t_AuthorInfo4> Gett_AuthorInfo4List()
 		{
 			return mt_AuthorInfo4Container.getList();
 		}
 
-		public t_AuthorInfo4Container Gett_AuthorInfo4Map()
+		public Dictionary<int, t_AuthorInfo4> Gett_AuthorInfo4Map()
 		{
 			return mt_AuthorInfo4Container.getMap();
 		}
 		
-		public t_AuthorInfo5Container Gett_AuthorInfo5List()
+		public List<t_AuthorInfo5> Gett_AuthorInfo5List()
 		{
 			return mt_AuthorInfo5Container.getList();
 		}
 
-		public t_AuthorInfo5Container Gett_AuthorInfo5Map()
+		public Dictionary<int, t_AuthorInfo5> Gett_AuthorInfo5Map()
 		{
 			return mt_AuthorInfo5Container.getMap();
 		}
 		
-		public t_AuthorInfo6Container Gett_AuthorInfo6List()
+		public List<t_AuthorInfo6> Gett_AuthorInfo6List()
 		{
 			return mt_AuthorInfo6Container.getList();
 		}
 
-		public t_AuthorInfo6Container Gett_AuthorInfo6Map()
+		public Dictionary<int, t_AuthorInfo6> Gett_AuthorInfo6Map()
 		{
 			return mt_AuthorInfo6Container.getMap();
 		}
 		
-		public t_AuthorInfo7Container Gett_AuthorInfo7List()
+		public List<t_AuthorInfo7> Gett_AuthorInfo7List()
 		{
 			return mt_AuthorInfo7Container.getList();
 		}
 
-		public t_AuthorInfo7Container Gett_AuthorInfo7Map()
+		public Dictionary<int, t_AuthorInfo7> Gett_AuthorInfo7Map()
 		{
 			return mt_AuthorInfo7Container.getMap();
 		}
 		
-		public t_AuthorInfo8Container Gett_AuthorInfo8List()
+		public List<t_AuthorInfo8> Gett_AuthorInfo8List()
 		{
 			return mt_AuthorInfo8Container.getList();
 		}
 
-		public t_AuthorInfo8Container Gett_AuthorInfo8Map()
+		public Dictionary<int, t_AuthorInfo8> Gett_AuthorInfo8Map()
 		{
 			return mt_AuthorInfo8Container.getMap();
 		}
 		
-		public t_AuthorInfo9Container Gett_AuthorInfo9List()
+		public List<t_AuthorInfo9> Gett_AuthorInfo9List()
 		{
 			return mt_AuthorInfo9Container.getList();
 		}
 
-		public t_AuthorInfo9Container Gett_AuthorInfo9Map()
+		public Dictionary<int, t_AuthorInfo9> Gett_AuthorInfo9Map()
 		{
 			return mt_AuthorInfo9Container.getMap();
 		}
 		
-		public t_GlobalContainer Gett_GlobalList()
+		public List<t_global_b> Gett_global_bList()
 		{
-			return mt_GlobalContainer.getList();
+			return mt_global_bContainer.getList();
 		}
 
-		public t_GlobalContainer Gett_GlobalMap()
+		public Dictionary<string, t_global_b> Gett_global_bMap()
 		{
-			return mt_GlobalContainer.getMap();
+			return mt_global_bContainer.getMap();
 		}
 		
-		public t_Global10Container Gett_Global10List()
+		public List<t_Global10> Gett_Global10List()
 		{
 			return mt_Global10Container.getList();
 		}
 
-		public t_Global10Container Gett_Global10Map()
+		public Dictionary<int, t_Global10> Gett_Global10Map()
 		{
 			return mt_Global10Container.getMap();
 		}
 		
-		public t_Global2Container Gett_Global2List()
+		public List<t_Global2> Gett_Global2List()
 		{
 			return mt_Global2Container.getList();
 		}
 
-		public t_Global2Container Gett_Global2Map()
+		public Dictionary<int, t_Global2> Gett_Global2Map()
 		{
 			return mt_Global2Container.getMap();
 		}
 		
-		public t_Global3Container Gett_Global3List()
+		public List<t_Global3> Gett_Global3List()
 		{
 			return mt_Global3Container.getList();
 		}
 
-		public t_Global3Container Gett_Global3Map()
+		public Dictionary<int, t_Global3> Gett_Global3Map()
 		{
 			return mt_Global3Container.getMap();
 		}
 		
-		public t_Global4Container Gett_Global4List()
+		public List<t_Global4> Gett_Global4List()
 		{
 			return mt_Global4Container.getList();
 		}
 
-		public t_Global4Container Gett_Global4Map()
+		public Dictionary<int, t_Global4> Gett_Global4Map()
 		{
 			return mt_Global4Container.getMap();
 		}
 		
-		public t_Global5Container Gett_Global5List()
+		public List<t_Global5> Gett_Global5List()
 		{
 			return mt_Global5Container.getList();
 		}
 
-		public t_Global5Container Gett_Global5Map()
+		public Dictionary<int, t_Global5> Gett_Global5Map()
 		{
 			return mt_Global5Container.getMap();
 		}
 		
-		public t_Global6Container Gett_Global6List()
+		public List<t_Global6> Gett_Global6List()
 		{
 			return mt_Global6Container.getList();
 		}
 
-		public t_Global6Container Gett_Global6Map()
+		public Dictionary<int, t_Global6> Gett_Global6Map()
 		{
 			return mt_Global6Container.getMap();
 		}
 		
-		public t_Global7Container Gett_Global7List()
+		public List<t_Global7> Gett_Global7List()
 		{
 			return mt_Global7Container.getList();
 		}
 
-		public t_Global7Container Gett_Global7Map()
+		public Dictionary<int, t_Global7> Gett_Global7Map()
 		{
 			return mt_Global7Container.getMap();
 		}
 		
-		public t_Global8Container Gett_Global8List()
+		public List<t_Global8> Gett_Global8List()
 		{
 			return mt_Global8Container.getList();
 		}
 
-		public t_Global8Container Gett_Global8Map()
+		public Dictionary<int, t_Global8> Gett_Global8Map()
 		{
 			return mt_Global8Container.getMap();
 		}
 		
-		public t_Global9Container Gett_Global9List()
+		public List<t_Global9> Gett_Global9List()
 		{
 			return mt_Global9Container.getList();
 		}
 
-		public t_Global9Container Gett_Global9Map()
+		public Dictionary<int, t_Global9> Gett_Global9Map()
 		{
 			return mt_Global9Container.getMap();
+		}
+		
+		public List<t_global_i> Gett_global_iList()
+		{
+			return mt_global_iContainer.getList();
+		}
+
+		public Dictionary<string, t_global_i> Gett_global_iMap()
+		{
+			return mt_global_iContainer.getMap();
+		}
+		
+		public List<t_global_s> Gett_global_sList()
+		{
+			return mt_global_sContainer.getList();
+		}
+
+		public Dictionary<string, t_global_s> Gett_global_sMap()
+		{
+			return mt_global_sContainer.getMap();
+		}
+		
+		public List<t_language_cn> Gett_language_cnList()
+		{
+			return mt_language_cnContainer.getList();
+		}
+
+		public Dictionary<string, t_language_cn> Gett_language_cnMap()
+		{
+			return mt_language_cnContainer.getMap();
+		}
+		
+		public List<t_ui> Gett_uiList()
+		{
+			return mt_uiContainer.getList();
+		}
+
+		public Dictionary<string, t_ui> Gett_uiMap()
+		{
+			return mt_uiContainer.getMap();
 		}
 		
 	}

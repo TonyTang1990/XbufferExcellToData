@@ -1,6 +1,7 @@
 /**
  * Auto generated, do not edit it
  */
+using System.Collections.Generic;
 using xbuffer;
 
 namespace Data
@@ -26,12 +27,12 @@ namespace Data
 		}
 
 		#CONTAINER_GET_LOOP#
-		public #LOOP_CLASS_NAME#Container[] Get#LOOP_CLASS_NAME#List()
+		public List<#LOOP_CLASS_NAME#> Get#LOOP_CLASS_NAME#List()
 		{
 			return m#LOOP_CLASS_NAME#Container.getList();
 		}
 
-		public Dictionary<#ID_TYPE#, #LOOP_CLASS_NAME#Container> Get#LOOP_CLASS_NAME#Map()
+		public Dictionary<#ID_TYPE#, #LOOP_CLASS_NAME#> Get#LOOP_CLASS_NAME#Map()
 		{
 			return m#LOOP_CLASS_NAME#Container.getMap();
 		}
