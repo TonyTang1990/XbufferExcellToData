@@ -10,14 +10,15 @@ namespace xbuffer
             if (_null) return null;
 
 			// Id
+
 			string _Id = stringBuffer.deserialize(buffer, ref offset);
-
 			// string_value
+
 			string _string_value = stringBuffer.deserialize(buffer, ref offset);
 
 			// value
 			return new t_language() {
-				Id = _Id,
+				Id = _Id,
 				string_value = _string_value,
             };
         }
@@ -30,9 +31,10 @@ namespace xbuffer
             if (value == null) return;
 
 			// Id
+
 			stringBuffer.serialize(value.Id, steam);
-
 			// string_value
+
 			stringBuffer.serialize(value.string_value, steam);
         }
     }

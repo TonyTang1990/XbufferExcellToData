@@ -65,7 +65,7 @@ public class GameLauncher : MonoBehaviour {
         Debug.Log("onLoadAllExcelData()");
         TimeCounter.Singleton.Restart("LoadAllExcelData()");
         MonoMemoryProfiler.Singleton.beginMemorySample("LoadAllExcelData()");
-        GameDataManager.Instance.loadAll();
+        GameDataManager.Singleton.loadAll();
         MonoMemoryProfiler.Singleton.endMemorySample();
         TimeCounter.Singleton.End();
     }
@@ -76,7 +76,7 @@ public class GameLauncher : MonoBehaviour {
     public void onPrintAuthorInfoExcelData()
     {
         Debug.Log("onPrintAuthorInfoExcelData()");
-        foreach(var authorinfo in GameDataManager.Instance.Gett_AuthorInfoList())
+        foreach(var authorinfo in GameDataManager.Singleton.Gett_AuthorInfoList())
         {
             Debug.Log(string.Format("authorinfo.Id : {0}", authorinfo.Id));
             Debug.Log(string.Format("authorinfo.author : {0}", authorinfo.author));
@@ -97,7 +97,7 @@ public class GameLauncher : MonoBehaviour {
     public void onPrintGlobal_SExcelData()
     {
         Debug.Log("onPrintAuthorInfoExcelData()");
-        foreach (var globalS in GameDataManager.Instance.Gett_global_sMap())
+        foreach (var globalS in GameDataManager.Singleton.Gett_global_sMap())
         {
             Debug.Log(string.Format("globalS.Key : {0}", globalS.Value.Key));
             Debug.Log(string.Format("globalS.Value : {0}", globalS.Value.Value));
@@ -110,7 +110,7 @@ public class GameLauncher : MonoBehaviour {
     public void onPrintUIExcelData()
     {
         Debug.Log("onPrintUIExcelData()");
-        foreach (var ui in GameDataManager.Instance.Gett_uiMap())
+        foreach (var ui in GameDataManager.Singleton.Gett_uiMap())
         {
             Debug.Log(string.Format("ui.WinName : {0}", ui.Value.WinName));
             Debug.Log(string.Format("ui.ResPath : {0}", ui.Value.ResPath));
@@ -125,7 +125,7 @@ public class GameLauncher : MonoBehaviour {
     public void onPrintLanguageExcelData()
     {
         Debug.Log("onPrintLanguageExcelData()");
-        foreach (var languageCn in GameDataManager.Instance.Gett_language_cnMap())
+        foreach (var languageCn in GameDataManager.Singleton.Gett_language_cnMap())
         {
             Debug.Log(string.Format("ui.Key : {0}", languageCn.Value.Key));
             Debug.Log(string.Format("ui.Value : {0}", languageCn.Value.Value));

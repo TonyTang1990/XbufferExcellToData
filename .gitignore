@@ -1,0 +1,11 @@
+# 文件以及目录过滤
+# 过滤library目录
+XbufferExcelToDataUnityProject/Library/
+# 过滤.vs目录
+XbufferExcelToDataUnityProject/.vs/
+# 过滤Temp目录
+XbufferExcelToDataUnityProject/Temp/
+# 过滤obj目录
+XbufferExcelToDataUnityProject/obj/
+# 过滤Log目录
+XbufferExcelToDataUnityProject/Log/

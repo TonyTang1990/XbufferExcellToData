@@ -8,7 +8,7 @@ namespace Data
 {
     public class GameDataManager
     {
-		public static readonly GameDataManager Instance = new GameDataManager();
+		public static readonly GameDataManager Singleton = new GameDataManager();
 
         
         private t_AuthorInfoContainer mt_AuthorInfoContainer = new t_AuthorInfoContainer();
