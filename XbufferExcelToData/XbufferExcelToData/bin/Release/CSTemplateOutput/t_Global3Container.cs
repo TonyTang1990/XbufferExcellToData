@@ -15,31 +15,42 @@ namespace Data
         private List<t_Global3> list = null;
         private Dictionary<int, t_Global3> map = null;
 
-        public List<t_Global3> getList()
+        public List<t_Global3> GetList()
         {
             if (list == null || list.Count <= 0)
-                loadDataFromBin();
+            {
+                LoadDataFromBin();
+            }
             return list;
         }
 
-        public Dictionary<int, t_Global3> getMap()
+        public Dictionary<int, t_Global3> GetMap()
         {
             if (map == null || map.Count <= 0)
-                loadDataFromBin();
+            {
+                LoadDataFromBin();
+            }
             return map;
         }
 
-        public void ClearList()
+        public void ClearData()
         {
             if (list != null && list.Count > 0)
+            {
                 list.Clear();
+            }
             if (map != null && map.Count > 0)
+            {
                 map.Clear();
+            }
         }   
 
-        public void loadDataFromBin()
-        {   
-            Stream fs = ConfLoader.Singleton.getStreamByteName(typeof(t_Global3).Name);
+        /// <summary>
+        /// 加载数据
+        /// </summary>
+        public void LoadDataFromBin()
+        {
+            Stream fs = ConfLoader.Singleton.GetStreamByteName(typeof(t_Global3).Name);
             if(fs != null)
             {
                 BinaryReader br = new BinaryReader(fs);
@@ -51,15 +62,21 @@ namespace Data
                         if (frist)
                         {
                             frist = false;
-                            ClearList();
+                            ClearData();
                             var count = br.ReadInt32();
-                            list =  new List<t_Global3>(count);
-                            map = new Dictionary<int, t_Global3>(count);
+                            if(list == null)
+                            {
+                                list =  new List<t_Global3>(count);             
+                            }
+                            if(map == null)
+                            {
+                                map = new Dictionary<int, t_Global3>(count);
+                            }
                         }
 
                         var length = br.ReadInt32();
                         var data = br.ReadBytes(length);
-                        var obj= t_Global3Buffer.deserialize(data, ref offset);
+                        var obj= t_Global3Buffer.Deserialize(data, ref offset);
                         offset = 0;
                         list.Add(obj);
                         map.Add(obj.Id, obj); 

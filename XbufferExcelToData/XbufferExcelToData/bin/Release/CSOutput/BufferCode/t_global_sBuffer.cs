@@ -2,7 +2,7 @@ namespace xbuffer
 {
     public static class t_global_sBuffer
     {
-        public static t_global_s deserialize(byte[] buffer, ref uint offset)
+        public static t_global_s Deserialize(byte[] buffer, ref uint offset)
         {
 
             // null
@@ -23,7 +23,7 @@ namespace xbuffer
             };
         }
 
-        public static void serialize(t_global_s value, XSteam steam)
+        public static void Serialize(t_global_s value, XSteam steam)
         {
 
             // null

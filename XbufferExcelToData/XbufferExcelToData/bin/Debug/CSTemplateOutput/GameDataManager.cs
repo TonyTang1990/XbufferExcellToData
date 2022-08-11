@@ -65,298 +65,418 @@ namespace Data
 		
 		}
 
-		public void loadAll()
+		public void LoadAll()
 		{
 			
-			mt_AuthorInfoContainer.loadDataFromBin();
+			Loadt_AuthorInfoData();
 			
-			mt_AuthorInfo10Container.loadDataFromBin();
+			Loadt_AuthorInfo10Data();
 			
-			mt_AuthorInfo2Container.loadDataFromBin();
+			Loadt_AuthorInfo2Data();
 			
-			mt_AuthorInfo3Container.loadDataFromBin();
+			Loadt_AuthorInfo3Data();
 			
-			mt_AuthorInfo4Container.loadDataFromBin();
+			Loadt_AuthorInfo4Data();
 			
-			mt_AuthorInfo5Container.loadDataFromBin();
+			Loadt_AuthorInfo5Data();
 			
-			mt_AuthorInfo6Container.loadDataFromBin();
+			Loadt_AuthorInfo6Data();
 			
-			mt_AuthorInfo7Container.loadDataFromBin();
+			Loadt_AuthorInfo7Data();
 			
-			mt_AuthorInfo8Container.loadDataFromBin();
+			Loadt_AuthorInfo8Data();
 			
-			mt_AuthorInfo9Container.loadDataFromBin();
+			Loadt_AuthorInfo9Data();
 			
-			mt_global_bContainer.loadDataFromBin();
+			Loadt_global_bData();
 			
-			mt_Global10Container.loadDataFromBin();
+			Loadt_Global10Data();
 			
-			mt_Global2Container.loadDataFromBin();
+			Loadt_Global2Data();
 			
-			mt_Global3Container.loadDataFromBin();
+			Loadt_Global3Data();
 			
-			mt_Global4Container.loadDataFromBin();
+			Loadt_Global4Data();
 			
-			mt_Global5Container.loadDataFromBin();
+			Loadt_Global5Data();
 			
-			mt_Global6Container.loadDataFromBin();
+			Loadt_Global6Data();
 			
-			mt_Global7Container.loadDataFromBin();
+			Loadt_Global7Data();
 			
-			mt_Global8Container.loadDataFromBin();
+			Loadt_Global8Data();
 			
-			mt_Global9Container.loadDataFromBin();
+			Loadt_Global9Data();
 			
-			mt_global_iContainer.loadDataFromBin();
+			Loadt_global_iData();
 			
-			mt_global_sContainer.loadDataFromBin();
+			Loadt_global_sData();
 			
-			mt_language_cnContainer.loadDataFromBin();
+			Loadt_language_cnData();
 			
-			mt_uiContainer.loadDataFromBin();
+			Loadt_uiData();
 			
 		}
 
 		
+		public void Loadt_AuthorInfoData()
+		{
+			mt_AuthorInfoContainer.LoadDataFromBin();
+		}
+
 		public List<t_AuthorInfo> Gett_AuthorInfoList()
 		{
-			return mt_AuthorInfoContainer.getList();
+			return mt_AuthorInfoContainer.GetList();
 		}
 
 		public Dictionary<int, t_AuthorInfo> Gett_AuthorInfoMap()
 		{
-			return mt_AuthorInfoContainer.getMap();
+			return mt_AuthorInfoContainer.GetMap();
 		}
 		
+		public void Loadt_AuthorInfo10Data()
+		{
+			mt_AuthorInfo10Container.LoadDataFromBin();
+		}
+
 		public List<t_AuthorInfo10> Gett_AuthorInfo10List()
 		{
-			return mt_AuthorInfo10Container.getList();
+			return mt_AuthorInfo10Container.GetList();
 		}
 
 		public Dictionary<int, t_AuthorInfo10> Gett_AuthorInfo10Map()
 		{
-			return mt_AuthorInfo10Container.getMap();
+			return mt_AuthorInfo10Container.GetMap();
 		}
 		
+		public void Loadt_AuthorInfo2Data()
+		{
+			mt_AuthorInfo2Container.LoadDataFromBin();
+		}
+
 		public List<t_AuthorInfo2> Gett_AuthorInfo2List()
 		{
-			return mt_AuthorInfo2Container.getList();
+			return mt_AuthorInfo2Container.GetList();
 		}
 
 		public Dictionary<int, t_AuthorInfo2> Gett_AuthorInfo2Map()
 		{
-			return mt_AuthorInfo2Container.getMap();
+			return mt_AuthorInfo2Container.GetMap();
 		}
 		
+		public void Loadt_AuthorInfo3Data()
+		{
+			mt_AuthorInfo3Container.LoadDataFromBin();
+		}
+
 		public List<t_AuthorInfo3> Gett_AuthorInfo3List()
 		{
-			return mt_AuthorInfo3Container.getList();
+			return mt_AuthorInfo3Container.GetList();
 		}
 
 		public Dictionary<int, t_AuthorInfo3> Gett_AuthorInfo3Map()
 		{
-			return mt_AuthorInfo3Container.getMap();
+			return mt_AuthorInfo3Container.GetMap();
 		}
 		
+		public void Loadt_AuthorInfo4Data()
+		{
+			mt_AuthorInfo4Container.LoadDataFromBin();
+		}
+
 		public List<t_AuthorInfo4> Gett_AuthorInfo4List()
 		{
-			return mt_AuthorInfo4Container.getList();
+			return mt_AuthorInfo4Container.GetList();
 		}
 
 		public Dictionary<int, t_AuthorInfo4> Gett_AuthorInfo4Map()
 		{
-			return mt_AuthorInfo4Container.getMap();
+			return mt_AuthorInfo4Container.GetMap();
 		}
 		
+		public void Loadt_AuthorInfo5Data()
+		{
+			mt_AuthorInfo5Container.LoadDataFromBin();
+		}
+
 		public List<t_AuthorInfo5> Gett_AuthorInfo5List()
 		{
-			return mt_AuthorInfo5Container.getList();
+			return mt_AuthorInfo5Container.GetList();
 		}
 
 		public Dictionary<int, t_AuthorInfo5> Gett_AuthorInfo5Map()
 		{
-			return mt_AuthorInfo5Container.getMap();
+			return mt_AuthorInfo5Container.GetMap();
 		}
 		
+		public void Loadt_AuthorInfo6Data()
+		{
+			mt_AuthorInfo6Container.LoadDataFromBin();
+		}
+
 		public List<t_AuthorInfo6> Gett_AuthorInfo6List()
 		{
-			return mt_AuthorInfo6Container.getList();
+			return mt_AuthorInfo6Container.GetList();
 		}
 
 		public Dictionary<int, t_AuthorInfo6> Gett_AuthorInfo6Map()
 		{
-			return mt_AuthorInfo6Container.getMap();
+			return mt_AuthorInfo6Container.GetMap();
 		}
 		
+		public void Loadt_AuthorInfo7Data()
+		{
+			mt_AuthorInfo7Container.LoadDataFromBin();
+		}
+
 		public List<t_AuthorInfo7> Gett_AuthorInfo7List()
 		{
-			return mt_AuthorInfo7Container.getList();
+			return mt_AuthorInfo7Container.GetList();
 		}
 
 		public Dictionary<int, t_AuthorInfo7> Gett_AuthorInfo7Map()
 		{
-			return mt_AuthorInfo7Container.getMap();
+			return mt_AuthorInfo7Container.GetMap();
 		}
 		
+		public void Loadt_AuthorInfo8Data()
+		{
+			mt_AuthorInfo8Container.LoadDataFromBin();
+		}
+
 		public List<t_AuthorInfo8> Gett_AuthorInfo8List()
 		{
-			return mt_AuthorInfo8Container.getList();
+			return mt_AuthorInfo8Container.GetList();
 		}
 
 		public Dictionary<int, t_AuthorInfo8> Gett_AuthorInfo8Map()
 		{
-			return mt_AuthorInfo8Container.getMap();
+			return mt_AuthorInfo8Container.GetMap();
 		}
 		
+		public void Loadt_AuthorInfo9Data()
+		{
+			mt_AuthorInfo9Container.LoadDataFromBin();
+		}
+
 		public List<t_AuthorInfo9> Gett_AuthorInfo9List()
 		{
-			return mt_AuthorInfo9Container.getList();
+			return mt_AuthorInfo9Container.GetList();
 		}
 
 		public Dictionary<int, t_AuthorInfo9> Gett_AuthorInfo9Map()
 		{
-			return mt_AuthorInfo9Container.getMap();
+			return mt_AuthorInfo9Container.GetMap();
 		}
 		
+		public void Loadt_global_bData()
+		{
+			mt_global_bContainer.LoadDataFromBin();
+		}
+
 		public List<t_global_b> Gett_global_bList()
 		{
-			return mt_global_bContainer.getList();
+			return mt_global_bContainer.GetList();
 		}
 
 		public Dictionary<string, t_global_b> Gett_global_bMap()
 		{
-			return mt_global_bContainer.getMap();
+			return mt_global_bContainer.GetMap();
 		}
 		
+		public void Loadt_Global10Data()
+		{
+			mt_Global10Container.LoadDataFromBin();
+		}
+
 		public List<t_Global10> Gett_Global10List()
 		{
-			return mt_Global10Container.getList();
+			return mt_Global10Container.GetList();
 		}
 
 		public Dictionary<int, t_Global10> Gett_Global10Map()
 		{
-			return mt_Global10Container.getMap();
+			return mt_Global10Container.GetMap();
 		}
 		
+		public void Loadt_Global2Data()
+		{
+			mt_Global2Container.LoadDataFromBin();
+		}
+
 		public List<t_Global2> Gett_Global2List()
 		{
-			return mt_Global2Container.getList();
+			return mt_Global2Container.GetList();
 		}
 
 		public Dictionary<int, t_Global2> Gett_Global2Map()
 		{
-			return mt_Global2Container.getMap();
+			return mt_Global2Container.GetMap();
 		}
 		
+		public void Loadt_Global3Data()
+		{
+			mt_Global3Container.LoadDataFromBin();
+		}
+
 		public List<t_Global3> Gett_Global3List()
 		{
-			return mt_Global3Container.getList();
+			return mt_Global3Container.GetList();
 		}
 
 		public Dictionary<int, t_Global3> Gett_Global3Map()
 		{
-			return mt_Global3Container.getMap();
+			return mt_Global3Container.GetMap();
 		}
 		
+		public void Loadt_Global4Data()
+		{
+			mt_Global4Container.LoadDataFromBin();
+		}
+
 		public List<t_Global4> Gett_Global4List()
 		{
-			return mt_Global4Container.getList();
+			return mt_Global4Container.GetList();
 		}
 
 		public Dictionary<int, t_Global4> Gett_Global4Map()
 		{
-			return mt_Global4Container.getMap();
+			return mt_Global4Container.GetMap();
 		}
 		
+		public void Loadt_Global5Data()
+		{
+			mt_Global5Container.LoadDataFromBin();
+		}
+
 		public List<t_Global5> Gett_Global5List()
 		{
-			return mt_Global5Container.getList();
+			return mt_Global5Container.GetList();
 		}
 
 		public Dictionary<int, t_Global5> Gett_Global5Map()
 		{
-			return mt_Global5Container.getMap();
+			return mt_Global5Container.GetMap();
 		}
 		
+		public void Loadt_Global6Data()
+		{
+			mt_Global6Container.LoadDataFromBin();
+		}
+
 		public List<t_Global6> Gett_Global6List()
 		{
-			return mt_Global6Container.getList();
+			return mt_Global6Container.GetList();
 		}
 
 		public Dictionary<int, t_Global6> Gett_Global6Map()
 		{
-			return mt_Global6Container.getMap();
+			return mt_Global6Container.GetMap();
 		}
 		
+		public void Loadt_Global7Data()
+		{
+			mt_Global7Container.LoadDataFromBin();
+		}
+
 		public List<t_Global7> Gett_Global7List()
 		{
-			return mt_Global7Container.getList();
+			return mt_Global7Container.GetList();
 		}
 
 		public Dictionary<int, t_Global7> Gett_Global7Map()
 		{
-			return mt_Global7Container.getMap();
+			return mt_Global7Container.GetMap();
 		}
 		
+		public void Loadt_Global8Data()
+		{
+			mt_Global8Container.LoadDataFromBin();
+		}
+
 		public List<t_Global8> Gett_Global8List()
 		{
-			return mt_Global8Container.getList();
+			return mt_Global8Container.GetList();
 		}
 
 		public Dictionary<int, t_Global8> Gett_Global8Map()
 		{
-			return mt_Global8Container.getMap();
+			return mt_Global8Container.GetMap();
 		}
 		
+		public void Loadt_Global9Data()
+		{
+			mt_Global9Container.LoadDataFromBin();
+		}
+
 		public List<t_Global9> Gett_Global9List()
 		{
-			return mt_Global9Container.getList();
+			return mt_Global9Container.GetList();
 		}
 
 		public Dictionary<int, t_Global9> Gett_Global9Map()
 		{
-			return mt_Global9Container.getMap();
+			return mt_Global9Container.GetMap();
 		}
 		
+		public void Loadt_global_iData()
+		{
+			mt_global_iContainer.LoadDataFromBin();
+		}
+
 		public List<t_global_i> Gett_global_iList()
 		{
-			return mt_global_iContainer.getList();
+			return mt_global_iContainer.GetList();
 		}
 
 		public Dictionary<string, t_global_i> Gett_global_iMap()
 		{
-			return mt_global_iContainer.getMap();
+			return mt_global_iContainer.GetMap();
 		}
 		
+		public void Loadt_global_sData()
+		{
+			mt_global_sContainer.LoadDataFromBin();
+		}
+
 		public List<t_global_s> Gett_global_sList()
 		{
-			return mt_global_sContainer.getList();
+			return mt_global_sContainer.GetList();
 		}
 
 		public Dictionary<string, t_global_s> Gett_global_sMap()
 		{
-			return mt_global_sContainer.getMap();
+			return mt_global_sContainer.GetMap();
 		}
 		
+		public void Loadt_language_cnData()
+		{
+			mt_language_cnContainer.LoadDataFromBin();
+		}
+
 		public List<t_language_cn> Gett_language_cnList()
 		{
-			return mt_language_cnContainer.getList();
+			return mt_language_cnContainer.GetList();
 		}
 
 		public Dictionary<string, t_language_cn> Gett_language_cnMap()
 		{
-			return mt_language_cnContainer.getMap();
+			return mt_language_cnContainer.GetMap();
 		}
 		
+		public void Loadt_uiData()
+		{
+			mt_uiContainer.LoadDataFromBin();
+		}
+
 		public List<t_ui> Gett_uiList()
 		{
-			return mt_uiContainer.getList();
+			return mt_uiContainer.GetList();
 		}
 
 		public Dictionary<string, t_ui> Gett_uiMap()
 		{
-			return mt_uiContainer.getMap();
+			return mt_uiContainer.GetMap();
 		}
 		
 	}

@@ -29,7 +29,7 @@ public class ConfLoader : SingletonTemplate<ConfLoader> {
     /// </summary>
     /// <param name="bytefilename"></param>
     /// <returns></returns>
-    public Stream getStreamByteName(string bytefilename)
+    public Stream GetStreamByteName(string bytefilename)
     {
         var textasset = Resources.Load(ExcelDataFolderPath + bytefilename) as TextAsset;
         var memorystream = new MemoryStream(textasset.bytes);

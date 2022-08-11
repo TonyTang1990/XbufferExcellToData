@@ -15,31 +15,42 @@ namespace Data
         private List<t_ui> list = null;
         private Dictionary<string, t_ui> map = null;
 
-        public List<t_ui> getList()
+        public List<t_ui> GetList()
         {
             if (list == null || list.Count <= 0)
-                loadDataFromBin();
+            {
+                LoadDataFromBin();
+            }
             return list;
         }
 
-        public Dictionary<string, t_ui> getMap()
+        public Dictionary<string, t_ui> GetMap()
         {
             if (map == null || map.Count <= 0)
-                loadDataFromBin();
+            {
+                LoadDataFromBin();
+            }
             return map;
         }
 
-        public void ClearList()
+        public void ClearData()
         {
             if (list != null && list.Count > 0)
+            {
                 list.Clear();
+            }
             if (map != null && map.Count > 0)
+            {
                 map.Clear();
+            }
         }   
 
-        public void loadDataFromBin()
-        {   
-            Stream fs = ConfLoader.Singleton.getStreamByteName(typeof(t_ui).Name);
+        /// <summary>
+        /// 加载数据
+        /// </summary>
+        public void LoadDataFromBin()
+        {
+            Stream fs = ConfLoader.Singleton.GetStreamByteName(typeof(t_ui).Name);
             if(fs != null)
             {
                 BinaryReader br = new BinaryReader(fs);
@@ -51,15 +62,21 @@ namespace Data
                         if (frist)
                         {
                             frist = false;
-                            ClearList();
+                            ClearData();
                             var count = br.ReadInt32();
-                            list =  new List<t_ui>(count);
-                            map = new Dictionary<string, t_ui>(count);
+                            if(list == null)
+                            {
+                                list =  new List<t_ui>(count);             
+                            }
+                            if(map == null)
+                            {
+                                map = new Dictionary<string, t_ui>(count);
+                            }
                         }
 
                         var length = br.ReadInt32();
                         var data = br.ReadBytes(length);
-                        var obj= t_uiBuffer.deserialize(data, ref offset);
+                        var obj= t_uiBuffer.Deserialize(data, ref offset);
                         offset = 0;
                         list.Add(obj);
                         map.Add(obj.WinName, obj); 

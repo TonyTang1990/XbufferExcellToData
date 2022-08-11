@@ -2,7 +2,7 @@ namespace xbuffer
 {
     public static class t_uiBuffer
     {
-        public static t_ui deserialize(byte[] buffer, ref uint offset)
+        public static t_ui Deserialize(byte[] buffer, ref uint offset)
         {
 
             // null
@@ -31,7 +31,7 @@ namespace xbuffer
             };
         }
 
-        public static void serialize(t_ui value, XSteam steam)
+        public static void Serialize(t_ui value, XSteam steam)
         {
 
             // null

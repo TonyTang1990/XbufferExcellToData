@@ -2,7 +2,7 @@ namespace xbuffer
 {
     public static class #CLASS_NAME#Buffer
     {
-        public static #CLASS_NAME# deserialize(byte[] buffer, ref uint offset)
+        public static #CLASS_NAME# Deserialize(byte[] buffer, ref uint offset)
         {
 #IF_DESERIALIZE_CLASS#
             // null
@@ -32,7 +32,7 @@ namespace xbuffer
             };
         }
 
-        public static void serialize(#CLASS_NAME# value, XSteam steam)
+        public static void Serialize(#CLASS_NAME# value, XSteam steam)
         {
 #IF_SERIALIZE_CLASS#
             // null

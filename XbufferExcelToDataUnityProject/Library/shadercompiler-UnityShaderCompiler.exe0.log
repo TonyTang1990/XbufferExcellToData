@@ -1,2 +1,5 @@
 Base path: 'G:/Software/UnityAllVersions/2019.4.31f1c1/Editor/Data', plugins path 'G:/Software/UnityAllVersions/2019.4.31f1c1/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
+Cmd: shutdown
+
+Quitting shader compiler process

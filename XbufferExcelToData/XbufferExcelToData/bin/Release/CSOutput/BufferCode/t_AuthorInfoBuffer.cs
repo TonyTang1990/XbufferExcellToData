@@ -2,7 +2,7 @@ namespace xbuffer
 {
     public static class t_AuthorInfoBuffer
     {
-        public static t_AuthorInfo deserialize(byte[] buffer, ref uint offset)
+        public static t_AuthorInfo Deserialize(byte[] buffer, ref uint offset)
         {
 
             // null
@@ -49,7 +49,7 @@ namespace xbuffer
             };
         }
 
-        public static void serialize(t_AuthorInfo value, XSteam steam)
+        public static void Serialize(t_AuthorInfo value, XSteam steam)
         {
 
             // null

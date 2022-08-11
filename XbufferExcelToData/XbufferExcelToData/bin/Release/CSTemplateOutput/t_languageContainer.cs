@@ -15,31 +15,42 @@ namespace Data
         private List<t_language> list = null;
         private Dictionary<string, t_language> map = null;
 
-        public List<t_language> getList()
+        public List<t_language> GetList()
         {
             if (list == null || list.Count <= 0)
-                loadDataFromBin();
+            {
+                LoadDataFromBin();
+            }
             return list;
         }
 
-        public Dictionary<string, t_language> getMap()
+        public Dictionary<string, t_language> GetMap()
         {
             if (map == null || map.Count <= 0)
-                loadDataFromBin();
+            {
+                LoadDataFromBin();
+            }
             return map;
         }
 
-        public void ClearList()
+        public void ClearData()
         {
             if (list != null && list.Count > 0)
+            {
                 list.Clear();
+            }
             if (map != null && map.Count > 0)
+            {
                 map.Clear();
+            }
         }   
 
-        public void loadDataFromBin()
-        {   
-            Stream fs = ConfLoader.Singleton.getStreamByteName(typeof(t_language).Name);
+        /// <summary>
+        /// 加载数据
+        /// </summary>
+        public void LoadDataFromBin()
+        {
+            Stream fs = ConfLoader.Singleton.GetStreamByteName(typeof(t_language).Name);
             if(fs != null)
             {
                 BinaryReader br = new BinaryReader(fs);
@@ -51,15 +62,21 @@ namespace Data
                         if (frist)
                         {
                             frist = false;
-                            ClearList();
+                            ClearData();
                             var count = br.ReadInt32();
-                            list =  new List<t_language>(count);
-                            map = new Dictionary<string, t_language>(count);
+                            if(list == null)
+                            {
+                                list =  new List<t_language>(count);             
+                            }
+                            if(map == null)
+                            {
+                                map = new Dictionary<string, t_language>(count);
+                            }
                         }
 
                         var length = br.ReadInt32();
                         var data = br.ReadBytes(length);
-                        var obj= t_languageBuffer.deserialize(data, ref offset);
+                        var obj= t_languageBuffer.Deserialize(data, ref offset);
                         offset = 0;
                         list.Add(obj);
                         map.Add(obj.Id, obj); 

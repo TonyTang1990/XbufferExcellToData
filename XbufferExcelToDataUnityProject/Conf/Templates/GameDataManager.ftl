@@ -11,7 +11,7 @@ namespace Data
 		public static readonly GameDataManager Singleton = new GameDataManager();
 
         #CONTAINER_MEMBER_LOOP#
-        private #CLASS_NAME#Container #CLASS_NAME#Container = new #CLASS_NAME#Container();
+        private #CLASS_NAME#Container m#CLASS_NAME#Container = new #CLASS_NAME#Container();
         #CONTAINER_MEMBER_LOOP#
 
 		private GameDataManager()
@@ -19,22 +19,27 @@ namespace Data
 		
 		}
 
-		public void loadAll()
+		public void LoadAll()
 		{
 			#CONTAINER_LOAD_LOOP#
-			#LOOP_CLASS_NAME#Container.loadDataFromBin();
+			Load#LOOP_CLASS_NAME#Data();
 			#CONTAINER_LOAD_LOOP#
 		}
 
 		#CONTAINER_GET_LOOP#
+		public void Load#LOOP_CLASS_NAME#Data()
+		{
+			m#LOOP_CLASS_NAME#Container.LoadDataFromBin();
+		}
+
 		public List<#LOOP_CLASS_NAME#> Get#LOOP_CLASS_NAME#List()
 		{
-			return #LOOP_CLASS_NAME#Container.getList();
+			return m#LOOP_CLASS_NAME#Container.GetList();
 		}
 
 		public Dictionary<#ID_TYPE#, #LOOP_CLASS_NAME#> Get#LOOP_CLASS_NAME#Map()
 		{
-			return #LOOP_CLASS_NAME#Container.getMap();
+			return m#LOOP_CLASS_NAME#Container.GetMap();
 		}
 		#CONTAINER_GET_LOOP#
 	}

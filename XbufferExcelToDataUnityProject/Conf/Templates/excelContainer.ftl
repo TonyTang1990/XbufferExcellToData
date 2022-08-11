@@ -15,31 +15,42 @@ namespace Data
         private List<#CLASS_NAME#> list = null;
         private Dictionary<#ID_TYPE#, #CLASS_NAME#> map = null;
 
-        public List<#CLASS_NAME#> getList()
+        public List<#CLASS_NAME#> GetList()
         {
             if (list == null || list.Count <= 0)
-                loadDataFromBin();
+            {
+                LoadDataFromBin();
+            }
             return list;
         }
 
-        public Dictionary<#ID_TYPE#, #CLASS_NAME#> getMap()
+        public Dictionary<#ID_TYPE#, #CLASS_NAME#> GetMap()
         {
             if (map == null || map.Count <= 0)
-                loadDataFromBin();
+            {
+                LoadDataFromBin();
+            }
             return map;
         }
 
-        public void ClearList()
+        public void ClearData()
         {
             if (list != null && list.Count > 0)
+            {
                 list.Clear();
+            }
             if (map != null && map.Count > 0)
+            {
                 map.Clear();
+            }
         }   
 
-        public void loadDataFromBin()
-        {   
-            Stream fs = ConfLoader.Singleton.getStreamByteName(typeof(#CLASS_NAME#).Name);
+        /// <summary>
+        /// 加载数据
+        /// </summary>
+        public void LoadDataFromBin()
+        {
+            Stream fs = ConfLoader.Singleton.GetStreamByteName(typeof(#CLASS_NAME#).Name);
             if(fs != null)
             {
                 BinaryReader br = new BinaryReader(fs);
@@ -51,15 +62,21 @@ namespace Data
                         if (frist)
                         {
                             frist = false;
-                            ClearList();
+                            ClearData();
                             var count = br.ReadInt32();
-                            list =  new List<#CLASS_NAME#>(count);
-                            map = new Dictionary<#ID_TYPE#, #CLASS_NAME#>(count);
+                            if(list == null)
+                            {
+                                list =  new List<#CLASS_NAME#>(count);             
+                            }
+                            if(map == null)
+                            {
+                                map = new Dictionary<#ID_TYPE#, #CLASS_NAME#>(count);
+                            }
                         }
 
                         var length = br.ReadInt32();
                         var data = br.ReadBytes(length);
-                        var obj= #CLASS_NAME#Buffer.deserialize(data, ref offset);
+                        var obj= #CLASS_NAME#Buffer.Deserialize(data, ref offset);
                         offset = 0;
                         list.Add(obj);
                         map.Add(obj.#ID_NAME#, obj); 

@@ -2,7 +2,7 @@ namespace xbuffer
 {
     public static class t_languageBuffer
     {
-        public static t_language deserialize(byte[] buffer, ref uint offset)
+        public static t_language Deserialize(byte[] buffer, ref uint offset)
         {
 
             // null
@@ -23,7 +23,7 @@ namespace xbuffer
             };
         }
 
-        public static void serialize(t_language value, XSteam steam)
+        public static void Serialize(t_language value, XSteam steam)
         {
 
             // null

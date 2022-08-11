@@ -25,9 +25,9 @@ public class GameLauncher : MonoBehaviour {
         VisibleLogUtility.getInstance().mVisibleLogSwitch = FastUIEntry.LogSwitch;
         Application.logMessageReceived += VisibleLogUtility.getInstance().HandleLog;
 
-        addMonoComponents();
+        AddMonoComponents();
 
-        nativeInitilization();
+        NativeInitilization();
     }
 
     private void Start () {
@@ -44,7 +44,7 @@ public class GameLauncher : MonoBehaviour {
     /// <summary>
     /// 添加Mono相关的组件
     /// </summary>
-    private void addMonoComponents()
+    private void AddMonoComponents()
     {
 
     }
@@ -52,7 +52,7 @@ public class GameLauncher : MonoBehaviour {
     /// <summary>
     /// 原生初始化
     /// </summary>
-    private void nativeInitilization()
+    private void NativeInitilization()
     {
 
     }
@@ -60,12 +60,12 @@ public class GameLauncher : MonoBehaviour {
     /// <summary>
     /// 加载所有Excel数据
     /// </summary>
-    public void onLoadAllExcelData()
+    public void OnLoadAllExcelData()
     {
-        Debug.Log("onLoadAllExcelData()");
+        Debug.Log("OnLoadAllExcelData()");
         TimeCounter.Singleton.Restart("LoadAllExcelData()");
         MonoMemoryProfiler.Singleton.beginMemorySample("LoadAllExcelData()");
-        GameDataManager.Singleton.loadAll();
+        GameDataManager.Singleton.LoadAll();
         MonoMemoryProfiler.Singleton.endMemorySample();
         TimeCounter.Singleton.End();
     }
@@ -73,9 +73,9 @@ public class GameLauncher : MonoBehaviour {
     /// <summary>
     /// 打印AuthorInfo表格Excel数据
     /// </summary>
-    public void onPrintAuthorInfoExcelData()
+    public void OnPrintAuthorInfoExcelData()
     {
-        Debug.Log("onPrintAuthorInfoExcelData()");
+        Debug.Log("OnPrintAuthorInfoExcelData()");
         foreach(var authorinfo in GameDataManager.Singleton.Gett_AuthorInfoList())
         {
             Debug.Log(string.Format("authorinfo.Id : {0}", authorinfo.Id));
@@ -94,9 +94,9 @@ public class GameLauncher : MonoBehaviour {
     /// <summary>
     /// 打印GlobalS
     /// </summary>
-    public void onPrintGlobal_SExcelData()
+    public void OnPrintGlobal_SExcelData()
     {
-        Debug.Log("onPrintAuthorInfoExcelData()");
+        Debug.Log("OnPrintAuthorInfoExcelData()");
         foreach (var globalS in GameDataManager.Singleton.Gett_global_sMap())
         {
             Debug.Log(string.Format("globalS.Key : {0}", globalS.Value.Key));
@@ -107,9 +107,9 @@ public class GameLauncher : MonoBehaviour {
     /// <summary>
     /// 打印UI表
     /// </summary>
-    public void onPrintUIExcelData()
+    public void OnPrintUIExcelData()
     {
-        Debug.Log("onPrintUIExcelData()");
+        Debug.Log("OnPrintUIExcelData()");
         foreach (var ui in GameDataManager.Singleton.Gett_uiMap())
         {
             Debug.Log(string.Format("ui.WinName : {0}", ui.Value.WinName));
@@ -122,9 +122,9 @@ public class GameLauncher : MonoBehaviour {
     /// <summary>
     /// 打印语言表
     /// </summary>
-    public void onPrintLanguageExcelData()
+    public void OnPrintLanguageExcelData()
     {
-        Debug.Log("onPrintLanguageExcelData()");
+        Debug.Log("OnPrintLanguageExcelData()");
         foreach (var languageCn in GameDataManager.Singleton.Gett_language_cnMap())
         {
             Debug.Log(string.Format("ui.Key : {0}", languageCn.Value.Key));

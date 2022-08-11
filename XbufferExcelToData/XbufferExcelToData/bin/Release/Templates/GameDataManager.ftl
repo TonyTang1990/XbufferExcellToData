@@ -19,22 +19,27 @@ namespace Data
 		
 		}
 
-		public void loadAll()
+		public void LoadAll()
 		{
 			#CONTAINER_LOAD_LOOP#
-			m#LOOP_CLASS_NAME#Container.loadDataFromBin();
+			Load#LOOP_CLASS_NAME#Data();
 			#CONTAINER_LOAD_LOOP#
 		}
 
 		#CONTAINER_GET_LOOP#
+		public void Load#LOOP_CLASS_NAME#Data()
+		{
+			m#LOOP_CLASS_NAME#Container.LoadDataFromBin();
+		}
+
 		public List<#LOOP_CLASS_NAME#> Get#LOOP_CLASS_NAME#List()
 		{
-			return m#LOOP_CLASS_NAME#Container.getList();
+			return m#LOOP_CLASS_NAME#Container.GetList();
 		}
 
 		public Dictionary<#ID_TYPE#, #LOOP_CLASS_NAME#> Get#LOOP_CLASS_NAME#Map()
 		{
-			return m#LOOP_CLASS_NAME#Container.getMap();
+			return m#LOOP_CLASS_NAME#Container.GetMap();
 		}
 		#CONTAINER_GET_LOOP#
 	}
