@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using xbuffer;
 
@@ -136,6 +137,9 @@ namespace XbufferExcelToData
                 case "bool":
                     serializNoneArrayData<boolBuffer>(data, stream);
                     break;
+                case "byte":
+                    serializNoneArrayData<byteBuffer>(data, stream);
+                    break;
                 case "int[]":
                     serializArrayData<intBuffer>(data, spilter, stream);
                     break;
@@ -150,6 +154,9 @@ namespace XbufferExcelToData
                     break;
                 case "bool[]":
                     serializArrayData<boolBuffer>(data, spilter, stream);
+                    break;
+                case "byte[]":
+                    serializArrayData<byteBuffer>(data, spilter, stream);
                     break;
                 default:
                     Console.WriteLine(string.Format("严重错误! 不支持的序列化数据类型 : {0}", datatype));
@@ -166,14 +173,13 @@ namespace XbufferExcelToData
         private void serializNoneArrayData<T>(string data, XSteam stream)
         {
             var type = typeof(T);
-            var typeinstance = Activator.CreateInstance<T>();
-            var serilizemethod = type.GetMethod("serialize");
+            var serilizemethod = GetSerializeMethodInfoByType(type);
             if(serilizemethod != null)
             {
                 // 填写数据之前需要解析数据到对应的类型
                 // 支持不填数据采用默认数值的形式
                 object finaldata = null;
-                if (type == typeof(intBuffer))
+                if (type == ExcelDataConst.INT_BUFFER_TYPE)
                 {
                     if(string.IsNullOrEmpty(data))
                     {
@@ -181,21 +187,33 @@ namespace XbufferExcelToData
                     }
                     else
                     {
-                        finaldata = int.Parse(data);
+                        int finalIntData;
+                        if(!int.TryParse(data, out finalIntData))
+                        {
+                            finalIntData = default(int);
+                            Console.WriteLine($"数据:{data} 类型:{type.Name} 配置数据格式有误,解析失败!");
+                        }
+                        finaldata = finalIntData;
                     }
                 }
-                else if(type == typeof(floatBuffer))
+                else if(type == ExcelDataConst.FLOAT_BUFFER_TYPE)
                 {
                     if (string.IsNullOrEmpty(data))
                     {
-                        finaldata = default(int);
+                        finaldata = default(float);
                     }
                     else
                     {
-                        finaldata = float.Parse(data);
+                        float finaFloatData;
+                        if (!float.TryParse(data, out finaFloatData))
+                        {
+                            finaFloatData = default(float);
+                            Console.WriteLine($"数据:{data} 类型:{type.Name} 配置数据格式有误,解析失败!");
+                        }
+                        finaldata = finaFloatData;
                     }
                 }
-                else if (type == typeof(stringBuffer))
+                else if (type == ExcelDataConst.STRING_BUFFER_TYPE)
                 {
                     if (string.IsNullOrEmpty(data))
                     {
@@ -206,7 +224,7 @@ namespace XbufferExcelToData
                         finaldata = data;
                     }
                 }
-                else if (type == typeof(longBuffer))
+                else if (type == ExcelDataConst.LONG_BUFFER_TYPE)
                 {
                     if (string.IsNullOrEmpty(data))
                     {
@@ -214,10 +232,16 @@ namespace XbufferExcelToData
                     }
                     else
                     {
-                        finaldata = long.Parse(data);
+                        long finaLongData;
+                        if (!long.TryParse(data, out finaLongData))
+                        {
+                            finaLongData = default(long);
+                            Console.WriteLine($"数据:{data} 类型:{type.Name} 配置数据格式有误,解析失败!");
+                        }
+                        finaldata = finaLongData;
                     }
                 }
-                else if (type == typeof(boolBuffer))
+                else if (type == ExcelDataConst.BOOL_BUFFER_TYPE)
                 {
                     if (string.IsNullOrEmpty(data))
                     {
@@ -225,14 +249,75 @@ namespace XbufferExcelToData
                     }
                     else
                     {
-                        finaldata = bool.Parse(data);
+                        bool finBoolData;
+                        if (!bool.TryParse(data, out finBoolData))
+                        {
+                            finBoolData = default(bool);
+                            Console.WriteLine($"数据:{data} 类型:{type.Name} 配置数据格式有误,解析失败!");
+                        }
+                        finaldata = finBoolData;
                     }
                 }
-                serilizemethod.Invoke(typeinstance, new object[] { finaldata, stream });
+                else if(type == ExcelDataConst.BYTE_BUFFER_TYPE)
+                {
+                    if (string.IsNullOrEmpty(data))
+                    {
+                        finaldata = default(byte);
+                    }
+                    else
+                    {
+                        byte finByteData;
+                        if (!byte.TryParse(data, out finByteData))
+                        {
+                            finByteData = default(byte);
+                            Console.WriteLine($"数据:{data} 类型:{type.Name} 配置数据格式有误,解析失败!");
+                        }
+                        finaldata = finByteData;
+                    }
+                }
+                serilizemethod.Invoke(null, new object[] { finaldata, stream });
             }
             else
             {
                 Console.WriteLine(string.Format("没有找到类型T : {0}的serialize方法!", type.ToString()));
+            }
+        }
+
+        /// <summary>
+        /// 获取指定类型新的序列化方法信息
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        private MethodInfo GetSerializeMethodInfoByType(Type type)
+        {
+            if(type == ExcelDataConst.INT_BUFFER_TYPE)
+            {
+                return ExcelDataConst.INT_BUFFER_SERIALIZE_METHOD;
+            }
+            else if (type == ExcelDataConst.FLOAT_BUFFER_TYPE)
+            {
+                return ExcelDataConst.FLOAT_BUFFER_SERIALIZE_METHOD;
+            }
+            else if (type == ExcelDataConst.STRING_BUFFER_TYPE)
+            {
+                return ExcelDataConst.STRING_BUFFER_SERIALIZE_METHOD;
+            }
+            else if (type == ExcelDataConst.LONG_BUFFER_TYPE)
+            {
+                return ExcelDataConst.LONG_BUFFER_SERIALIZE_METHOD;
+            }
+            else if (type == ExcelDataConst.BOOL_BUFFER_TYPE)
+            {
+                return ExcelDataConst.BOOL_BUFFER_SERIALIZE_METHOD;
+            }
+            else if (type == ExcelDataConst.BYTE_BUFFER_TYPE)
+            {
+                return ExcelDataConst.BYTE_BUFFER_SERIALIZE_METHOD;
+            }
+            else
+            {
+                Console.WriteLine(string.Format("找不到类型T : {0}的serialize方法!", type.ToString())); 
+                return null;
             }
         }
 
@@ -307,25 +392,30 @@ namespace XbufferExcelToData
         /// <returns></returns>
         private string getBufferCorrespondingDV<T>()
         {
-            if(typeof(T) == typeof(intBuffer))
+            var type = typeof(T);
+            if (type == ExcelDataConst.INT_BUFFER_TYPE)
             {
-                return default(int).ToString();
+                return ExcelDataConst.INT_BUFFER_DEFAULT_STRING_VALUE;
             }
-            else if(typeof(T) == typeof(floatBuffer))
+            else if(type == ExcelDataConst.FLOAT_BUFFER_TYPE)
             {
-                return default(float).ToString();
+                return ExcelDataConst.FLOAT_BUFFER_DEFAULT_STRING_VALUE;
             }
-            else if (typeof(T) == typeof(stringBuffer))
+            else if (type == ExcelDataConst.STRING_BUFFER_TYPE)
             {
-                return string.Empty;
+                return ExcelDataConst.STRING_BUFFER_DEFAULT_STRING_VALUE;
             }
-            else if (typeof(T) == typeof(longBuffer))
+            else if (type == ExcelDataConst.LONG_BUFFER_TYPE)
             {
-                return default(long).ToString();
+                return ExcelDataConst.LONG_BUFFER_DEFAULT_STRING_VALUE;
             }
-            else if (typeof(T) == typeof(boolBuffer))
+            else if (type == ExcelDataConst.BOOL_BUFFER_TYPE)
             {
-                return default(bool).ToString();
+                return ExcelDataConst.BOOL_BUFFER_DEFAULT_STRING_VALUE;
+            }
+            else if(type == ExcelDataConst.BYTE_BUFFER_TYPE)
+            {
+                return ExcelDataConst.BYTE_BUFFER_DEFAULT_STRING_VALUE;
             }
             else
             {
