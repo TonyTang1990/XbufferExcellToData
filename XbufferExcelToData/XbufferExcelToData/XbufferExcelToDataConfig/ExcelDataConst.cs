@@ -112,11 +112,11 @@ namespace XbufferExcelToData
         /// <summary>
         /// 一维数组分隔符
         /// </summary>
-        public const char ONE_DIMENSION_SPLITER = '+';
+        public const char ONE_DIMENSION_SPLITER = '#';
 
         /// <summary>
         /// 二维数组分隔符
         /// </summary>
-        public const char TWO_DIMENSION_SPLITER = '#';
+        public const char TWO_DIMENSION_SPLITER = '|';
     }
 }
