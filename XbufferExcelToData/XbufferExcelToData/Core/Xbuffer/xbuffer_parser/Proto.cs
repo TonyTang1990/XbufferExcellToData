@@ -16,7 +16,7 @@ namespace xbuffer
 
         public Proto(string proto)
         {
-            var matchs = Regex.Matches(proto, @"//\s*(\S*)\s*((class)|(struct))\s*(\w+)\s*{\s*((\w+):([\[|\]|\w]+);\s*//\s*(\S*)\s*)*}");
+            var matchs = Regex.Matches(proto, @"//\s*(\S*)\s*((class)|(struct))\s*(\w+)\s*{\s*((\w+):([\[|\]|\w]+);\s*//\s*([\S ]*)\s*)*}");
             class_protos = new Proto_Class[matchs.Count];
             for (int i = 0; i < matchs.Count; i++)
             {

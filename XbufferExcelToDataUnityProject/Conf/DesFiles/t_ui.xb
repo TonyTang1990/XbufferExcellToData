@@ -3,6 +3,8 @@ class t_ui
 {
 	WinName:string;			                     //窗口名
 	ResPath:string;			                     //资源路径
+	TestSpace1:string;			                  //测试空格 描述支持1
 	IsFullScreen:bool;			                  //是否全屏
 	Layer:int;			                          //UI层级Layer
+	TestSpace2:string;			                  //测试空格 描述支持2
 }

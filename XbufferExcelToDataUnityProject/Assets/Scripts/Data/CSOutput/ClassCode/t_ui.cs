@@ -2,10 +2,14 @@
 public partial class t_ui
 {
 	public string WinName;				// 窗口名
-
+
 	public string ResPath;				// 资源路径
-
+
+	public string TestSpace1;				// 测试空格 描述支持1
+
 	public bool IsFullScreen;				// 是否全屏
-
+
 	public int Layer;				// UI层级Layer
+
+	public string TestSpace2;				// 测试空格 描述支持2
 }
