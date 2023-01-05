@@ -96,13 +96,13 @@ namespace XbufferExcelToData
         private void serializeExcelOneLineDatas(ExcelData[] exceldata, XSteam stream)
         {
             // 先写入数据是否为空的bool信息
-            serializeExcelData("bool", exceldata == null ? "true" : "false", string.Empty, stream);
+            serializeExcelData("bool", exceldata == null ? "true" : "false", stream);
             if(exceldata != null)
             {
                 // 数据不为空才写入数据信息
                 foreach (var data in exceldata)
                 {
-                    serializeExcelData(data.Type, data.Data, data.Spliter, stream);
+                    serializeExcelData(data.Type, data.Data, stream);
                 }
             }
         }
@@ -112,9 +112,8 @@ namespace XbufferExcelToData
         /// </summary>
         /// <param name="datatype">数据类型字符串</param>
         /// <param name="data">数据</param>
-        /// <param name="spilter">数据分隔符</param>
         /// <param name="stream">Xbuffer的内存管理分配对象</param>
-        private bool serializeExcelData(string datatype, string data, string spilter, XSteam stream)
+        private bool serializeExcelData(string datatype, string data, XSteam stream)
         {
             switch (datatype)
             {
@@ -141,22 +140,40 @@ namespace XbufferExcelToData
                     serializNoneArrayData<byteBuffer>(data, stream);
                     break;
                 case "int[]":
-                    serializArrayData<intBuffer>(data, spilter, stream);
+                    serializOneDimensionArrayData<intBuffer>(data, stream);
                     break;
                 case "float[]":
-                    serializArrayData<floatBuffer>(data, spilter, stream);
+                    serializOneDimensionArrayData<floatBuffer>(data, stream);
                     break;
                 case "string[]":
-                    serializArrayData<stringBuffer>(data, spilter, stream);
+                    serializOneDimensionArrayData<stringBuffer>(data, stream);
                     break;
                 case "long[]":
-                    serializArrayData<longBuffer>(data, spilter, stream);
+                    serializOneDimensionArrayData<longBuffer>(data, stream);
                     break;
                 case "bool[]":
-                    serializArrayData<boolBuffer>(data, spilter, stream);
+                    serializOneDimensionArrayData<boolBuffer>(data, stream);
                     break;
                 case "byte[]":
-                    serializArrayData<byteBuffer>(data, spilter, stream);
+                    serializOneDimensionArrayData<byteBuffer>(data, stream);
+                    break;
+                case "int[][]":
+                    serializTwoDimensionArrayData<intBuffer>(data, stream);
+                    break;
+                case "float[][]":
+                    serializTwoDimensionArrayData<floatBuffer>(data, stream);
+                    break;
+                case "string[][]":
+                    serializTwoDimensionArrayData<stringBuffer>(data, stream);
+                    break;
+                case "long[][]":
+                    serializTwoDimensionArrayData<longBuffer>(data, stream);
+                    break;
+                case "bool[][]":
+                    serializTwoDimensionArrayData<boolBuffer>(data, stream);
+                    break;
+                case "byte[][]":
+                    serializTwoDimensionArrayData<byteBuffer>(data, stream);
                     break;
                 default:
                     Console.WriteLine(string.Format("严重错误! 不支持的序列化数据类型 : {0}", datatype));
@@ -322,26 +339,22 @@ namespace XbufferExcelToData
         }
 
         /// <summary>
-        /// 序列化数组类型数据
+        /// 序列化一维数组类型数据
         /// </summary>
         /// <param name="data">数据</param>
         /// <param name="spilter">分隔符</param>
         /// <param name="stream">Xbuffer的内存管理分配对象</param>
-        private void serializArrayData<T>(string data, string spilter, XSteam stream)
+        private void serializOneDimensionArrayData<T>(string data, XSteam stream)
         {
             if(string.IsNullOrEmpty(data))
             {
-                // 未配置一维数据，默认值去对应T类型的默认值
-                // 长度默认为1
-                serializNoneArrayData<intBuffer>("1", stream);
-                var defaultvalue = getBufferCorrespondingDV<T>();
-                serializNoneArrayData<T>(defaultvalue, stream);
+                // 未配置一维数据，默认长度默认为0
+                serializNoneArrayData<intBuffer>("0", stream);
             }
             else
             {
                 // 只支持1维数据的配置和快速解析
-                var spliters = spilter.ToCharArray();
-                var datas = data.Split(spliters[0]);
+                var datas = data.Split(ExcelDataConst.ONE_DIMENSION_SPLITER);
                 // 写入一维数组的长度字节数信息
                 serializNoneArrayData<intBuffer>(datas.Length.ToString(), stream);
 
@@ -349,6 +362,39 @@ namespace XbufferExcelToData
                 foreach (var dt in datas)
                 {
                     serializNoneArrayData<T>(dt, stream);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 序列化二维数组类型数据
+        /// </summary>
+        /// <param name="data">数据</param>
+        /// <param name="stream">Xbuffer的内存管理分配对象</param>
+        private void serializTwoDimensionArrayData<T>(string data, XSteam stream)
+        {
+            if (string.IsNullOrEmpty(data))
+            {
+                // 未配置二维数据，默认长度默认为0
+                serializNoneArrayData<intBuffer>("0", stream);
+            }
+            else
+            {
+                var twoDimensionDatas = data.Split(ExcelDataConst.TWO_DIMENSION_SPLITER);
+                // 写入二维数组第一维度的长度字节数信息
+                serializNoneArrayData<intBuffer>(twoDimensionDatas.Length.ToString(), stream);
+
+                // 开始序列化第一维度数组数据
+                foreach (var twoDimensionData in twoDimensionDatas)
+                {
+                    // 写入每一维度数据长度+每一维度的数据
+                    var oneDimensionDatas = twoDimensionData.Split(ExcelDataConst.ONE_DIMENSION_SPLITER);
+                    // 写入每一维度数组的长度字节数信息
+                    serializNoneArrayData<intBuffer>(oneDimensionDatas.Length.ToString(), stream);
+                    foreach(var oneDimensionData in oneDimensionDatas)
+                    {
+                        serializNoneArrayData<T>(oneDimensionData, stream);
+                    }
                 }
             }
         }

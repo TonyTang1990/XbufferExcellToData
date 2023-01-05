@@ -16,4 +16,8 @@ public partial class t_ui
 	public byte TestByte;				// 测试Byte数据类型
 
 	public byte[] TestByteArray;				// 测试Byte数组
+
+	public int[][] TestIntTwoArray;			// 测试整形二维数组
+
+	public string[][] TestStringTwoArray;			// 测试字符串二维数组
 }

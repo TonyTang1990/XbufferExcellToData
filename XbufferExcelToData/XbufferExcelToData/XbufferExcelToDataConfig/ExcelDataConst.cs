@@ -108,5 +108,15 @@ namespace XbufferExcelToData
         /// stringBuffer默认指字符串
         /// </summary>
         public static string STRING_BUFFER_DEFAULT_STRING_VALUE = string.Empty;
+
+        /// <summary>
+        /// 一维数组分隔符
+        /// </summary>
+        public const char ONE_DIMENSION_SPLITER = '+';
+
+        /// <summary>
+        /// 二维数组分隔符
+        /// </summary>
+        public const char TWO_DIMENSION_SPLITER = '#';
     }
 }

@@ -29,7 +29,6 @@ E:\TonyTang\Work\Projects\MyGitHubProjects\XbuffExcelToData\XbufferExcelToData\X
 D:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Debug\xbuffer_parser.exe.config
 D:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Debug\xbuffer_parser.exe
 D:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Debug\xbuffer_parser.pdb
-D:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\Core\Xbuffer\xbuffer_parser\obj\Debug\xbuffer_parser.csproj.AssemblyReference.cache
 D:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\Core\Xbuffer\xbuffer_parser\obj\Debug\xbuffer_parser.csproj.CoreCompileInputs.cache
 D:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\Core\Xbuffer\xbuffer_parser\obj\Debug\xbuffer_parser.exe
 D:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\Core\Xbuffer\xbuffer_parser\obj\Debug\xbuffer_parser.pdb

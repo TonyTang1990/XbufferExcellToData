@@ -12,7 +12,11 @@ namespace xbuffer
 {
     public class Proto
     {
-        public Proto_Class[] class_protos;
+        public Proto_Class[] class_protos
+        {
+            get;
+            private set;
+        }
 
         public Proto(string proto)
         {
@@ -30,23 +34,71 @@ namespace xbuffer
     /// </summary>
     public class Proto_Variable
     {
-        public string Var_Type;                             // 变量类型
-        public string Var_Name;                             // 变量名
-        public bool IsArray;                                // 是否是数组
-        public string Var_Comment;                          // 变量注释
+        /// <summary>
+        /// 变量类型
+        /// </summary>
+        public string Var_Type
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 变量名
+        /// </summary>
+        public string Var_Name
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 是否是一维数组
+        /// </summary>
+        public bool IsOneArray
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 是否是二维数组
+        /// </summary>
+        public bool IsTwoArray
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 变量注释
+        /// </summary>
+        public string Var_Comment
+        {
+            get;
+            private set;
+        }
 
         public Proto_Variable(string name, string type, string comment)
         {
             Var_Name = name;
-            if (type.Contains("["))
+            if (type.Contains("[["))
+            {
+                Var_Type = type.Substring(2, type.Length - 4);
+                IsOneArray = false;
+                IsTwoArray = true;
+            }
+            else if(type.Contains("["))
             {
                 Var_Type = type.Substring(1, type.Length - 2);
-                IsArray = true;
+                IsOneArray = true;
+                IsTwoArray = false;
             }
             else
             {
                 Var_Type = type;
-                IsArray = false;
+                IsOneArray = false;
+                IsTwoArray = false;
             }
             Var_Comment = comment;
         }
@@ -57,10 +109,41 @@ namespace xbuffer
     /// </summary>
     public class Proto_Class
     {
-        public string Class_Comment;                            // 注释
-        public string Class_Type;                               // 类型 例如 class struct
-        public string Class_Name;                               // 类名
-        public Proto_Variable[] Class_Variables;                // 变量列表
+        /// <summary>
+        /// 注释
+        /// </summary>
+        public string Class_Comment
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 类型 例如 class struct
+        /// </summary>
+        public string Class_Type
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 类名
+        /// </summary>
+        public string Class_Name
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 变量列表
+        /// </summary>
+        public Proto_Variable[] Class_Variables
+        {
+            get;
+            private set;
+        }
 
         public Proto_Class(Match match)
         {

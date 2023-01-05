@@ -37,6 +37,32 @@ namespace xbuffer
             {
                 _TestByteArray[i] = byteBuffer.deserialize(buffer, ref offset);
             }
+
+			// TestIntTwoArray
+            int _TestIntTwoArray_two_length = intBuffer.deserialize(buffer, ref offset);
+            int[][] _TestIntTwoArray = new int[_TestIntTwoArray_two_length][];
+            for (int i = 0; i < _TestIntTwoArray_two_length; i++)
+            {
+                int _TestIntTwoArray_one_length = intBuffer.deserialize(buffer, ref offset);
+                _TestIntTwoArray[i] = new int[_TestIntTwoArray_one_length];
+                for(int j = 0; j < _TestIntTwoArray_one_length; j++)
+                {
+                    _TestIntTwoArray[i][j] = intBuffer.deserialize(buffer, ref offset);
+                }
+            }
+
+			// TestStringTwoArray
+            int _TestStringTwoArray_two_length = intBuffer.deserialize(buffer, ref offset);
+            string[][] _TestStringTwoArray = new string[_TestStringTwoArray_two_length][];
+            for (int i = 0; i < _TestStringTwoArray_two_length; i++)
+            {
+                int _TestStringTwoArray_one_length = intBuffer.deserialize(buffer, ref offset);
+                _TestStringTwoArray[i] = new int[_TestStringTwoArray_one_length];
+                for(int j = 0; j < _TestStringTwoArray_one_length; j++)
+                {
+                    _TestStringTwoArray[i][j] = stringBuffer.deserialize(buffer, ref offset);
+                }
+            }
 
 			// value
 			return new t_ui() {
@@ -47,7 +73,9 @@ namespace xbuffer
 				Layer = _Layer,
 				TestSpace2 = _TestSpace2,
 				TestByte = _TestByte,
-				TestByteArray = _TestByteArray,
+				TestByteArray = _TestByteArray,
+				TestIntTwoArray = _TestIntTwoArray,
+				TestStringTwoArray = _TestStringTwoArray,
             };
         }
 
@@ -84,6 +112,32 @@ namespace xbuffer
             for (int i = 0; i < value.TestByteArray.Length; i++)
             {
                 byteBuffer.serialize(value.TestByteArray[i], steam);
+            }
+
+			// TestIntTwoArray
+            int _TestIntTwoArray_two_length = value.TestIntTwoArray.Length;
+            intBuffer.serialize(_TestIntTwoArray_two_length, steam);
+            for (int i = 0; i < _TestIntTwoArray_two_length; i++)
+            {
+                int _TestIntTwoArray_one_length = value.TestIntTwoArray[i].Length;
+                intBuffer.serialize(_TestIntTwoArray_one_length, steam);
+                for(int j = 0; j < _TestIntTwoArray_one_length; j++)
+                {
+                    intBuffer.serialize(value.TestIntTwoArray[i][j], steam);
+                }
+            }
+
+			// TestStringTwoArray
+            int _TestStringTwoArray_two_length = value.TestStringTwoArray.Length;
+            intBuffer.serialize(_TestStringTwoArray_two_length, steam);
+            for (int i = 0; i < _TestStringTwoArray_two_length; i++)
+            {
+                int _TestStringTwoArray_one_length = value.TestStringTwoArray[i].Length;
+                intBuffer.serialize(_TestStringTwoArray_one_length, steam);
+                for(int j = 0; j < _TestStringTwoArray_one_length; j++)
+                {
+                    stringBuffer.serialize(value.TestStringTwoArray[i][j], steam);
+                }
             }
         }
     }

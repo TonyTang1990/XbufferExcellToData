@@ -8,5 +8,8 @@ public partial #CLASS_TYPE# #CLASS_NAME#
 #IF_ARRAY#
 	public #VAR_TYPE#[] #VAR_NAME#;				// #VAR_COMMENT#
 #END_ARRAY#
+#IF_TWO_ARRAY#
+	public #VAR_TYPE#[][] #VAR_NAME#;			// #VAR_COMMENT#
+#END_TWO_ARRAY#
 #VARIABLES#
 }

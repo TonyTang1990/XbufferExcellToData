@@ -22,6 +22,19 @@ namespace xbuffer
                 _#VAR_NAME#[i] = #VAR_TYPE#Buffer.deserialize(buffer, ref offset);
             }
 #END_ARRAY#
+#IF_TWO_ARRAY#
+            int _#VAR_NAME#_two_length = intBuffer.deserialize(buffer, ref offset);
+            #VAR_TYPE#[][] _#VAR_NAME# = new #VAR_TYPE#[_#VAR_NAME#_two_length][];
+            for (int i = 0; i < _#VAR_NAME#_two_length; i++)
+            {
+                int _#VAR_NAME#_one_length = intBuffer.deserialize(buffer, ref offset);
+                _#VAR_NAME#[i] = new int[_#VAR_NAME#_one_length];
+                for(int j = 0; j < _#VAR_NAME#_one_length; j++)
+                {
+                    _#VAR_NAME#[i][j] = #VAR_TYPE#Buffer.deserialize(buffer, ref offset);
+                }
+            }
+#END_TWO_ARRAY#
 #DESERIALIZE_PROCESS#
 
 			// value
@@ -51,6 +64,19 @@ namespace xbuffer
                 #VAR_TYPE#Buffer.serialize(value.#VAR_NAME#[i], steam);
             }
 #END_ARRAY#
+#IF_TWO_ARRAY#
+            int _#VAR_NAME#_two_length = value.#VAR_NAME#.Length;
+            intBuffer.serialize(_#VAR_NAME#_two_length, steam);
+            for (int i = 0; i < _#VAR_NAME#_two_length; i++)
+            {
+                int _#VAR_NAME#_one_length = value.#VAR_NAME#[i].Length;
+                intBuffer.serialize(_#VAR_NAME#_one_length, steam);
+                for(int j = 0; j < _#VAR_NAME#_one_length; j++)
+                {
+                    #VAR_TYPE#Buffer.serialize(value.#VAR_NAME#[i][j], steam);
+                }
+            }
+#END_TWO_ARRAY#
 #SERIALIZE_PROCESS#
         }
     }

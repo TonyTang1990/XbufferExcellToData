@@ -9,4 +9,6 @@ class t_ui
 	TestSpace2:string;			                  //测试空格 描述支持2
 	TestByte:byte;			                      //测试Byte数据类型
 	TestByteArray:[byte];			               //测试Byte数组
+	TestIntTwoArray:[[int]];			            //测试整形二维数组
+	TestStringTwoArray:[[string]];			      //测试字符串二维数组
 }

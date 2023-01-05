@@ -29,7 +29,7 @@ namespace XbufferExcelToData
         public string[] FieldTypes { get; set; }
 
         /// <summary> 分割信息(仅用于一维和多维数组数据) /// </summary>
-        public string[] FieldSpliters { get; set; }
+        //public string[] FieldSpliters { get; set; }
 
         /// <summary> 占位符1 /// </summary>
         public string[] FieldPlaceholder1s { get; set; }
@@ -46,7 +46,7 @@ namespace XbufferExcelToData
             FieldNames = null;
             FieldNotations = null;
             FieldTypes = null;
-            FieldSpliters = null;
+            //FieldSpliters = null;
             FieldPlaceholder1s = null;
             FieldPlaceholder2s = null;
             DatasList = new List<ExcelData[]>();
@@ -88,7 +88,7 @@ namespace XbufferExcelToData
             printOutArrayInfo(FieldNames);
             printOutArrayInfo(FieldNotations);
             printOutArrayInfo(FieldTypes);
-            printOutArrayInfo(FieldSpliters);
+            //printOutArrayInfo(FieldSpliters);
 
             foreach (var datas in DatasList)
             {
@@ -135,7 +135,7 @@ namespace XbufferExcelToData
         /// <summary>
         /// 分割信息(仅用于一维和多维数组数据)
         /// </summary>
-        public string Spliter { get; set; }
+        //public string Spliter { get; set; }
 
         /// <summary>
         /// 数据

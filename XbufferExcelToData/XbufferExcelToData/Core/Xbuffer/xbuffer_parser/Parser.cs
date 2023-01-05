@@ -32,8 +32,9 @@ namespace xbuffer
             {
                 foreach (var item in proto_class.Class_Variables)
                 {
-                    template.setCondition("SINGLE", !item.IsArray);
-                    template.setCondition("ARRAY", item.IsArray);
+                    template.setCondition("SINGLE", !(item.IsOneArray || item.IsTwoArray));
+                    template.setCondition("ARRAY", item.IsOneArray);
+                    template.setCondition("TWO_ARRAY", item.IsTwoArray);
                     template.setValue("#VAR_TYPE#", item.Var_Type);
                     template.setValue("#VAR_NAME#", item.Var_Name);
                     template.setValue("#VAR_COMMENT#", item.Var_Comment);
@@ -46,8 +47,9 @@ namespace xbuffer
             {
                 foreach (var item in proto_class.Class_Variables)
                 {
-                    template.setCondition("SINGLE", !item.IsArray);
-                    template.setCondition("ARRAY", item.IsArray);
+                    template.setCondition("SINGLE", !(item.IsOneArray || item.IsTwoArray));
+                    template.setCondition("ARRAY", item.IsOneArray);
+                    template.setCondition("TWO_ARRAY", item.IsTwoArray);
                     template.setValue("#VAR_TYPE#", item.Var_Type);
                     template.setValue("#VAR_NAME#", item.Var_Name);
 					template.setValue("#VAR_COMMENT#", item.Var_Comment);
@@ -72,8 +74,9 @@ namespace xbuffer
             {
                 foreach (var item in proto_class.Class_Variables)
                 {
-                    template.setCondition("SINGLE", !item.IsArray);
-                    template.setCondition("ARRAY", item.IsArray);
+                    template.setCondition("SINGLE", !(item.IsOneArray || item.IsTwoArray));
+                    template.setCondition("ARRAY", item.IsOneArray);
+                    template.setCondition("TWO_ARRAY", item.IsTwoArray);
                     template.setValue("#VAR_TYPE#", item.Var_Type);
                     template.setValue("#VAR_NAME#", item.Var_Name);
 					template.setValue("#VAR_COMMENT#", item.Var_Comment);

@@ -99,7 +99,7 @@ namespace XbufferExcelToData
         /// <summary>
         /// 有效的分割符号配置
         /// </summary>
-        private List<char> ValideSplitersList;
+        //private List<char> ValideSplitersList;
 
         /// <summary>
         /// 有效的类型与Xbuffer支持的类型映射Map(用于快速访问表格配置的对应Xbuffer的类型字符串)
@@ -120,10 +120,11 @@ namespace XbufferExcelToData
             ValideExcelPostFixFilter = new List<string>(new string[] { "*.xlsx", "*.xls", "*.csv" });
             ValideTypesList = new List<string>(new string[] 
                                                 { "notation", // 第一个notation是特殊类型，用于表示注释列
-                                                  "int", "float", "string", "long", "bool", "byte", 
-                                                  "int[]", "float[]", "string[]", "long[]", "bool[]", "byte[]",});
+                                                  "int", "float", "string", "long", "bool", "byte",
+                                                  "int[]", "float[]", "string[]", "long[]", "bool[]", "byte[]",
+                                                  "int[][]", "float[][]", "string[][]", "long[][]", "bool[][]", "byte[][]",});
             // 为了避免使用过于常见的分隔符，这里定死了支持的分隔符配置
-            ValideSplitersList = new List<char>(new char[] { '+', ';', ',', '|'});      
+            //ValideSplitersList = new List<char>(new char[] { '+', ';', ',', '|'});      
             mValideTypesXbufferTypeMap = new Dictionary<string, string>();
             mValideTypesXbufferTypeMap.Add("notation", "notation");
             mValideTypesXbufferTypeMap.Add("int", "int");
@@ -138,6 +139,12 @@ namespace XbufferExcelToData
             mValideTypesXbufferTypeMap.Add("long[]", "[long]");
             mValideTypesXbufferTypeMap.Add("bool[]", "[bool]");
             mValideTypesXbufferTypeMap.Add("byte[]", "[byte]");
+            mValideTypesXbufferTypeMap.Add("int[][]", "[[int]]");
+            mValideTypesXbufferTypeMap.Add("float[][]", "[[float]]");
+            mValideTypesXbufferTypeMap.Add("string[][]", "[[string]]");
+            mValideTypesXbufferTypeMap.Add("long[][]", "[[long]]");
+            mValideTypesXbufferTypeMap.Add("bool[][]", "[[bool]]");
+            mValideTypesXbufferTypeMap.Add("byte[][]", "[[byte]]");
 
             mTempIdMap = new Dictionary<string, string>();
         }
@@ -301,7 +308,7 @@ namespace XbufferExcelToData
                                     // 字段分隔符信息行
                                     else if (currentlinenumber == FieldSpliterLineNumber)
                                     {
-                                        excelinfo.FieldSpliters = datas;
+                                        //excelinfo.FieldSpliters = datas;
                                     }
                                     // 字段占位符1信息行
                                     else if (currentlinenumber == FieldPlaceHolder1LineNumber)
@@ -330,12 +337,12 @@ namespace XbufferExcelToData
                                                 issuccess = false;
                                                 break;
                                             }
-                                            if (hasInvalideSpliter(excelinfo.FieldSpliters))
-                                            {
-                                                Console.WriteLine(string.Format("Excel Table:{0}", excelreader.Name));
-                                                issuccess = false;
-                                                break;
-                                            }
+                                            //if (hasInvalideSpliter(excelinfo.FieldSpliters))
+                                            //{
+                                            //    Console.WriteLine(string.Format("Excel Table:{0}", excelreader.Name));
+                                            //    issuccess = false;
+                                            //    break;
+                                            //}
                                         }
 
                                         // 记录每一行所有数据的字段名，字段类型，字段数据
@@ -345,7 +352,7 @@ namespace XbufferExcelToData
                                             ExcelData cd = new ExcelData();
                                             cd.Type = excelinfo.FieldTypes[m];
                                             cd.Name = excelinfo.FieldNames[m];
-                                            cd.Spliter = excelinfo.FieldSpliters[m];
+                                            //cd.Spliter = excelinfo.FieldSpliters[m];
                                             cd.Data = datas[m];
                                             exceldatas[m] = cd;
                                         }
@@ -516,39 +523,39 @@ namespace XbufferExcelToData
         /// </summary>
         /// <param name="spliters"></param>
         /// <returns></returns>
-        private bool hasInvalideSpliter(string[] spliters)
-        {
-            foreach (var spliter in spliters)
-            {
-                if (spliter != null)
-                {
-                    var allspliters = spliter.ToCharArray();
-                    // 只支持一个分隔符即一维数组配置
-                    if (allspliters.Length != 1)
-                    {
-                        Console.WriteLine("只支持最多一个的分隔符配置!");
-                        return true;
-                    }
-                    else
-                    {
-                        foreach (var sp in allspliters)
-                        {
-                            if (!ValideSplitersList.Contains(sp))
-                            {
-                                Console.WriteLine(string.Format("配置错误 : 不支持的分隔符配置:{0}", sp));
-                                Console.WriteLine(string.Format("支持的有效分隔符如下: {0}", ValideSplitersList.ToString()));
-                                return true;
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    continue;
-                }
-            }
-            return false;
-        }
+        //private bool hasInvalideSpliter(string[] spliters)
+        //{
+        //    foreach (var spliter in spliters)
+        //    {
+        //        if (spliter != null)
+        //        {
+        //            var allspliters = spliter.ToCharArray();
+        //            // 只支持一个分隔符即一维数组配置
+        //            if (allspliters.Length != 1)
+        //            {
+        //                Console.WriteLine("只支持最多一个的分隔符配置!");
+        //                return true;
+        //            }
+        //            else
+        //            {
+        //                foreach (var sp in allspliters)
+        //                {
+        //                    if (!ValideSplitersList.Contains(sp))
+        //                    {
+        //                        Console.WriteLine(string.Format("配置错误 : 不支持的分隔符配置:{0}", sp));
+        //                        Console.WriteLine(string.Format("支持的有效分隔符如下: {0}", ValideSplitersList.ToString()));
+        //                        return true;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        else
+        //        {
+        //            continue;
+        //        }
+        //    }
+        //    return false;
+        //}
 
         /// <summary>
         /// Id是否有效
