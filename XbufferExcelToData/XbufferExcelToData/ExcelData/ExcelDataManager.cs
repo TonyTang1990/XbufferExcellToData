@@ -120,8 +120,8 @@ namespace XbufferExcelToData
             ValideExcelPostFixFilter = new List<string>(new string[] { "*.xlsx", "*.xls", "*.csv" });
             ValideTypesList = new List<string>(new string[] 
                                                 { "notation", // 第一个notation是特殊类型，用于表示注释列
-                                                  "int", "float", "string", "long", "bool", 
-                                                  "int[]", "float[]", "string[]", "long[]", "bool[]"});
+                                                  "int", "float", "string", "long", "bool", "byte", 
+                                                  "int[]", "float[]", "string[]", "long[]", "bool[]", "byte[]",});
             // 为了避免使用过于常见的分隔符，这里定死了支持的分隔符配置
             ValideSplitersList = new List<char>(new char[] { '+', ';', ',', '|'});      
             mValideTypesXbufferTypeMap = new Dictionary<string, string>();
@@ -131,11 +131,13 @@ namespace XbufferExcelToData
             mValideTypesXbufferTypeMap.Add("string", "string");
             mValideTypesXbufferTypeMap.Add("long", "long");
             mValideTypesXbufferTypeMap.Add("bool", "bool");
+            mValideTypesXbufferTypeMap.Add("byte", "byte");
             mValideTypesXbufferTypeMap.Add("int[]", "[int]");
             mValideTypesXbufferTypeMap.Add("float[]", "[float]");
             mValideTypesXbufferTypeMap.Add("string[]", "[string]");
             mValideTypesXbufferTypeMap.Add("long[]", "[long]");
             mValideTypesXbufferTypeMap.Add("bool[]", "[bool]");
+            mValideTypesXbufferTypeMap.Add("byte[]", "[byte]");
 
             mTempIdMap = new Dictionary<string, string>();
         }

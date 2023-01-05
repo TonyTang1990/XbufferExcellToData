@@ -7,4 +7,6 @@ class t_ui
 	IsFullScreen:bool;			                  //是否全屏
 	Layer:int;			                          //UI层级Layer
 	TestSpace2:string;			                  //测试空格 描述支持2
+	TestByte:byte;			                      //测试Byte数据类型
+	TestByteArray:[byte];			               //测试Byte数组
 }
