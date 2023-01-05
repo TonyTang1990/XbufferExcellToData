@@ -28,7 +28,7 @@ namespace xbuffer
             for (int i = 0; i < _#VAR_NAME#_two_length; i++)
             {
                 int _#VAR_NAME#_one_length = intBuffer.deserialize(buffer, ref offset);
-                _#VAR_NAME#[i] = new int[_#VAR_NAME#_one_length];
+                _#VAR_NAME#[i] = new #VAR_TYPE#[_#VAR_NAME#_one_length];
                 for(int j = 0; j < _#VAR_NAME#_one_length; j++)
                 {
                     _#VAR_NAME#[i][j] = #VAR_TYPE#Buffer.deserialize(buffer, ref offset);

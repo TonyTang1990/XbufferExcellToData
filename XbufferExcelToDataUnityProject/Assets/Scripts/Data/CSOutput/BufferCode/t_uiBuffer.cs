@@ -57,7 +57,7 @@ namespace xbuffer
             for (int i = 0; i < _TestStringTwoArray_two_length; i++)
             {
                 int _TestStringTwoArray_one_length = intBuffer.deserialize(buffer, ref offset);
-                _TestStringTwoArray[i] = new int[_TestStringTwoArray_one_length];
+                _TestStringTwoArray[i] = new string[_TestStringTwoArray_one_length];
                 for(int j = 0; j < _TestStringTwoArray_one_length; j++)
                 {
                     _TestStringTwoArray[i][j] = stringBuffer.deserialize(buffer, ref offset);

@@ -78,15 +78,15 @@ public class GameLauncher : MonoBehaviour {
         Debug.Log("OnPrintAuthorInfoExcelData()");
         foreach(var authorinfo in GameDataManager.Singleton.Gett_AuthorInfoList())
         {
-            Debug.Log(string.Format("authorinfo.Id : {0}", authorinfo.Id));
-            Debug.Log(string.Format("authorinfo.author : {0}", authorinfo.author));
-            Debug.Log(string.Format("authorinfo.age : {0}", authorinfo.age));
-            Debug.Log(string.Format("authorinfo.hashouse : {0}", authorinfo.hashouse));
-            Debug.Log(string.Format("authorinfo.money : {0}", authorinfo.money));
-            Debug.Log(string.Format("authorinfo.pbutctime : {0}", authorinfo.pbutctime));
+            Debug.Log($"authorinfo.Id : {authorinfo.Id}");
+            Debug.Log($"authorinfo.author : {authorinfo.author}");
+            Debug.Log($"authorinfo.age : {authorinfo.age}");
+            Debug.Log($"authorinfo.hashouse : {authorinfo.hashouse}");
+            Debug.Log($"authorinfo.money : {authorinfo.money}");
+            Debug.Log($"authorinfo.pbutctime : {authorinfo.pbutctime}");
             foreach (var lucknumber in authorinfo.luckynumber)
             {
-                Debug.Log(string.Format("authorinfo.lucknumber : {0}", lucknumber));
+                Debug.Log($"authorinfo.lucknumber : {lucknumber}");
             }
         }
     }
@@ -99,8 +99,8 @@ public class GameLauncher : MonoBehaviour {
         Debug.Log("OnPrintAuthorInfoExcelData()");
         foreach (var globalS in GameDataManager.Singleton.Gett_global_sMap())
         {
-            Debug.Log(string.Format("globalS.Key : {0}", globalS.Value.Key));
-            Debug.Log(string.Format("globalS.Value : {0}", globalS.Value.Value));
+            Debug.Log($"globalS.Key : {globalS.Value.Key}");
+            Debug.Log($"globalS.Value : {globalS.Value.Value}");
         }
     }
 
@@ -112,10 +112,31 @@ public class GameLauncher : MonoBehaviour {
         Debug.Log("OnPrintUIExcelData()");
         foreach (var ui in GameDataManager.Singleton.Gett_uiMap())
         {
-            Debug.Log(string.Format("ui.WinName : {0}", ui.Value.WinName));
-            Debug.Log(string.Format("ui.ResPath : {0}", ui.Value.ResPath));
-            Debug.Log(string.Format("ui.IsFullScreen : {0}", ui.Value.IsFullScreen));
-            Debug.Log(string.Format("ui.Layer : {0}", ui.Value.Layer));
+            Debug.Log($"ui.WinName : {ui.Value.WinName}");
+            Debug.Log($"ui.ResPath : {ui.Value.ResPath}");
+            Debug.Log($"ui.TestSpace1 : {ui.Value.TestSpace1}");
+            Debug.Log($"ui.IsFullScreen : {ui.Value.IsFullScreen}");
+            Debug.Log($"ui.Layer : {ui.Value.Layer}");
+            Debug.Log($"ui.TestSpace2 : {ui.Value.TestSpace2}");
+            Debug.Log($"ui.TestByte : {ui.Value.TestByte}");
+            for(int i = 0, length = ui.Value.TestByteArray.Length; i < length; i++)
+            {
+                Debug.Log($"ui.Value.TestByteArray[{i}] : {ui.Value.TestByteArray[i]}");
+            }
+            for (int i = 0, length = ui.Value.TestIntTwoArray.Length; i < length; i++)
+            {
+                for(int j = 0, length2 = ui.Value.TestIntTwoArray[i].Length; j < length2; j++)
+                {
+                    Debug.Log($"ui.Value.TestIntTwoArray[{i}][{j}] : {ui.Value.TestIntTwoArray[i][j]}");
+                }
+            }
+            for (int i = 0, length = ui.Value.TestStringTwoArray.Length; i < length; i++)
+            {
+                for (int j = 0, length2 = ui.Value.TestStringTwoArray[i].Length; j < length2; j++)
+                {
+                    Debug.Log($"ui.Value.TestStringTwoArray[{i}][{j}] : {ui.Value.TestStringTwoArray[i][j]}");
+                }
+            }
         }
     }
 
@@ -127,8 +148,8 @@ public class GameLauncher : MonoBehaviour {
         Debug.Log("OnPrintLanguageExcelData()");
         foreach (var languageCn in GameDataManager.Singleton.Gett_language_cnMap())
         {
-            Debug.Log(string.Format("ui.Key : {0}", languageCn.Value.Key));
-            Debug.Log(string.Format("ui.Value : {0}", languageCn.Value.Value));
+            Debug.Log($"ui.Key : {languageCn.Value.Key}");
+            Debug.Log($"ui.Value : {languageCn.Value.Value}");
         }
     }
 }
