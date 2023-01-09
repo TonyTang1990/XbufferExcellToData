@@ -46,11 +46,6 @@ namespace XbufferExcelToData
         };
 
         /// <summary>
-        /// 第一列字段名(第一列字段名必须是Id)
-        /// </summary>
-        public const string ID_NAME = "Id";
-
-        /// <summary>
         /// 字段名字行号
         /// </summary>
         private const int FieldNameLineNumber = 1;
