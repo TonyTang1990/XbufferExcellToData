@@ -77,6 +77,10 @@
     <Folder Include="Extention\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Core\Xbuffer\xbuffer_parser\xbuffer_parser.csproj">
+      <Project>{00cf1d92-56bd-4048-8f4b-017775dd8c5b}</Project>
+      <Name>xbuffer_parser</Name>
+    </ProjectReference>
     <ProjectReference Include="Core\Xbuffer\xbuffer_runtime\xbuffer_runtime.csproj">
       <Project>{304d8131-c14a-4ceb-b053-2ed2649777ec}</Project>
       <Name>xbuffer_runtime</Name>

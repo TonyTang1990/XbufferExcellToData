@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -29,6 +30,7 @@ namespace XbufferExcelToData
                 }
             }
             Console.WriteLine("控制台参数:" + argfulltext);
+            Console.WriteLine("当前目录:" + Directory.GetCurrentDirectory());
             var disableouputcscode = args.Length > 0 ? (bool.TryParse(args[0], out bool disablecscode) == true ? disablecscode : false) : false;
             if(disableouputcscode)
             {

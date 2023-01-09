@@ -67,5 +67,15 @@ namespace XbufferExcelToData
         {
             return Path.GetFileName(Path.GetDirectoryName(filepath));
         }
+
+        /// <summary>
+        /// 解析窗口参数
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public static string[] ParseConsoleArgs(string parameter)
+        {
+            return parameter.Split(' ');
+        }
     }
 }

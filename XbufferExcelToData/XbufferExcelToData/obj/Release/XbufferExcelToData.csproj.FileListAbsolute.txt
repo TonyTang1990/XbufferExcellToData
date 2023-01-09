@@ -58,3 +58,4 @@ D:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToDat
 D:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\obj\Release\XbufferExcelToData.exe
 D:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\obj\Release\XbufferExcelToData.pdb
 G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\obj\Release\XbufferExcelToData.csproj.AssemblyReference.cache
+D:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Release\xbuffer_parser.exe.config

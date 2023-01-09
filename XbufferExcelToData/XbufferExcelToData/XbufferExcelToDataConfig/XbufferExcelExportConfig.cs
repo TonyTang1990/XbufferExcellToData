@@ -20,9 +20,9 @@ namespace XbufferExcelToData
     public class XbufferExcelExportConfig : SingletonTemplate<XbufferExcelExportConfig>
     {
         /// <summary>
-        /// XML配置文件全路径
+        /// XML配置文件相对路径
         /// </summary>
-        public string XMLConfigFileFullPath { get; private set; }
+        public string XMLConfigFileRelativePath { get; private set; }
 
         /// <summary>
         /// 导出配置数据
@@ -31,7 +31,7 @@ namespace XbufferExcelToData
 
         public XbufferExcelExportConfig()
         {
-            XMLConfigFileFullPath = "./ExportConfig.xml";
+            XMLConfigFileRelativePath = "./ExportConfig.xml";
             ExportConfigInfo = null;
         }
 
@@ -40,17 +40,17 @@ namespace XbufferExcelToData
         /// </summary>
         public bool LoadExportConfigData()
         {
-            if (File.Exists(XMLConfigFileFullPath))
+            if (File.Exists(XMLConfigFileRelativePath))
             {
                 XmlSerializer ser = new XmlSerializer(typeof(ExportConfig));
-                FileStream fs = new FileStream(XMLConfigFileFullPath, FileMode.Open);
+                FileStream fs = new FileStream(XMLConfigFileRelativePath, FileMode.Open);
                 ExportConfigInfo = (ExportConfig)ser.Deserialize(fs);
                 fs.Close();
                 return ExportConfigInfo != null;
             }
             else
             {
-                Console.WriteLine(string.Format("导出配置文件不存在 : {0}", XMLConfigFileFullPath));
+                Console.WriteLine(string.Format("导出配置文件不存在 : {0}", XMLConfigFileRelativePath));
                 return false;
             }
         }

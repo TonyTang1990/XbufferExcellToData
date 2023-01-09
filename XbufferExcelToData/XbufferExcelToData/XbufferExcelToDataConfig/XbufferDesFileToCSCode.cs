@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using xbuffer;
 
 namespace XbufferExcelToData
 {
@@ -60,52 +61,39 @@ namespace XbufferExcelToData
         {
             Utilities.RecreateSpecificFolder(CSClassCodeFolderPath);
             Utilities.RecreateSpecificFolder(CSBufferCodeFolderPath);
-            Process process = new Process();
-            string csclasspara = string.Format("input={0} template=\"{1}/csharp_class.ftl\" output_dir=\"{2}\" suffix=\".cs\"",
+            string csclasspara = string.Format("input={0} template={1}csharp_class.ftl output_dir={2} suffix=.cs",
                                                 XbufferExcelExportConfig.Singleton.ExportConfigInfo.DesFileOutputPath,
                                                 XbufferExcelExportConfig.Singleton.ExportConfigInfo.TemplatePath,
                                                 XbufferExcelExportConfig.Singleton.ExportConfigInfo.CSClassCodeOutputPath);
-            string csbufferpara = string.Format("input={0} template=\"{1}csharp_buffer.ftl\" output_dir=\"{2}\" suffix=\"Buffer.cs\"",
+            string csbufferpara = string.Format("input={0} template={1}csharp_buffer.ftl output_dir={2} suffix=Buffer.cs",
                                                 XbufferExcelExportConfig.Singleton.ExportConfigInfo.DesFileOutputPath,
                                                 XbufferExcelExportConfig.Singleton.ExportConfigInfo.TemplatePath,
                                                 XbufferExcelExportConfig.Singleton.ExportConfigInfo.CSBufferCodeOutputPath);
-            startXbufferCSClassProcess(process, csclasspara);
-            startXbufferCSBufferProcess(process, csbufferpara);
+            startXbufferCSClassProcess(csclasspara);
+            startXbufferCSBufferProcess(csbufferpara);
             return true;
         }
 
         /// <summary>
-        /// 开启Xbuffer生成CS类代码的进程
+        /// 开始Xbuffer生成CS类代码
         /// </summary>
-        /// <param name="process"></param>
         /// <param name="parameters"></param>
-        private void startXbufferCSClassProcess(Process process, string parameters)
+        private void startXbufferCSClassProcess(string parameters)
         {
-            ProcessStartInfo csclassprocessstartinfo = new ProcessStartInfo(ConstValue.XbufferParserExePath, parameters);
-            process.StartInfo = csclassprocessstartinfo;
-            process.Start();
-            while (!process.HasExited)
-            {
-                process.WaitForExit();
-            }
-            int returnValue = process.ExitCode;
+            var result = Parser.parseByArgs(Utilities.ParseConsoleArgs(parameters));
+            var resultTxt = result ? "成功" : "失败";
+            Console.WriteLine($"CS Class生成结果:{resultTxt}");
         }
 
         /// <summary>
-        /// 开启Xbuffer生成CS序列化代码的进程
+        /// 开始Xbuffer生成CS序列化代码
         /// </summary>
-        /// <param name="process"></param>
         /// <param name="parameters"></param>
-        private void startXbufferCSBufferProcess(Process process, string parameters)
+        private void startXbufferCSBufferProcess(string parameters)
         {
-            ProcessStartInfo csclassprocessstartinfo = new ProcessStartInfo(ConstValue.XbufferParserExePath, parameters);
-            process.StartInfo = csclassprocessstartinfo;
-            process.Start();
-            while (!process.HasExited)
-            {
-                process.WaitForExit();
-            }
-            int returnValue = process.ExitCode;
+            var result = Parser.parseByArgs(Utilities.ParseConsoleArgs(parameters));
+            var resultTxt = result ? "成功" : "失败";
+            Console.WriteLine($"CS Buffer生成结果:{resultTxt}");
         }
     }
 }
