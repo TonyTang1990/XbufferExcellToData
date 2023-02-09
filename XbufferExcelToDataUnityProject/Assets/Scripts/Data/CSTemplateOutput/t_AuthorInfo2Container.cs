@@ -10,43 +10,47 @@ using xbuffer;
 
 namespace Data
 {
+    /// <summary>
+    /// #LOOP_CLASS_NAME#数据容器类
+    /// </summary>
     public class t_AuthorInfo2Container
     {
+        /// <summary>
+        /// 数据列表
+        /// </summary>
         private List<t_AuthorInfo2> list = null;
+
+        /// <summary>
+        /// 数据Map<ID, 数据>
+        /// </summary>
         private Dictionary<int, t_AuthorInfo2> map = null;
 
+        /// <summary>
+        /// 获取数据列表
+        /// </summary>
         public List<t_AuthorInfo2> GetList()
         {
-            if (list == null || list.Count <= 0)
+            if (list == null)
             {
                 LoadDataFromBin();
             }
             return list;
         }
 
+        /// <summary>
+        /// 获取数据Map
+        /// </summary>
         public Dictionary<int, t_AuthorInfo2> GetMap()
         {
-            if (map == null || map.Count <= 0)
+            if (map == null)
             {
                 LoadDataFromBin();
             }
             return map;
         }
 
-        public void ClearData()
-        {
-            if (list != null && list.Count > 0)
-            {
-                list.Clear();
-            }
-            if (map != null && map.Count > 0)
-            {
-                map.Clear();
-            }
-        }   
-
         /// <summary>
-        /// 加载数据
+        /// 加载配置数据
         /// </summary>
         public void LoadDataFromBin()
         {
@@ -87,6 +91,21 @@ namespace Data
                 }           
                 br.Close();
                 fs.Close();
+            }
+        }
+
+        /// <summary>
+        /// 清除数据Map
+        /// </summary>
+        private void ClearData()
+        {
+            if (list != null)
+            {
+                list.Clear();
+            }
+            if (map != null)
+            {
+                map.Clear();
             }
         }
     }

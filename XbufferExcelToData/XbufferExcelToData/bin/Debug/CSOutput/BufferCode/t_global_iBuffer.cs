@@ -10,15 +10,14 @@ namespace xbuffer
             if (_null) return null;
 
 			// Key
-
 			string _Key = stringBuffer.deserialize(buffer, ref offset);
+
 			// Value
-
 			int _Value = intBuffer.deserialize(buffer, ref offset);
 
 			// value
 			return new t_global_i() {
-				Key = _Key,
+				Key = _Key,
 				Value = _Value,
             };
         }
@@ -31,10 +30,9 @@ namespace xbuffer
             if (value == null) return;
 
 			// Key
-
 			stringBuffer.serialize(value.Key, steam);
+
 			// Value
-
 			intBuffer.serialize(value.Value, steam);
         }
     }

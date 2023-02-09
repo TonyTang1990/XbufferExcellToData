@@ -10,43 +10,47 @@ using xbuffer;
 
 namespace Data
 {
+    /// <summary>
+    /// #LOOP_CLASS_NAME#数据容器类
+    /// </summary>
     public class #CLASS_NAME#Container
     {
+        /// <summary>
+        /// 数据列表
+        /// </summary>
         private List<#CLASS_NAME#> list = null;
+
+        /// <summary>
+        /// 数据Map<ID, 数据>
+        /// </summary>
         private Dictionary<#ID_TYPE#, #CLASS_NAME#> map = null;
 
+        /// <summary>
+        /// 获取数据列表
+        /// </summary>
         public List<#CLASS_NAME#> GetList()
         {
-            if (list == null || list.Count <= 0)
+            if (list == null)
             {
                 LoadDataFromBin();
             }
             return list;
         }
 
+        /// <summary>
+        /// 获取数据Map
+        /// </summary>
         public Dictionary<#ID_TYPE#, #CLASS_NAME#> GetMap()
         {
-            if (map == null || map.Count <= 0)
+            if (map == null)
             {
                 LoadDataFromBin();
             }
             return map;
         }
 
-        public void ClearData()
-        {
-            if (list != null && list.Count > 0)
-            {
-                list.Clear();
-            }
-            if (map != null && map.Count > 0)
-            {
-                map.Clear();
-            }
-        }   
-
         /// <summary>
-        /// 加载数据
+        /// 加载配置数据
         /// </summary>
         public void LoadDataFromBin()
         {
@@ -87,6 +91,21 @@ namespace Data
                 }           
                 br.Close();
                 fs.Close();
+            }
+        }
+
+        /// <summary>
+        /// 清除数据Map
+        /// </summary>
+        private void ClearData()
+        {
+            if (list != null)
+            {
+                list.Clear();
+            }
+            if (map != null)
+            {
+                map.Clear();
             }
         }
     }
