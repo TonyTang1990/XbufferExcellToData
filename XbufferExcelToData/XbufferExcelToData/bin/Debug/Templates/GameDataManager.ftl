@@ -2,7 +2,7 @@
  * Auto generated, do not edit it
  */
 using System.Collections.Generic;
-using xbuffer;
+using System.Collections.ObjectModel;
 
 namespace Data
 {
@@ -50,7 +50,7 @@ namespace Data
 		/// <summary>
 		/// 获取#LOOP_CLASS_NAME#数据列表
 		/// </summary>
-		public List<#LOOP_CLASS_NAME#> Get#LOOP_CLASS_NAME#List()
+		public ReadOnlyCollection<#LOOP_CLASS_NAME#> Get#LOOP_CLASS_NAME#List()
 		{
 			return m#LOOP_CLASS_NAME#Container.GetList();
 		}
@@ -58,7 +58,7 @@ namespace Data
 		/// <summary>
 		/// 获取#LOOP_CLASS_NAME#数据Map
 		/// </summary>
-		public Dictionary<#ID_TYPE#, #LOOP_CLASS_NAME#> Get#LOOP_CLASS_NAME#Map()
+		public ReadOnlyDictionary<#ID_TYPE#, #LOOP_CLASS_NAME#> Get#LOOP_CLASS_NAME#Map()
 		{
 			return m#LOOP_CLASS_NAME#Container.GetMap();
 		}

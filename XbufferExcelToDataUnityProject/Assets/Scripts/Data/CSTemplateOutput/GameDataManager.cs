@@ -2,7 +2,7 @@
  * Auto generated, do not edit it
  */
 using System.Collections.Generic;
-using xbuffer;
+using System.Collections.ObjectModel;
 
 namespace Data
 {
@@ -211,7 +211,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_AuthorInfo数据列表
 		/// </summary>
-		public List<t_AuthorInfo> Gett_AuthorInfoList()
+		public ReadOnlyCollection<t_AuthorInfo> Gett_AuthorInfoList()
 		{
 			return mt_AuthorInfoContainer.GetList();
 		}
@@ -219,7 +219,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_AuthorInfo数据Map
 		/// </summary>
-		public Dictionary<int, t_AuthorInfo> Gett_AuthorInfoMap()
+		public ReadOnlyDictionary<int, t_AuthorInfo> Gett_AuthorInfoMap()
 		{
 			return mt_AuthorInfoContainer.GetMap();
 		}

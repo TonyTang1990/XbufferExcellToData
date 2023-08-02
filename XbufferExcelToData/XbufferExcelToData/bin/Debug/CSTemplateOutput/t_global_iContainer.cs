@@ -4,6 +4,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using UnityEngine;
 using xbuffer;
@@ -21,32 +22,42 @@ namespace Data
         private List<t_global_i> list = null;
 
         /// <summary>
+        /// 只读数据列表
+        /// </summary>
+        private ReadOnlyCollection<t_global_i> readOnlyList = null;
+
+        /// <summary>
         /// 数据Map<ID, 数据>
         /// </summary>
         private Dictionary<string, t_global_i> map = null;
 
         /// <summary>
+        /// 只读数据Map<ID, 数据>
+        /// </summary>
+        private ReadOnlyDictionary<string, t_global_i> readOnlyMap = null;
+
+        /// <summary>
         /// 获取数据列表
         /// </summary>
-        public List<t_global_i> GetList()
+        public ReadOnlyCollection<t_global_i> GetList()
         {
-            if (list == null)
+            if (readOnlyList == null)
             {
                 LoadDataFromBin();
             }
-            return list;
+            return readOnlyList;
         }
 
         /// <summary>
         /// 获取数据Map
         /// </summary>
-        public Dictionary<string, t_global_i> GetMap()
+        public ReadOnlyDictionary<string, t_global_i> GetMap()
         {
-            if (map == null)
+            if (readOnlyMap == null)
             {
                 LoadDataFromBin();
             }
-            return map;
+            return readOnlyMap;
         }
 
         /// <summary>
@@ -85,6 +96,10 @@ namespace Data
                         list.Add(obj);
                         map.Add(obj.Key, obj); 
                     }
+                    readOnlyList = new ReadOnlyCollection<t_global_i>(list);
+                    readOnlyMap = new ReadOnlyDictionary<string, t_global_i>(map);
+                    list.Clear();
+                    map.Clear();
                 }catch (Exception ex)
                 {
                     Debug.LogError("import data error: " + ex.ToString());
@@ -99,13 +114,15 @@ namespace Data
         /// </summary>
         private void ClearData()
         {
-            if (list != null)
+            if (readOnlyList != null)
             {
                 list.Clear();
+                readOnlyList = null;
             }
-            if (map != null)
+            if (readOnlyMap != null)
             {
                 map.Clear();
+                readOnlyMap = null;
             }
         }
     }
