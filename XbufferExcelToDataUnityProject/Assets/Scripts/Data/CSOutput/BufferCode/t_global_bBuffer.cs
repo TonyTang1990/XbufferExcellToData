@@ -16,10 +16,10 @@ namespace xbuffer
 			bool _Value = boolBuffer.deserialize(buffer, ref offset);
 
 			// value
-			return new t_global_b() {
-				Key = _Key,
-				Value = _Value,
-            };
+			return new t_global_b(
+                _Key,
+                _Value
+            );
         }
 
         public static void Serialize(t_global_b value, XSteam steam)

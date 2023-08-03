@@ -116,6 +116,36 @@ namespace xbuffer
                 template.endLoop();
             }
 
+            if (template.beginLoop("#CONSTRUCTOR_PARAMS#"))
+            {
+                for (int i = 0, length = proto_class.Class_Variables.Length; i < length; i++)
+                {
+                    var item = proto_class.Class_Variables[i];
+                    var isLastVariable = i == (length - 1);
+                    var varName = isLastVariable ? item.Var_Name : $"{item.Var_Name},";
+                    template.setCondition("SINGLE", !(item.IsOneArray || item.IsTwoArray));
+                    template.setCondition("ARRAY", item.IsOneArray);
+                    template.setCondition("TWO_ARRAY", item.IsTwoArray);
+                    template.setValue("#VAR_TYPE#", item.Var_Type);
+                    template.setValue("#VAR_NAME#", varName);
+                    template.setValue("#VAR_COMMENT#", item.Var_Comment);
+                    template.nextLoop();
+                }
+                template.endLoop();
+            }
+
+            if (template.beginLoop("#CONSTRUCTOR_ASSIGNMENTS#"))
+            {
+                foreach (var item in proto_class.Class_Variables)
+                {
+                    template.setValue("#VAR_TYPE#", item.Var_Type);
+                    template.setValue("#VAR_NAME#", item.Var_Name);
+                    template.setValue("#VAR_COMMENT#", item.Var_Comment);
+                    template.nextLoop();
+                }
+                template.endLoop();
+            }
+
             if (template.beginLoop("#DESERIALIZE_PROCESS#"))
             {
                 foreach (var item in proto_class.Class_Variables)
@@ -133,10 +163,13 @@ namespace xbuffer
 
             if (template.beginLoop("#DESERIALIZE_RETURN#"))
             {
-                foreach (var item in proto_class.Class_Variables)
+                for (int i = 0, length = proto_class.Class_Variables.Length; i < length; i++)
                 {
-					template.setValue("#VAR_TYPE#", item.Var_Type);
-                    template.setValue("#VAR_NAME#", item.Var_Name);
+                    var item = proto_class.Class_Variables[i];
+                    var isLastVariable = i == (length - 1);
+                    var varName = isLastVariable ? item.Var_Name : $"{item.Var_Name},";
+                    template.setValue("#VAR_TYPE#", item.Var_Type);
+                    template.setValue("#VAR_NAME#", varName);
 					template.setValue("#VAR_COMMENT#", item.Var_Comment);
                     template.nextLoop();
                 }

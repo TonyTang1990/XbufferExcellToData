@@ -16,10 +16,10 @@ namespace xbuffer
 			string _Value = stringBuffer.deserialize(buffer, ref offset);
 
 			// value
-			return new t_language_cn() {
-				Key = _Key,
-				Value = _Value,
-            };
+			return new t_language_cn(
+                _Key,
+                _Value
+            );
         }
 
         public static void Serialize(t_language_cn value, XSteam steam)

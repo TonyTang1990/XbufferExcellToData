@@ -36,15 +36,15 @@ namespace xbuffer
             }
 
 			// value
-			return new t_AuthorInfo2() {
-				Id = _Id,
-				author = _author,
-				age = _age,
-				money = _money,
-				hashouse = _hashouse,
-				pbutctime = _pbutctime,
-				luckynumber = _luckynumber,
-            };
+			return new t_AuthorInfo2(
+                _Id,
+                _author,
+                _age,
+                _money,
+                _hashouse,
+                _pbutctime,
+                _luckynumber
+            );
         }
 
         public static void Serialize(t_AuthorInfo2 value, XSteam steam)

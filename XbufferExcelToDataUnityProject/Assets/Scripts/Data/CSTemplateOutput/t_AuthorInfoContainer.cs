@@ -81,9 +81,9 @@ namespace Data
                             var count = br.ReadInt32();
                             if(list == null)
                             {
-                                list =  new List<t_AuthorInfo>(count);
+                                list =  new List<t_AuthorInfo>(count);             
                             }
-                            if (map == null)
+                            if(map == null)
                             {
                                 map = new Dictionary<int, t_AuthorInfo>(count);
                             }
@@ -98,10 +98,7 @@ namespace Data
                     }
                     readOnlyList = new ReadOnlyCollection<t_AuthorInfo>(list);
                     readOnlyMap = new ReadOnlyDictionary<int, t_AuthorInfo>(map);
-                    list.Clear();
-                    map.Clear();
-                }
-                catch (Exception ex)
+                }catch (Exception ex)
                 {
                     Debug.LogError("import data error: " + ex.ToString());
                 }           

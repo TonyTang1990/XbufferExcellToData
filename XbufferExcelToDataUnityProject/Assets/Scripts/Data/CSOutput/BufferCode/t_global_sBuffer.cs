@@ -16,10 +16,10 @@ namespace xbuffer
 			string _Value = stringBuffer.deserialize(buffer, ref offset);
 
 			// value
-			return new t_global_s() {
-				Key = _Key,
-				Value = _Value,
-            };
+			return new t_global_s(
+                _Key,
+                _Value
+            );
         }
 
         public static void Serialize(t_global_s value, XSteam steam)

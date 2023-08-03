@@ -98,8 +98,6 @@ namespace Data
                     }
                     readOnlyList = new ReadOnlyCollection<t_global_b>(list);
                     readOnlyMap = new ReadOnlyDictionary<string, t_global_b>(map);
-                    list.Clear();
-                    map.Clear();
                 }catch (Exception ex)
                 {
                     Debug.LogError("import data error: " + ex.ToString());

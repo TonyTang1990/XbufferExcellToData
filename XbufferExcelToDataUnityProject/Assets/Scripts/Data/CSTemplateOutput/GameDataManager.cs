@@ -235,7 +235,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_AuthorInfo10数据列表
 		/// </summary>
-		public List<t_AuthorInfo10> Gett_AuthorInfo10List()
+		public ReadOnlyCollection<t_AuthorInfo10> Gett_AuthorInfo10List()
 		{
 			return mt_AuthorInfo10Container.GetList();
 		}
@@ -243,7 +243,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_AuthorInfo10数据Map
 		/// </summary>
-		public Dictionary<int, t_AuthorInfo10> Gett_AuthorInfo10Map()
+		public ReadOnlyDictionary<int, t_AuthorInfo10> Gett_AuthorInfo10Map()
 		{
 			return mt_AuthorInfo10Container.GetMap();
 		}
@@ -259,7 +259,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_AuthorInfo2数据列表
 		/// </summary>
-		public List<t_AuthorInfo2> Gett_AuthorInfo2List()
+		public ReadOnlyCollection<t_AuthorInfo2> Gett_AuthorInfo2List()
 		{
 			return mt_AuthorInfo2Container.GetList();
 		}
@@ -267,7 +267,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_AuthorInfo2数据Map
 		/// </summary>
-		public Dictionary<int, t_AuthorInfo2> Gett_AuthorInfo2Map()
+		public ReadOnlyDictionary<int, t_AuthorInfo2> Gett_AuthorInfo2Map()
 		{
 			return mt_AuthorInfo2Container.GetMap();
 		}
@@ -283,7 +283,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_AuthorInfo3数据列表
 		/// </summary>
-		public List<t_AuthorInfo3> Gett_AuthorInfo3List()
+		public ReadOnlyCollection<t_AuthorInfo3> Gett_AuthorInfo3List()
 		{
 			return mt_AuthorInfo3Container.GetList();
 		}
@@ -291,7 +291,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_AuthorInfo3数据Map
 		/// </summary>
-		public Dictionary<int, t_AuthorInfo3> Gett_AuthorInfo3Map()
+		public ReadOnlyDictionary<int, t_AuthorInfo3> Gett_AuthorInfo3Map()
 		{
 			return mt_AuthorInfo3Container.GetMap();
 		}
@@ -307,7 +307,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_AuthorInfo4数据列表
 		/// </summary>
-		public List<t_AuthorInfo4> Gett_AuthorInfo4List()
+		public ReadOnlyCollection<t_AuthorInfo4> Gett_AuthorInfo4List()
 		{
 			return mt_AuthorInfo4Container.GetList();
 		}
@@ -315,7 +315,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_AuthorInfo4数据Map
 		/// </summary>
-		public Dictionary<int, t_AuthorInfo4> Gett_AuthorInfo4Map()
+		public ReadOnlyDictionary<int, t_AuthorInfo4> Gett_AuthorInfo4Map()
 		{
 			return mt_AuthorInfo4Container.GetMap();
 		}
@@ -331,7 +331,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_AuthorInfo5数据列表
 		/// </summary>
-		public List<t_AuthorInfo5> Gett_AuthorInfo5List()
+		public ReadOnlyCollection<t_AuthorInfo5> Gett_AuthorInfo5List()
 		{
 			return mt_AuthorInfo5Container.GetList();
 		}
@@ -339,7 +339,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_AuthorInfo5数据Map
 		/// </summary>
-		public Dictionary<int, t_AuthorInfo5> Gett_AuthorInfo5Map()
+		public ReadOnlyDictionary<int, t_AuthorInfo5> Gett_AuthorInfo5Map()
 		{
 			return mt_AuthorInfo5Container.GetMap();
 		}
@@ -355,7 +355,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_AuthorInfo6数据列表
 		/// </summary>
-		public List<t_AuthorInfo6> Gett_AuthorInfo6List()
+		public ReadOnlyCollection<t_AuthorInfo6> Gett_AuthorInfo6List()
 		{
 			return mt_AuthorInfo6Container.GetList();
 		}
@@ -363,7 +363,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_AuthorInfo6数据Map
 		/// </summary>
-		public Dictionary<int, t_AuthorInfo6> Gett_AuthorInfo6Map()
+		public ReadOnlyDictionary<int, t_AuthorInfo6> Gett_AuthorInfo6Map()
 		{
 			return mt_AuthorInfo6Container.GetMap();
 		}
@@ -379,7 +379,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_AuthorInfo7数据列表
 		/// </summary>
-		public List<t_AuthorInfo7> Gett_AuthorInfo7List()
+		public ReadOnlyCollection<t_AuthorInfo7> Gett_AuthorInfo7List()
 		{
 			return mt_AuthorInfo7Container.GetList();
 		}
@@ -387,7 +387,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_AuthorInfo7数据Map
 		/// </summary>
-		public Dictionary<int, t_AuthorInfo7> Gett_AuthorInfo7Map()
+		public ReadOnlyDictionary<int, t_AuthorInfo7> Gett_AuthorInfo7Map()
 		{
 			return mt_AuthorInfo7Container.GetMap();
 		}
@@ -403,7 +403,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_AuthorInfo8数据列表
 		/// </summary>
-		public List<t_AuthorInfo8> Gett_AuthorInfo8List()
+		public ReadOnlyCollection<t_AuthorInfo8> Gett_AuthorInfo8List()
 		{
 			return mt_AuthorInfo8Container.GetList();
 		}
@@ -411,7 +411,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_AuthorInfo8数据Map
 		/// </summary>
-		public Dictionary<int, t_AuthorInfo8> Gett_AuthorInfo8Map()
+		public ReadOnlyDictionary<int, t_AuthorInfo8> Gett_AuthorInfo8Map()
 		{
 			return mt_AuthorInfo8Container.GetMap();
 		}
@@ -427,7 +427,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_AuthorInfo9数据列表
 		/// </summary>
-		public List<t_AuthorInfo9> Gett_AuthorInfo9List()
+		public ReadOnlyCollection<t_AuthorInfo9> Gett_AuthorInfo9List()
 		{
 			return mt_AuthorInfo9Container.GetList();
 		}
@@ -435,7 +435,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_AuthorInfo9数据Map
 		/// </summary>
-		public Dictionary<int, t_AuthorInfo9> Gett_AuthorInfo9Map()
+		public ReadOnlyDictionary<int, t_AuthorInfo9> Gett_AuthorInfo9Map()
 		{
 			return mt_AuthorInfo9Container.GetMap();
 		}
@@ -451,7 +451,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_global_b数据列表
 		/// </summary>
-		public List<t_global_b> Gett_global_bList()
+		public ReadOnlyCollection<t_global_b> Gett_global_bList()
 		{
 			return mt_global_bContainer.GetList();
 		}
@@ -459,7 +459,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_global_b数据Map
 		/// </summary>
-		public Dictionary<string, t_global_b> Gett_global_bMap()
+		public ReadOnlyDictionary<string, t_global_b> Gett_global_bMap()
 		{
 			return mt_global_bContainer.GetMap();
 		}
@@ -475,7 +475,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_Global10数据列表
 		/// </summary>
-		public List<t_Global10> Gett_Global10List()
+		public ReadOnlyCollection<t_Global10> Gett_Global10List()
 		{
 			return mt_Global10Container.GetList();
 		}
@@ -483,7 +483,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_Global10数据Map
 		/// </summary>
-		public Dictionary<int, t_Global10> Gett_Global10Map()
+		public ReadOnlyDictionary<int, t_Global10> Gett_Global10Map()
 		{
 			return mt_Global10Container.GetMap();
 		}
@@ -499,7 +499,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_Global2数据列表
 		/// </summary>
-		public List<t_Global2> Gett_Global2List()
+		public ReadOnlyCollection<t_Global2> Gett_Global2List()
 		{
 			return mt_Global2Container.GetList();
 		}
@@ -507,7 +507,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_Global2数据Map
 		/// </summary>
-		public Dictionary<int, t_Global2> Gett_Global2Map()
+		public ReadOnlyDictionary<int, t_Global2> Gett_Global2Map()
 		{
 			return mt_Global2Container.GetMap();
 		}
@@ -523,7 +523,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_Global3数据列表
 		/// </summary>
-		public List<t_Global3> Gett_Global3List()
+		public ReadOnlyCollection<t_Global3> Gett_Global3List()
 		{
 			return mt_Global3Container.GetList();
 		}
@@ -531,7 +531,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_Global3数据Map
 		/// </summary>
-		public Dictionary<int, t_Global3> Gett_Global3Map()
+		public ReadOnlyDictionary<int, t_Global3> Gett_Global3Map()
 		{
 			return mt_Global3Container.GetMap();
 		}
@@ -547,7 +547,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_Global4数据列表
 		/// </summary>
-		public List<t_Global4> Gett_Global4List()
+		public ReadOnlyCollection<t_Global4> Gett_Global4List()
 		{
 			return mt_Global4Container.GetList();
 		}
@@ -555,7 +555,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_Global4数据Map
 		/// </summary>
-		public Dictionary<int, t_Global4> Gett_Global4Map()
+		public ReadOnlyDictionary<int, t_Global4> Gett_Global4Map()
 		{
 			return mt_Global4Container.GetMap();
 		}
@@ -571,7 +571,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_Global5数据列表
 		/// </summary>
-		public List<t_Global5> Gett_Global5List()
+		public ReadOnlyCollection<t_Global5> Gett_Global5List()
 		{
 			return mt_Global5Container.GetList();
 		}
@@ -579,7 +579,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_Global5数据Map
 		/// </summary>
-		public Dictionary<int, t_Global5> Gett_Global5Map()
+		public ReadOnlyDictionary<int, t_Global5> Gett_Global5Map()
 		{
 			return mt_Global5Container.GetMap();
 		}
@@ -595,7 +595,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_Global6数据列表
 		/// </summary>
-		public List<t_Global6> Gett_Global6List()
+		public ReadOnlyCollection<t_Global6> Gett_Global6List()
 		{
 			return mt_Global6Container.GetList();
 		}
@@ -603,7 +603,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_Global6数据Map
 		/// </summary>
-		public Dictionary<int, t_Global6> Gett_Global6Map()
+		public ReadOnlyDictionary<int, t_Global6> Gett_Global6Map()
 		{
 			return mt_Global6Container.GetMap();
 		}
@@ -619,7 +619,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_Global7数据列表
 		/// </summary>
-		public List<t_Global7> Gett_Global7List()
+		public ReadOnlyCollection<t_Global7> Gett_Global7List()
 		{
 			return mt_Global7Container.GetList();
 		}
@@ -627,7 +627,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_Global7数据Map
 		/// </summary>
-		public Dictionary<int, t_Global7> Gett_Global7Map()
+		public ReadOnlyDictionary<int, t_Global7> Gett_Global7Map()
 		{
 			return mt_Global7Container.GetMap();
 		}
@@ -643,7 +643,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_Global8数据列表
 		/// </summary>
-		public List<t_Global8> Gett_Global8List()
+		public ReadOnlyCollection<t_Global8> Gett_Global8List()
 		{
 			return mt_Global8Container.GetList();
 		}
@@ -651,7 +651,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_Global8数据Map
 		/// </summary>
-		public Dictionary<int, t_Global8> Gett_Global8Map()
+		public ReadOnlyDictionary<int, t_Global8> Gett_Global8Map()
 		{
 			return mt_Global8Container.GetMap();
 		}
@@ -667,7 +667,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_Global9数据列表
 		/// </summary>
-		public List<t_Global9> Gett_Global9List()
+		public ReadOnlyCollection<t_Global9> Gett_Global9List()
 		{
 			return mt_Global9Container.GetList();
 		}
@@ -675,7 +675,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_Global9数据Map
 		/// </summary>
-		public Dictionary<int, t_Global9> Gett_Global9Map()
+		public ReadOnlyDictionary<int, t_Global9> Gett_Global9Map()
 		{
 			return mt_Global9Container.GetMap();
 		}
@@ -691,7 +691,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_global_i数据列表
 		/// </summary>
-		public List<t_global_i> Gett_global_iList()
+		public ReadOnlyCollection<t_global_i> Gett_global_iList()
 		{
 			return mt_global_iContainer.GetList();
 		}
@@ -699,7 +699,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_global_i数据Map
 		/// </summary>
-		public Dictionary<string, t_global_i> Gett_global_iMap()
+		public ReadOnlyDictionary<string, t_global_i> Gett_global_iMap()
 		{
 			return mt_global_iContainer.GetMap();
 		}
@@ -715,7 +715,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_global_s数据列表
 		/// </summary>
-		public List<t_global_s> Gett_global_sList()
+		public ReadOnlyCollection<t_global_s> Gett_global_sList()
 		{
 			return mt_global_sContainer.GetList();
 		}
@@ -723,7 +723,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_global_s数据Map
 		/// </summary>
-		public Dictionary<string, t_global_s> Gett_global_sMap()
+		public ReadOnlyDictionary<string, t_global_s> Gett_global_sMap()
 		{
 			return mt_global_sContainer.GetMap();
 		}
@@ -739,7 +739,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_language_cn数据列表
 		/// </summary>
-		public List<t_language_cn> Gett_language_cnList()
+		public ReadOnlyCollection<t_language_cn> Gett_language_cnList()
 		{
 			return mt_language_cnContainer.GetList();
 		}
@@ -747,7 +747,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_language_cn数据Map
 		/// </summary>
-		public Dictionary<string, t_language_cn> Gett_language_cnMap()
+		public ReadOnlyDictionary<string, t_language_cn> Gett_language_cnMap()
 		{
 			return mt_language_cnContainer.GetMap();
 		}
@@ -763,7 +763,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_ui数据列表
 		/// </summary>
-		public List<t_ui> Gett_uiList()
+		public ReadOnlyCollection<t_ui> Gett_uiList()
 		{
 			return mt_uiContainer.GetList();
 		}
@@ -771,7 +771,7 @@ namespace Data
 		/// <summary>
 		/// 获取t_ui数据Map
 		/// </summary>
-		public Dictionary<string, t_ui> Gett_uiMap()
+		public ReadOnlyDictionary<string, t_ui> Gett_uiMap()
 		{
 			return mt_uiContainer.GetMap();
 		}

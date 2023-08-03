@@ -38,14 +38,14 @@ namespace xbuffer
             }
 
 			// value
-			return new t_Global5() {
-				Id = _Id,
-				stringvalue = _stringvalue,
-				intvalue = _intvalue,
-				floatvalue = _floatvalue,
-				intarrayvalue = _intarrayvalue,
-				stringarrayvalue = _stringarrayvalue,
-            };
+			return new t_Global5(
+                _Id,
+                _stringvalue,
+                _intvalue,
+                _floatvalue,
+                _intarrayvalue,
+                _stringarrayvalue
+            );
         }
 
         public static void Serialize(t_Global5 value, XSteam steam)

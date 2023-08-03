@@ -38,11 +38,10 @@ namespace xbuffer
 #DESERIALIZE_PROCESS#
 
 			// value
-			return new #CLASS_NAME#() {
+			return new #CLASS_NAME#(
 #DESERIALIZE_RETURN#
-				#VAR_NAME# = _#VAR_NAME#,
-#DESERIALIZE_RETURN#
-            };
+                _#VAR_NAME##DESERIALIZE_RETURN#
+            );
         }
 
         public static void Serialize(#CLASS_NAME# value, XSteam steam)

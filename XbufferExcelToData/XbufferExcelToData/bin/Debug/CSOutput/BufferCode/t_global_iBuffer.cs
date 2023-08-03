@@ -16,10 +16,10 @@ namespace xbuffer
 			int _Value = intBuffer.deserialize(buffer, ref offset);
 
 			// value
-			return new t_global_i() {
-				Key = _Key,
-				Value = _Value,
-            };
+			return new t_global_i(
+                _Key,
+                _Value
+            );
         }
 
         public static void Serialize(t_global_i value, XSteam steam)

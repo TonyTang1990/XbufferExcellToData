@@ -22,12 +22,12 @@ namespace xbuffer
 			int _Layer = intBuffer.deserialize(buffer, ref offset);
 
 			// value
-			return new t_ui() {
-				WinName = _WinName,
-				ResPath = _ResPath,
-				IsFullScreen = _IsFullScreen,
-				Layer = _Layer,
-            };
+			return new t_ui(
+                _WinName,
+                _ResPath,
+                _IsFullScreen,
+                _Layer
+            );
         }
 
         public static void Serialize(t_ui value, XSteam steam)
