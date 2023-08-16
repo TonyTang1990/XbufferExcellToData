@@ -488,7 +488,7 @@ namespace XbufferExcelToData
         }
 
         /// <summary>
-        /// 是否有无效的类型配置且第一列必须是int类型(强制限制第一类数据类型，第一列用于填id)
+        /// 是否有无效的类型配置且第一列必须是int或string类型(强制限制第一类数据类型，第一列用于填id)
         /// </summary>
         /// <param name="types"></param>
         /// <returns></returns>
