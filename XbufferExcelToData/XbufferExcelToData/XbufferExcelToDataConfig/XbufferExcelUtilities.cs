@@ -11,6 +11,15 @@ namespace XbufferExcelToData
     /// </summary>
     public static class XbufferExcelUtilities
     {
-
+        /// <summary>
+        /// 获取指定数据类型的Excel数据类型
+        /// </summary>
+        /// <param name="dataType"></param>
+        /// <returns></returns>
+        public static ExcelDataType GetExcelDataType(string dataType)
+        {
+            var excelDataType = ExcelDataType.BASIC;
+            return excelDataType;
+        }
     }
 }

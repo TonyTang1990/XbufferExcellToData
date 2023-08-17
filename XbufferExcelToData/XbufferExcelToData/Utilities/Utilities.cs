@@ -77,5 +77,22 @@ namespace XbufferExcelToData
         {
             return parameter.Split(' ');
         }
+
+        /// <summary>
+        /// 剔除所有前后空格数据
+        /// </summary>
+        /// <param name="datas"></param>
+        /// <returns></returns>
+        public static void TrimAllWhiteSpace(string[] datas)
+        {
+            if(datas == null)
+            {
+                return;
+            }
+            for(int i = 0, length = datas.Length; i < length; i++)
+            {
+                datas[i] = datas[i].Trim();
+            }
+        }
     }
 }

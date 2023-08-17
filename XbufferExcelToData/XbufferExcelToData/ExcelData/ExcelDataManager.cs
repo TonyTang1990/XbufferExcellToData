@@ -41,8 +41,8 @@ namespace XbufferExcelToData
         /// </summary>
         public static List<string> ValideIdTypeList = new List<string>
         {
-            "int",
-            "string"
+            ConstValue.IntTypeName,
+            ConstValue.StringTypeName,
         };
 
         /// <summary>
@@ -113,33 +113,43 @@ namespace XbufferExcelToData
             AllExcelFilesList = new List<string>();
             ExcelsInfoMap = new Dictionary<string, ExcelInfo>();
             ValideExcelPostFixFilter = new List<string>(new string[] { "*.xlsx", "*.xls", "*.csv" });
-            ValideTypesList = new List<string>(new string[] 
-                                                { "notation", // 第一个notation是特殊类型，用于表示注释列
-                                                  "int", "float", "string", "long", "bool", "byte",
-                                                  "int[]", "float[]", "string[]", "long[]", "bool[]", "byte[]",
-                                                  "int[][]", "float[][]", "string[][]", "long[][]", "bool[][]", "byte[][]",});
+            ValideTypesList = new List<string>(
+                new string[] 
+                {
+                    ConstValue.NotationTypeName, // 第一个notation是特殊类型，用于表示注释列
+                    ConstValue.IntTypeName, ConstValue.FloatTypeName, ConstValue.StringTypeName,
+                    ConstValue.LongTypeName, ConstValue.BoolTypeName, ConstValue.ByteTypeName,
+                    ConstValue.ClassTypeName,
+                    $"{ConstValue.IntTypeName}[]", $"{ConstValue.FloatTypeName}[]", $"{ConstValue.StringTypeName}[]",
+                    $"{ConstValue.LongTypeName}[]", $"{ConstValue.BoolTypeName}[]", $"{ConstValue.ByteTypeName}[]",
+                    $"{ConstValue.ClassTypeName}[]",
+                    $"{ConstValue.IntTypeName}[][]", $"{ConstValue.FloatTypeName}[][]", $"{ConstValue.StringTypeName}[][]",
+                    $"{ConstValue.LongTypeName}[][]", $"{ConstValue.BoolTypeName}[][]", $"{ConstValue.ByteTypeName}[][]",
+                    $"{ConstValue.ClassTypeName}[][]",
+                }
+            );
             // 为了避免使用过于常见的分隔符，这里定死了支持的分隔符配置
             //ValideSplitersList = new List<char>(new char[] { '+', ';', ',', '|'});      
             mValideTypesXbufferTypeMap = new Dictionary<string, string>();
-            mValideTypesXbufferTypeMap.Add("notation", "notation");
-            mValideTypesXbufferTypeMap.Add("int", "int");
-            mValideTypesXbufferTypeMap.Add("float", "float");
-            mValideTypesXbufferTypeMap.Add("string", "string");
-            mValideTypesXbufferTypeMap.Add("long", "long");
-            mValideTypesXbufferTypeMap.Add("bool", "bool");
-            mValideTypesXbufferTypeMap.Add("byte", "byte");
-            mValideTypesXbufferTypeMap.Add("int[]", "[int]");
-            mValideTypesXbufferTypeMap.Add("float[]", "[float]");
-            mValideTypesXbufferTypeMap.Add("string[]", "[string]");
-            mValideTypesXbufferTypeMap.Add("long[]", "[long]");
-            mValideTypesXbufferTypeMap.Add("bool[]", "[bool]");
-            mValideTypesXbufferTypeMap.Add("byte[]", "[byte]");
-            mValideTypesXbufferTypeMap.Add("int[][]", "[[int]]");
-            mValideTypesXbufferTypeMap.Add("float[][]", "[[float]]");
-            mValideTypesXbufferTypeMap.Add("string[][]", "[[string]]");
-            mValideTypesXbufferTypeMap.Add("long[][]", "[[long]]");
-            mValideTypesXbufferTypeMap.Add("bool[][]", "[[bool]]");
-            mValideTypesXbufferTypeMap.Add("byte[][]", "[[byte]]");
+            mValideTypesXbufferTypeMap.Add(ConstValue.NotationTypeName, ConstValue.NotationTypeName);
+            mValideTypesXbufferTypeMap.Add(ConstValue.IntTypeName, ConstValue.IntTypeName);
+            mValideTypesXbufferTypeMap.Add(ConstValue.FloatTypeName, ConstValue.FloatTypeName);
+            mValideTypesXbufferTypeMap.Add(ConstValue.StringTypeName, ConstValue.StringTypeName);
+            mValideTypesXbufferTypeMap.Add(ConstValue.LongTypeName, ConstValue.LongTypeName);
+            mValideTypesXbufferTypeMap.Add(ConstValue.BoolTypeName, ConstValue.BoolTypeName);
+            mValideTypesXbufferTypeMap.Add(ConstValue.ByteTypeName, ConstValue.ByteTypeName);
+            mValideTypesXbufferTypeMap.Add($"{ConstValue.IntTypeName}[]", $"[{ConstValue.IntTypeName}]");
+            mValideTypesXbufferTypeMap.Add($"{ConstValue.FloatTypeName}[]", $"[{ConstValue.FloatTypeName}]");
+            mValideTypesXbufferTypeMap.Add($"{ConstValue.StringTypeName}[]", $"[{ConstValue.StringTypeName}]");
+            mValideTypesXbufferTypeMap.Add($"{ConstValue.LongTypeName}[]", $"[{ConstValue.LongTypeName}]");
+            mValideTypesXbufferTypeMap.Add($"{ConstValue.BoolTypeName}[]", $"[{ConstValue.BoolTypeName}]");
+            mValideTypesXbufferTypeMap.Add($"{ConstValue.ByteTypeName}[]", $"[{ConstValue.ByteTypeName}]");
+            mValideTypesXbufferTypeMap.Add($"{ConstValue.IntTypeName}[][]", $"[[{ConstValue.IntTypeName}]]");
+            mValideTypesXbufferTypeMap.Add($"{ConstValue.FloatTypeName}[][]", $"[[{ConstValue.FloatTypeName}]]");
+            mValideTypesXbufferTypeMap.Add($"{ConstValue.StringTypeName}[][]", $"[[{ConstValue.StringTypeName}]]");
+            mValideTypesXbufferTypeMap.Add($"{ConstValue.LongTypeName}[][]", $"[[{ConstValue.LongTypeName}]]");
+            mValideTypesXbufferTypeMap.Add($"{ConstValue.BoolTypeName}[][]", $"[[{ConstValue.BoolTypeName}]]");
+            mValideTypesXbufferTypeMap.Add($"{ConstValue.ByteTypeName}[][]", $"[[{ConstValue.ByteTypeName}]]");
 
             mTempIdMap = new Dictionary<string, string>();
         }
@@ -298,6 +308,8 @@ namespace XbufferExcelToData
                                     // 字段类型信息行
                                     else if (currentlinenumber == FieldTypeLineNumber)
                                     {
+                                        // 确保类型数据不会因为错误的空格导致报错
+                                        Utilities.TrimAllWhiteSpace(datas);
                                         excelinfo.FieldTypes = datas;
                                     }
                                     // 字段分隔符信息行

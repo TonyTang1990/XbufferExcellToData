@@ -141,8 +141,7 @@ namespace XbufferExcelToData
             /// <param name="name"></param>
             /// <param name="dataType"></param>
             /// <param name="comment"></param>
-            /// <param name="excelDataType"></param>
-            public MemberData(string name, string dataType, string comment = "", ExcelDataType excelDataType = ExcelDataType.BASIC)
+            public MemberData(string name, string dataType, string comment = "")
             {
                 Name = name;
                 DataType = dataType;
@@ -171,13 +170,60 @@ namespace XbufferExcelToData
         }
 
         /// <summary>
-        /// 解析Excel类型数据
+        /// 清除所有Excel类型数据
         /// </summary>
-        /// <param name="excelsInfoMap"></param>
-        public void ParseExcelClassDatas(Dictionary<string, ExcelInfo> excelsInfoMap)
+        public void ClearAllExcelClassData()
         {
             mExcelClassDataMap.Clear();
+        }
 
+        /// <summary>
+        /// 解析Excel数据信息Map
+        /// </summary>
+        /// <param name="excelsInfoMap"></param>
+        public void ParseExcelInfoMap(Dictionary<string, ExcelInfo> excelsInfoMap)
+        {
+            foreach(var excelsInfoData in excelsInfoMap)
+            {
+                ParseExcelInfo(excelsInfoData.Value);
+            }
+        }
+
+        /// <summary>
+        /// 解析单个Excel数据信息
+        /// </summary>
+        /// <param name="excelInfo"></param>
+        public void ParseExcelInfo(ExcelInfo excelInfo)
+        {
+            if(IsContainSheetClassData(excelInfo.ExcelName))
+            {
+                Console.WriteLine($"重复解析Sheet:{excelInfo.ExcelName}的Excel数据信息，解析失败！");
+                return;
+            }
+            var classData = ParseExcelInfoToClassData(excelInfo);
+            AddClassData(excelInfo.ExcelName, classData);
+        }
+
+        /// <summary>
+        /// 添加指定Sheet名的Excel类型数据
+        /// </summary>
+        /// <param name="sheetName"></param>
+        /// <param name="classData"></param>
+        /// <returns></returns>
+        public bool AddClassData(string sheetName, ClassData classData)
+        {
+            if(classData == null)
+            {
+                Console.WriteLine($"Sheet:{sheetName}不支持添加空Excel数据信息，添加Excel类型数据失败！");
+                return false;
+            }
+            if(IsContainSheetClassData(sheetName))
+            {
+                Console.WriteLine($"重复添加Sheet:{sheetName}的Excel数据信息，添加Excel类型数据失败！");
+                return false;
+            }
+            mExcelClassDataMap.Add(sheetName, classData);
+            return true;
         }
 
         /// <summary>
@@ -192,6 +238,32 @@ namespace XbufferExcelToData
             {
                 Console.WriteLine($"找不到Sheet:{sheetName}的Excel类型抽象数据！");
                 return null;
+            }
+            return classData;
+        }
+
+        /// <summary>
+        /// 是否包含指定Sheet名的Excel类型数据
+        /// </summary>
+        /// <param name="sheetName"></param>
+        /// <returns></returns>
+        public bool IsContainSheetClassData(string sheetName)
+        {
+            return mExcelClassDataMap.ContainsKey(sheetName);
+        }
+
+        /// <summary>
+        /// 解析Excel数据信息到Excel类型数据
+        /// </summary>
+        /// <param name="excelInfo"></param>
+        /// <returns></returns>
+        private ClassData ParseExcelInfoToClassData(ExcelInfo excelInfo)
+        {
+            var classData = new ClassData(excelInfo.ExcelName);
+            var memberNum = excelInfo.FieldNames.Length;
+            for(int memberIndex = 0, length = memberNum; memberIndex < length; memberIndex++)
+            {
+
             }
             return classData;
         }
