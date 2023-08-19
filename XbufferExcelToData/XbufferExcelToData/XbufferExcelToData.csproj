@@ -63,6 +63,7 @@
     <Compile Include="Utilities\DataToBytesUtilities.cs" />
     <Compile Include="XbufferExcelToDataConfig\XbufferExcelToExportData.cs" />
     <Compile Include="XbufferExcelToDataConfig\XbufferExcelUtilities.cs" />
+    <Compile Include="XbufferExcelToDataConfig\XbufferExportDataToCSCode.cs" />
     <Compile Include="XbufferExcelToDataConfig\XbufferTemplateToCSCode.cs" />
     <Compile Include="Utilities\Utilities.cs" />
     <Compile Include="XbufferExcelToDataConfig\ExportConfig.cs" />
