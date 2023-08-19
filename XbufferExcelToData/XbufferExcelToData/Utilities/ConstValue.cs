@@ -30,29 +30,5 @@ namespace XbufferExcelToData
 
         /// <summary> Excel二进制数据文件后缀 /// </summary>
         public const string ExcelBytesDataFilePostFix = ".bytes";
-
-        /// <summary> 注释类型名 /// </summary>
-        public const string NotationTypeName = "notation";
-
-        /// <summary> int类型名 /// </summary>
-        public const string IntTypeName = "int";
-
-        /// <summary> float类型名 /// </summary>
-        public const string FloatTypeName = "float";
-
-        /// <summary> String类型名 /// </summary>
-        public const string StringTypeName = "string";
-
-        /// <summary> long类型名 /// </summary>
-        public const string LongTypeName = "long";
-
-        /// <summary> bool类型名 /// </summary>
-        public const string BoolTypeName = "bool";
-
-        /// <summary> byte类型名 /// </summary>
-        public const string ByteTypeName = "byte";
-
-        /// <summary> Class类型名 /// </summary>
-        public const string ClassTypeName = "class";
     }
 }

@@ -10,155 +10,210 @@ using System.Collections.Generic;
 namespace XbufferExcelToData
 {
     /// <summary>
-    /// 自动化分析配置表数据到导出数据
+    /// 类型结构数据抽象
     /// </summary>
-    class XbufferExcelToExportData : SingletonTemplate<XbufferExcelToExportData>
+    public class ClassData
     {
         /// <summary>
-        /// 类型结构数据抽象
+        /// 类名
         /// </summary>
-        public class ClassData
+        public string ClassName
         {
-            /// <summary>
-            /// 类名
-            /// </summary>
-            public string ClassName
-            {
-                get;
-                private set;
-            }
+            get;
+            private set;
+        }
 
-            /// <summary>
-            /// 注释
-            /// </summary>
-            public string Comment
-            {
-                get;
-                private set;
-            }
+        /// <summary>
+        /// 注释
+        /// </summary>
+        public string Comment
+        {
+            get;
+            private set;
+        }
 
-            /// <summary>
-            /// 成员数据列表
-            /// </summary>
-            public List<MemberData> MemberDataList
-            {
-                get;
-                private set;
-            }
+        /// <summary>
+        /// 成员数据列表
+        /// </summary>
+        public List<MemberData> MemberDataList
+        {
+            get;
+            private set;
+        }
 
-            /// <summary>
-            /// 构造函数
-            /// </summary>
-            /// <param name="className"></param>
-            /// <param name="comment"></param>
-            public ClassData(string className, string comment = "")
-            {
-                ClassName = className;
-                Comment = comment;
-                MemberDataList = new List<MemberData>();
-            }
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="className"></param>
+        /// <param name="comment"></param>
+        public ClassData(string className, string comment = "")
+        {
+            ClassName = className;
+            Comment = comment;
+            MemberDataList = new List<MemberData>();
+        }
 
-            /// <summary>
-            /// 添加成员数据
-            /// </summary>
-            /// <param name="memberData"></param>
-            /// <returns></returns>
-            public bool AddMemberData(MemberData memberData)
+        /// <summary>
+        /// 添加成员数据
+        /// </summary>
+        /// <param name="memberData"></param>
+        /// <returns></returns>
+        public bool AddMemberData(MemberData memberData)
+        {
+            if (MemberDataList.Contains(memberData))
             {
-                if (MemberDataList.Contains(memberData))
-                {
-                    Console.WriteLine($"重复添加成员数据:{memberData.ToString()}，添加成员失败！");
-                    return false;
-                }
-                MemberDataList.Add(memberData);
-                return true;
+                Console.WriteLine($"重复添加成员数据:{memberData.ToString()}，添加成员失败！");
+                return false;
             }
+            MemberDataList.Add(memberData);
+            return true;
+        }
 
-            /// <summary>
-            /// 删除指定成员数据
-            /// </summary>
-            /// <param name="memberData"></param>
-            /// <returns></returns>
-            public bool RemoveMemberData(MemberData memberData)
+        /// <summary>
+        /// 删除指定成员数据
+        /// </summary>
+        /// <param name="memberData"></param>
+        /// <returns></returns>
+        public bool RemoveMemberData(MemberData memberData)
+        {
+            return MemberDataList.Remove(memberData);
+        }
+
+        /// <summary>
+        /// 是否是有效Class数据
+        /// </summary>
+        /// <returns></returns>
+        public bool IsValide()
+        {
+            if(string.IsNullOrEmpty(ClassName))
             {
-                return MemberDataList.Remove(memberData);
+                Console.WriteLine($"不允许构建空类名的Class数据！");
+                return false;
+            }
+            return true;
+        }
+    }
+
+    /// <summary>
+    /// 成员结构数据抽象
+    /// </summary>
+    public class MemberData
+    {
+        /// <summary>
+        /// 所属类型结构数据
+        /// </summary>
+        public ClassData OwnerClassData
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 成员名
+        /// </summary>
+        public string Name
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 数据类型
+        /// </summary>
+        public string DataType
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 注释
+        /// </summary>
+        public string Comment
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Excel数据类型
+        /// </summary>
+        public ExcelDataType ExcelDataType
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 成员类型数据(仅当数据类型DataType为Class时有效)
+        /// </summary>
+        public ClassData MemberClassData
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="classData"></param>
+        /// <param name="name"></param>
+        /// <param name="dataType"></param>
+        /// <param name="comment"></param>
+        public MemberData(ClassData classData, string name, string dataType, string comment = "")
+        {
+            OwnerClassData = classData;
+            Name = name;
+            DataType = dataType;
+            Comment = comment;
+            ExcelDataType = XbufferExcelUtilities.GetExcelDataType(dataType);
+            if (XbufferExcelUtilities.IsClassExcelDataType(ExcelDataType))
+            {
+                var className = XbufferExcelUtilities.GetExcelMemberClassName(classData.ClassName, Name);
+                var classComment = Comment;
+                MemberClassData = XbufferExcelUtilities.ParseDataTypeToClassData(DataType, className, Comment);
             }
         }
 
         /// <summary>
-        /// 成员结构数据抽象
+        /// 是否是有效成员数据
         /// </summary>
-        public class MemberData
+        /// <returns></returns>
+        public bool IsValide()
         {
-            /// <summary>
-            /// 成员名
-            /// </summary>
-            public string Name
+            if (string.IsNullOrEmpty(Name))
             {
-                get;
-                private set;
+                Console.WriteLine($"Sheet:{OwnerClassData.ClassName}不允许配置空字段名成员数据！");
+                return false;
             }
-
-            /// <summary>
-            /// 数据类型
-            /// </summary>
-            public string DataType
+            if (string.IsNullOrEmpty(DataType))
             {
-                get;
-                private set;
+                Console.WriteLine($"Sheet:{OwnerClassData.ClassName},字段:{Name}不允许配置空字段类型数据！");
+                return false;
             }
-
-            /// <summary>
-            /// 注释
-            /// </summary>
-            public string Comment
+            if (XbufferExcelUtilities.IsClassExcelDataType(ExcelDataType) && !MemberClassData.IsValide())
             {
-                get;
-                private set;
+                Console.WriteLine($"Sheet:{OwnerClassData.ClassName}的成员数据有无效数据！");
+                return false;
             }
-
-            /// <summary>
-            /// Excel数据类型
-            /// </summary>
-            public ExcelDataType ExcelDataType
-            {
-                get;
-                private set;
-            }
-
-            /// <summary>
-            /// 成员类型数据(仅当数据类型DataType为Class时有效)
-            /// </summary>
-            public ClassData MemberClassData
-            {
-                get;
-                private set;
-            }
-
-            /// <summary>
-            /// 构造函数
-            /// </summary>
-            /// <param name="name"></param>
-            /// <param name="dataType"></param>
-            /// <param name="comment"></param>
-            public MemberData(string name, string dataType, string comment = "")
-            {
-                Name = name;
-                DataType = dataType;
-                Comment = comment;
-                ExcelDataType = excelDataType;
-            }
-
-            /// <summary>
-            /// 获取字符串描述
-            /// </summary>
-            /// <returns></returns>
-            public override string ToString()
-            {
-                return $"Name:{Name};DataType:{DataType};ExcelDataType:{ExcelDataType};Comment:{Comment}";
-            }
+            return true;
         }
 
+        /// <summary>
+        /// 获取字符串描述
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return $"Name:{Name};DataType:{DataType};ExcelDataType:{ExcelDataType};Comment:{Comment}";
+        }
+    }
+
+    /// <summary>
+    /// 自动化分析配置表数据到导出数据
+    /// </summary>
+    public class XbufferExcelToExportData : SingletonTemplate<XbufferExcelToExportData>
+    {
         /// <summary>
         /// Excel类型数据Map<sheet名, sheet类型数据>
         /// </summary>
@@ -181,27 +236,32 @@ namespace XbufferExcelToData
         /// 解析Excel数据信息Map
         /// </summary>
         /// <param name="excelsInfoMap"></param>
-        public void ParseExcelInfoMap(Dictionary<string, ExcelInfo> excelsInfoMap)
+        public bool ParseExcelInfoMap(Dictionary<string, ExcelInfo> excelsInfoMap)
         {
             foreach(var excelsInfoData in excelsInfoMap)
             {
-                ParseExcelInfo(excelsInfoData.Value);
+                if(!ParseExcelInfo(excelsInfoData.Value))
+                {
+                    return false;
+                }
             }
+            return true;
         }
 
         /// <summary>
         /// 解析单个Excel数据信息
         /// </summary>
         /// <param name="excelInfo"></param>
-        public void ParseExcelInfo(ExcelInfo excelInfo)
+        public bool ParseExcelInfo(ExcelInfo excelInfo)
         {
             if(IsContainSheetClassData(excelInfo.ExcelName))
             {
                 Console.WriteLine($"重复解析Sheet:{excelInfo.ExcelName}的Excel数据信息，解析失败！");
-                return;
+                return false;
             }
-            var classData = ParseExcelInfoToClassData(excelInfo);
+            var classData = XbufferExcelUtilities.ParseExcelInfoToClassData(excelInfo);
             AddClassData(excelInfo.ExcelName, classData);
+            return classData.IsValide();
         }
 
         /// <summary>
@@ -250,22 +310,6 @@ namespace XbufferExcelToData
         public bool IsContainSheetClassData(string sheetName)
         {
             return mExcelClassDataMap.ContainsKey(sheetName);
-        }
-
-        /// <summary>
-        /// 解析Excel数据信息到Excel类型数据
-        /// </summary>
-        /// <param name="excelInfo"></param>
-        /// <returns></returns>
-        private ClassData ParseExcelInfoToClassData(ExcelInfo excelInfo)
-        {
-            var classData = new ClassData(excelInfo.ExcelName);
-            var memberNum = excelInfo.FieldNames.Length;
-            for(int memberIndex = 0, length = memberNum; memberIndex < length; memberIndex++)
-            {
-
-            }
-            return classData;
         }
     }
 }

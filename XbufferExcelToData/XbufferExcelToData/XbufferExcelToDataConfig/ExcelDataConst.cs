@@ -118,5 +118,36 @@ namespace XbufferExcelToData
         /// 二维数组分隔符
         /// </summary>
         public const char TWO_DIMENSION_SPLITER = '|';
+
+        /// <summary>
+        /// 嵌套类型成员定义分隔符
+        /// </summary>
+        public const char CLASS_MEMBER_SPLITER = ';';
+
+        /// <summary>
+        /// 嵌套类型成员类型名字分隔符
+        /// </summary>
+        public const char CLASS_MEMBER_TYPE_NAME_SPLITER = ' ';
+
+        /// <summary> 注释类型名 /// </summary>
+        public const string NotationTypeName = "notation";
+
+        /// <summary> int类型名 /// </summary>
+        public const string IntTypeName = "int";
+
+        /// <summary> float类型名 /// </summary>
+        public const string FloatTypeName = "float";
+
+        /// <summary> String类型名 /// </summary>
+        public const string StringTypeName = "string";
+
+        /// <summary> long类型名 /// </summary>
+        public const string LongTypeName = "long";
+
+        /// <summary> bool类型名 /// </summary>
+        public const string BoolTypeName = "bool";
+
+        /// <summary> byte类型名 /// </summary>
+        public const string ByteTypeName = "byte";
     }
 }

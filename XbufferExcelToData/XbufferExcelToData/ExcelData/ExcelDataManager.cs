@@ -87,9 +87,19 @@ namespace XbufferExcelToData
         private List<string> ValideExcelPostFixFilter;
 
         /// <summary>
-        /// 有效的数据类型配置
+        /// 有效的数据类型配置(不含嵌套Class类型)
         /// </summary>
         private List<string> ValideTypesList;
+
+        /// <summary>
+        /// 有效的一维数据类型配置(不含嵌套Class类型)
+        /// </summary>
+        private List<string> ValideOneArrayTypesList;
+
+        /// <summary>
+        /// 有效的二维数据类型配置(不含嵌套Class类型)
+        /// </summary>
+        private List<string> ValideTwoArrayTypesList;
 
         /// <summary>
         /// 有效的分割符号配置
@@ -113,21 +123,23 @@ namespace XbufferExcelToData
             AllExcelFilesList = new List<string>();
             ExcelsInfoMap = new Dictionary<string, ExcelInfo>();
             ValideExcelPostFixFilter = new List<string>(new string[] { "*.xlsx", "*.xls", "*.csv" });
-            ValideTypesList = new List<string>(
-                new string[] 
-                {
-                    ConstValue.NotationTypeName, // 第一个notation是特殊类型，用于表示注释列
-                    ConstValue.IntTypeName, ConstValue.FloatTypeName, ConstValue.StringTypeName,
-                    ConstValue.LongTypeName, ConstValue.BoolTypeName, ConstValue.ByteTypeName,
-                    ConstValue.ClassTypeName,
-                    $"{ConstValue.IntTypeName}[]", $"{ConstValue.FloatTypeName}[]", $"{ConstValue.StringTypeName}[]",
-                    $"{ConstValue.LongTypeName}[]", $"{ConstValue.BoolTypeName}[]", $"{ConstValue.ByteTypeName}[]",
-                    $"{ConstValue.ClassTypeName}[]",
-                    $"{ConstValue.IntTypeName}[][]", $"{ConstValue.FloatTypeName}[][]", $"{ConstValue.StringTypeName}[][]",
-                    $"{ConstValue.LongTypeName}[][]", $"{ConstValue.BoolTypeName}[][]", $"{ConstValue.ByteTypeName}[][]",
-                    $"{ConstValue.ClassTypeName}[][]",
-                }
-            );
+            ValideTypesList = new List<string>
+            {
+                ExcelDataConst.NotationTypeName, // 第一个notation是特殊类型，用于表示注释列
+                ExcelDataConst.IntTypeName, ExcelDataConst.FloatTypeName, ExcelDataConst.StringTypeName,
+                ExcelDataConst.LongTypeName, ExcelDataConst.BoolTypeName, ExcelDataConst.ByteTypeName,
+            };
+            ValideOneArrayTypesList = new List<string>()
+            {
+                $"{ExcelDataConst.IntTypeName}[]", $"{ExcelDataConst.FloatTypeName}[]", $"{ExcelDataConst.StringTypeName}[]",
+                $"{ExcelDataConst.LongTypeName}[]", $"{ExcelDataConst.BoolTypeName}[]", $"{ExcelDataConst.ByteTypeName}[]",
+            };
+            ValideTwoArrayTypesList = new List<string>()
+            {
+                $"{ExcelDataConst.IntTypeName}[][]", $"{ExcelDataConst.FloatTypeName}[][]", $"{ExcelDataConst.StringTypeName}[][]",
+                $"{ExcelDataConst.LongTypeName}[][]", $"{ExcelDataConst.BoolTypeName}[][]", $"{ExcelDataConst.ByteTypeName}[][]",
+            };
+
             // 为了避免使用过于常见的分隔符，这里定死了支持的分隔符配置
             //ValideSplitersList = new List<char>(new char[] { '+', ';', ',', '|'});      
             mValideTypesXbufferTypeMap = new Dictionary<string, string>();
@@ -207,7 +219,7 @@ namespace XbufferExcelToData
         /// <returns></returns>
         public bool isNotationType(string typename)
         {
-            return ValideTypesList[0].Equals(typename);
+            return ConstValue.NotationTypeName.Equals(typename);
         }
 
         /// <summary>
@@ -298,6 +310,8 @@ namespace XbufferExcelToData
                                     // 字段信息行
                                     if (currentlinenumber == FieldNameLineNumber)
                                     {
+                                        // 确保字段名不会因为错误的空格导致报错
+                                        Utilities.TrimAllWhiteSpace(datas);
                                         excelinfo.FieldNames = datas;
                                     }
                                     // 字段注释信息行
@@ -515,7 +529,7 @@ namespace XbufferExcelToData
                 }
                 else
                 {
-                    if (!ValideTypesList.Contains(types[i]))
+                    if (!isValideType(types[i]))
                     {
                         Console.WriteLine(string.Format("配置错误 : 不支持的数据类型配置:{0}", types[i]));
                         return true;
@@ -591,7 +605,107 @@ namespace XbufferExcelToData
         {
             return ValideIdTypeList.Contains(type);
         }
-    
+
+        /// <summary>
+        /// 指定的类型是否是有效类型
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public bool isValideType(string type)
+        {
+            if(isValideNormalType(type))
+            {
+                return true;
+            }
+            if (isValideOneArrayNormalType(type))
+            {
+                return true;
+            }
+            if (isValideTwoArrayNormalType(type))
+            {
+                return true;
+            }
+            if (isValideClassType(type))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 指定的类型是否是普通类型
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public bool isValideNormalType(string type)
+        {
+            return ValideTypesList.Contains(type);
+        }
+
+        /// <summary>
+        /// 指定的类型是否是一维普通类型数组
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public bool isValideOneArrayNormalType(string type)
+        {
+            return ValideOneArrayTypesList.Contains(type);
+        }
+
+        /// <summary>
+        /// 指定的类型是否是二维普通类型数组
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public bool isValideTwoArrayNormalType(string type)
+        {
+            return ValideTwoArrayTypesList.Contains(type);
+        }
+
+        /// <summary>
+        /// 是否是有效的嵌套Class类型
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public bool isValideClassType(string type)
+        {
+            if(isValideNormalClassType(type) || isValideOneArrayClassType(type) || isValideTwoArrayClassType(type))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 指定的类型是否是嵌套类型
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public bool isValideNormalClassType(string type)
+        {
+            return type.StartsWith("{") && type.EndsWith("}");
+        }
+
+        /// <summary>
+        /// 指定的类型是否是一维嵌套类型数组
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public bool isValideOneArrayClassType(string type)
+        {
+            return type.StartsWith("{") && type.EndsWith("}[]");
+        }
+
+        /// <summary>
+        /// 指定的类型是否是二维嵌套类型数组
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public bool isValideTwoArrayClassType(string type)
+        {
+            return type.StartsWith("{") && type.EndsWith("}[][]");
+        }
+
         /// <summary>
         /// 是否有重复的id
         /// </summary>

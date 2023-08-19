@@ -62,6 +62,7 @@ namespace XbufferExcelToData
             }
             TimeCounter.Singleton.End();
 
+            /*
             // 自动化生成Excel对应的描述文件
             TimeCounter.Singleton.Restart("生成Excel对应描述文件");
             XbufferExcelToDesFile.Singleton.configDesFileOutputFolderPath(XbufferExcelExportConfig.Singleton.ExportConfigInfo.DesFileOutputPath);
@@ -90,6 +91,17 @@ namespace XbufferExcelToData
                 XbufferDesFileToCSCode.Singleton.writeAllDesFileToCSCode();
                 TimeCounter.Singleton.End();
             }
+            */
+
+            // 解析所有Excel类型结构数据
+            TimeCounter.Singleton.Restart("解析所有Excel类型结构数据");
+            if(!XbufferExcelToExportData.Singleton.ParseExcelInfoMap(ExcelDataManager.Singleton.ExcelsInfoMap))
+            {
+                Console.WriteLine("解析所有Excel类型结构数据失败!");
+                Console.ReadKey();
+                return;
+            }
+            TimeCounter.Singleton.End();
 
             // 序列化数据
             TimeCounter.Singleton.Restart("序列化数据");
