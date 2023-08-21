@@ -30,5 +30,8 @@ namespace XbufferExcelToData
 
         /// <summary> Excel二进制数据文件后缀 /// </summary>
         public const string ExcelBytesDataFilePostFix = ".bytes";
+
+        /// <summary> C#文件后缀名 /// </summary>
+        public static string CSharpFilePostfix = ".cs";
     }
 }

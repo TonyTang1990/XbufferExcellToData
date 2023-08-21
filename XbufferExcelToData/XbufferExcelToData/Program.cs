@@ -103,6 +103,17 @@ namespace XbufferExcelToData
             }
             TimeCounter.Singleton.End();
 
+            // 自动化生成序列化所需的代码文件
+            if (disableouputcscode == false)
+            {
+                TimeCounter.Singleton.Restart("生成序列化代码文件");
+                XbufferExportDataToCSCode.Singleton.configFolderPath(XbufferExcelExportConfig.Singleton.ExportConfigInfo.TemplatePath,
+                                                                     XbufferExcelExportConfig.Singleton.ExportConfigInfo.CSClassCodeOutputPath,
+                                                                     XbufferExcelExportConfig.Singleton.ExportConfigInfo.CSBufferCodeOutputPath);
+                XbufferExportDataToCSCode.Singleton.writeAllExportDataToCSCode(XbufferExcelToExportData.Singleton.ExcelClassDataMap);
+                TimeCounter.Singleton.End();
+            }
+
             // 序列化数据
             TimeCounter.Singleton.Restart("序列化数据");
             XbufferExcelDataToBytes.Singleton.configBytesOutputFolderPath(XbufferExcelExportConfig.Singleton.ExportConfigInfo.ByteDataOutputPath);

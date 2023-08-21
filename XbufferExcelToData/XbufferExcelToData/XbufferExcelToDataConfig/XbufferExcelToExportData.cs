@@ -90,6 +90,14 @@ namespace XbufferExcelToData
                 Console.WriteLine($"不允许构建空类名的Class数据！");
                 return false;
             }
+            foreach(var memberData in MemberDataList)
+            {
+                if(!memberData.IsValide())
+                {
+                    Console.WriteLine($"类名:{ClassName}有无效成员数据:{memberData.Name}！");
+                    return false;
+                }
+            }
             return true;
         }
     }
@@ -112,6 +120,15 @@ namespace XbufferExcelToData
         /// 成员名
         /// </summary>
         public string Name
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// 数据类型描述
+        /// </summary>
+        public string DataTypeDes
         {
             get;
             private set;
@@ -158,20 +175,22 @@ namespace XbufferExcelToData
         /// </summary>
         /// <param name="classData"></param>
         /// <param name="name"></param>
-        /// <param name="dataType"></param>
+        /// <param name="dataTypeDes"></param>
         /// <param name="comment"></param>
-        public MemberData(ClassData classData, string name, string dataType, string comment = "")
+        public MemberData(ClassData classData, string name, string dataTypeDes, string comment = "")
         {
             OwnerClassData = classData;
             Name = name;
-            DataType = dataType;
+            DataTypeDes = dataTypeDes;
+            DataType = dataTypeDes;
             Comment = comment;
-            ExcelDataType = XbufferExcelUtilities.GetExcelDataType(dataType);
+            ExcelDataType = XbufferExcelUtilities.GetExcelDataType(dataTypeDes);
             if (XbufferExcelUtilities.IsClassExcelDataType(ExcelDataType))
             {
                 var className = XbufferExcelUtilities.GetExcelMemberClassName(classData.ClassName, Name);
                 var classComment = Comment;
-                MemberClassData = XbufferExcelUtilities.ParseDataTypeToClassData(DataType, className, Comment);
+                MemberClassData = XbufferExcelUtilities.ParseDataTypeToClassData(DataTypeDes, className, classComment);
+                DataType = className;
             }
         }
 
@@ -186,12 +205,12 @@ namespace XbufferExcelToData
                 Console.WriteLine($"Sheet:{OwnerClassData.ClassName}不允许配置空字段名成员数据！");
                 return false;
             }
-            if (string.IsNullOrEmpty(DataType))
+            if (string.IsNullOrEmpty(DataTypeDes))
             {
                 Console.WriteLine($"Sheet:{OwnerClassData.ClassName},字段:{Name}不允许配置空字段类型数据！");
                 return false;
             }
-            if (XbufferExcelUtilities.IsClassExcelDataType(ExcelDataType) && !MemberClassData.IsValide())
+            if (XbufferExcelUtilities.IsClassExcelDataType(ExcelDataType) && (MemberClassData == null || !MemberClassData.IsValide()))
             {
                 Console.WriteLine($"Sheet:{OwnerClassData.ClassName}的成员数据有无效数据！");
                 return false;
@@ -205,7 +224,7 @@ namespace XbufferExcelToData
         /// <returns></returns>
         public override string ToString()
         {
-            return $"Name:{Name};DataType:{DataType};ExcelDataType:{ExcelDataType};Comment:{Comment}";
+            return $"Name:{Name};DataType:{DataTypeDes};ExcelDataType:{ExcelDataType};Comment:{Comment}";
         }
     }
 
@@ -217,11 +236,15 @@ namespace XbufferExcelToData
         /// <summary>
         /// Excel类型数据Map<sheet名, sheet类型数据>
         /// </summary>
-        private Dictionary<string, ClassData> mExcelClassDataMap;
+        public Dictionary<string, ClassData> ExcelClassDataMap
+        {
+            get;
+            private set;
+        }
 
         public XbufferExcelToExportData()
         {
-            mExcelClassDataMap = new Dictionary<string, ClassData>();
+            ExcelClassDataMap = new Dictionary<string, ClassData>();
         }
 
         /// <summary>
@@ -229,7 +252,7 @@ namespace XbufferExcelToData
         /// </summary>
         public void ClearAllExcelClassData()
         {
-            mExcelClassDataMap.Clear();
+            ExcelClassDataMap.Clear();
         }
 
         /// <summary>
@@ -282,7 +305,7 @@ namespace XbufferExcelToData
                 Console.WriteLine($"重复添加Sheet:{sheetName}的Excel数据信息，添加Excel类型数据失败！");
                 return false;
             }
-            mExcelClassDataMap.Add(sheetName, classData);
+            ExcelClassDataMap.Add(sheetName, classData);
             return true;
         }
 
@@ -294,7 +317,7 @@ namespace XbufferExcelToData
         public ClassData GetExcelClassDataBySheetName(string sheetName)
         {
             ClassData classData;
-            if(!mExcelClassDataMap.TryGetValue(sheetName, out classData))
+            if(!ExcelClassDataMap.TryGetValue(sheetName, out classData))
             {
                 Console.WriteLine($"找不到Sheet:{sheetName}的Excel类型抽象数据！");
                 return null;
@@ -309,7 +332,7 @@ namespace XbufferExcelToData
         /// <returns></returns>
         public bool IsContainSheetClassData(string sheetName)
         {
-            return mExcelClassDataMap.ContainsKey(sheetName);
+            return ExcelClassDataMap.ContainsKey(sheetName);
         }
     }
 }

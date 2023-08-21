@@ -1,5 +1,5 @@
 ﻿/*
- * Description:             Xbuffer Excel导表工具类
+ * Description:             Xbuffer Excel导表工具静态类
  * Author:                  tanghuan
  * Create Date:             2023/08/16
  */
@@ -9,7 +9,7 @@ using System;
 namespace XbufferExcelToData
 {
     /// <summary>
-    /// Xbuffer Excel导表工具类
+    /// Xbuffer Excel导表工具静态类
     /// </summary>
     public static class XbufferExcelUtilities
     {
@@ -23,6 +23,28 @@ namespace XbufferExcelToData
             return excelDataType == ExcelDataType.CLASS ||
                     excelDataType == ExcelDataType.CLASS_ONE_ARRAY ||
                         excelDataType == ExcelDataType.CLASS_TWO_ARRAY;
+        }
+
+        /// <summary>
+        /// 是否是一维数组类型
+        /// </summary>
+        /// <param name="excelDataType"></param>
+        /// <returns></returns>
+        public static bool IsOneArrayDataType(ExcelDataType excelDataType)
+        {
+            return excelDataType == ExcelDataType.BASIC_ONE_ARRAY ||
+                    excelDataType == ExcelDataType.CLASS_ONE_ARRAY;
+        }
+
+        /// <summary>
+        /// 是否是二维数组类型
+        /// </summary>
+        /// <param name="excelDataType"></param>
+        /// <returns></returns>
+        public static bool IsTwoArrayDataType(ExcelDataType excelDataType)
+        {
+            return excelDataType == ExcelDataType.BASIC_TWO_ARRAY ||
+                    excelDataType == ExcelDataType.CLASS_TWO_ARRAY;
         }
 
         /// <summary>
@@ -126,24 +148,27 @@ namespace XbufferExcelToData
                 var finalMemberDefinition = memberDefinition.Trim();
                 var memberInfos = finalMemberDefinition.Split(ExcelDataConst.CLASS_MEMBER_TYPE_NAME_SPLITER);
                 var memberInfoNum = memberInfos.Length;
+                string memberType = string.Empty;
+                var memberName = string.Empty;
                 if (memberInfoNum != 2)
                 {
                     Console.WriteLine($"SheetName:{className}的字段名:{classComment}的数据类型:{dataType}的成员数据:{finalMemberDefinition}配置格式有误！");
-                    continue;
                 }
-                var memberType = memberInfos[0];
-                // Note:
-                // 嵌套类型只支持基础类型
-                if (!ExcelDataManager.Singleton.isValideNormalType(memberType))
+                else
                 {
-                    Console.WriteLine($"SheetName:{className}的字段名:{classComment}的数据类型:{dataType}的成员数据:{finalMemberDefinition}的成员类型:{memberType}配置格式有误！");
-                    continue;
-                }
-                var memberName = memberInfos[1];
-                if(string.IsNullOrEmpty(memberName))
-                {
-                    Console.WriteLine($"SheetName:{className}的字段名:{classComment}的数据类型:{dataType}的成员数据:{finalMemberDefinition}的成员名:{memberName}不能为空！");
-                    continue;
+                    memberType = memberInfos[0];
+                    memberName = memberInfos[1];
+                    // Note:
+                    // 嵌套类型只支持基础类型
+                    if (!ExcelDataManager.Singleton.isValideNormalType(memberType))
+                    {
+                        Console.WriteLine($"SheetName:{className}的字段名:{classComment}的数据类型:{dataType}的成员数据:{finalMemberDefinition}的成员类型:{memberType}配置格式有误！");
+                        memberType = string.Empty;
+                    }
+                    if (string.IsNullOrEmpty(memberName))
+                    {
+                        Console.WriteLine($"SheetName:{className}的字段名:{classComment}的数据类型:{dataType}的成员数据:{finalMemberDefinition}的成员名:{memberName}不能为空！");
+                    }
                 }
                 var memberData = new MemberData(classData, memberName, memberType);
                 classData.AddMemberData(memberData);
