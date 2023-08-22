@@ -41,8 +41,8 @@ namespace XbufferExcelToData
         /// </summary>
         public static List<string> ValideIdTypeList = new List<string>
         {
-            ConstValue.IntTypeName,
-            ConstValue.StringTypeName,
+            ExcelDataConst.IntTypeName,
+            ExcelDataConst.StringTypeName,
         };
 
         /// <summary>
@@ -143,25 +143,25 @@ namespace XbufferExcelToData
             // 为了避免使用过于常见的分隔符，这里定死了支持的分隔符配置
             //ValideSplitersList = new List<char>(new char[] { '+', ';', ',', '|'});      
             mValideTypesXbufferTypeMap = new Dictionary<string, string>();
-            mValideTypesXbufferTypeMap.Add(ConstValue.NotationTypeName, ConstValue.NotationTypeName);
-            mValideTypesXbufferTypeMap.Add(ConstValue.IntTypeName, ConstValue.IntTypeName);
-            mValideTypesXbufferTypeMap.Add(ConstValue.FloatTypeName, ConstValue.FloatTypeName);
-            mValideTypesXbufferTypeMap.Add(ConstValue.StringTypeName, ConstValue.StringTypeName);
-            mValideTypesXbufferTypeMap.Add(ConstValue.LongTypeName, ConstValue.LongTypeName);
-            mValideTypesXbufferTypeMap.Add(ConstValue.BoolTypeName, ConstValue.BoolTypeName);
-            mValideTypesXbufferTypeMap.Add(ConstValue.ByteTypeName, ConstValue.ByteTypeName);
-            mValideTypesXbufferTypeMap.Add($"{ConstValue.IntTypeName}[]", $"[{ConstValue.IntTypeName}]");
-            mValideTypesXbufferTypeMap.Add($"{ConstValue.FloatTypeName}[]", $"[{ConstValue.FloatTypeName}]");
-            mValideTypesXbufferTypeMap.Add($"{ConstValue.StringTypeName}[]", $"[{ConstValue.StringTypeName}]");
-            mValideTypesXbufferTypeMap.Add($"{ConstValue.LongTypeName}[]", $"[{ConstValue.LongTypeName}]");
-            mValideTypesXbufferTypeMap.Add($"{ConstValue.BoolTypeName}[]", $"[{ConstValue.BoolTypeName}]");
-            mValideTypesXbufferTypeMap.Add($"{ConstValue.ByteTypeName}[]", $"[{ConstValue.ByteTypeName}]");
-            mValideTypesXbufferTypeMap.Add($"{ConstValue.IntTypeName}[][]", $"[[{ConstValue.IntTypeName}]]");
-            mValideTypesXbufferTypeMap.Add($"{ConstValue.FloatTypeName}[][]", $"[[{ConstValue.FloatTypeName}]]");
-            mValideTypesXbufferTypeMap.Add($"{ConstValue.StringTypeName}[][]", $"[[{ConstValue.StringTypeName}]]");
-            mValideTypesXbufferTypeMap.Add($"{ConstValue.LongTypeName}[][]", $"[[{ConstValue.LongTypeName}]]");
-            mValideTypesXbufferTypeMap.Add($"{ConstValue.BoolTypeName}[][]", $"[[{ConstValue.BoolTypeName}]]");
-            mValideTypesXbufferTypeMap.Add($"{ConstValue.ByteTypeName}[][]", $"[[{ConstValue.ByteTypeName}]]");
+            mValideTypesXbufferTypeMap.Add(ExcelDataConst.NotationTypeName, ExcelDataConst.NotationTypeName);
+            mValideTypesXbufferTypeMap.Add(ExcelDataConst.IntTypeName, ExcelDataConst.IntTypeName);
+            mValideTypesXbufferTypeMap.Add(ExcelDataConst.FloatTypeName, ExcelDataConst.FloatTypeName);
+            mValideTypesXbufferTypeMap.Add(ExcelDataConst.StringTypeName, ExcelDataConst.StringTypeName);
+            mValideTypesXbufferTypeMap.Add(ExcelDataConst.LongTypeName, ExcelDataConst.LongTypeName);
+            mValideTypesXbufferTypeMap.Add(ExcelDataConst.BoolTypeName, ExcelDataConst.BoolTypeName);
+            mValideTypesXbufferTypeMap.Add(ExcelDataConst.ByteTypeName, ExcelDataConst.ByteTypeName);
+            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.IntTypeName}[]", $"[{ExcelDataConst.IntTypeName}]");
+            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.FloatTypeName}[]", $"[{ExcelDataConst.FloatTypeName}]");
+            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.StringTypeName}[]", $"[{ExcelDataConst.StringTypeName}]");
+            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.LongTypeName}[]", $"[{ExcelDataConst.LongTypeName}]");
+            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.BoolTypeName}[]", $"[{ExcelDataConst.BoolTypeName}]");
+            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.ByteTypeName}[]", $"[{ExcelDataConst.ByteTypeName}]");
+            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.IntTypeName}[][]", $"[[{ExcelDataConst.IntTypeName}]]");
+            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.FloatTypeName}[][]", $"[[{ExcelDataConst.FloatTypeName}]]");
+            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.StringTypeName}[][]", $"[[{ExcelDataConst.StringTypeName}]]");
+            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.LongTypeName}[][]", $"[[{ExcelDataConst.LongTypeName}]]");
+            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.BoolTypeName}[][]", $"[[{ExcelDataConst.BoolTypeName}]]");
+            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.ByteTypeName}[][]", $"[[{ExcelDataConst.ByteTypeName}]]");
 
             mTempIdMap = new Dictionary<string, string>();
         }
@@ -219,7 +219,7 @@ namespace XbufferExcelToData
         /// <returns></returns>
         public bool isNotationType(string typename)
         {
-            return ConstValue.NotationTypeName.Equals(typename);
+            return ExcelDataConst.NotationTypeName.Equals(typename);
         }
 
         /// <summary>

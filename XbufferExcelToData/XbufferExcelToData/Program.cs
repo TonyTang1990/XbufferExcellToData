@@ -120,7 +120,8 @@ namespace XbufferExcelToData
             Utilities.RecreateSpecificFolder(XbufferExcelDataToBytes.Singleton.BytesFolderPath);
             foreach (var excelinfo in ExcelDataManager.Singleton.ExcelsInfoMap)
             {
-                if(!XbufferExcelDataToBytes.Singleton.writeExcelDataToBytes(excelinfo.Value))
+                var excelClassData = XbufferExcelToExportData.Singleton.GetExcelClassDataBySheetName(excelinfo.Key);
+                if (!XbufferExcelDataToBytes.Singleton.writeExcelDataToBytes(excelinfo.Value, excelClassData))
                 {
                     Console.WriteLine("序列化数据出问题!请检查表格配置!");
                     Console.ReadKey();

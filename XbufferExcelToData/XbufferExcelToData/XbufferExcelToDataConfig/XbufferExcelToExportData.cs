@@ -144,6 +144,15 @@ namespace XbufferExcelToData
         }
 
         /// <summary>
+        /// 最基础数据类型(剔除一维和二维数据概念后的基础数据类型)
+        /// </summary>
+        public string BasicDataType
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// 注释
         /// </summary>
         public string Comment
@@ -183,6 +192,17 @@ namespace XbufferExcelToData
             Name = name;
             DataTypeDes = dataTypeDes;
             DataType = dataTypeDes;
+            BasicDataType = dataTypeDes;
+            if (ExcelDataType == ExcelDataType.BASIC_ONE_ARRAY)
+            {
+                var lastBracketIndex = BasicDataType.LastIndexOf("[]");
+                BasicDataType = BasicDataType.Remove(lastBracketIndex);
+            }
+            else if (ExcelDataType == ExcelDataType.BASIC_TWO_ARRAY)
+            {
+                var lastBracketIndex = BasicDataType.LastIndexOf("[][]");
+                BasicDataType = BasicDataType.Remove(lastBracketIndex);
+            }
             Comment = comment;
             ExcelDataType = XbufferExcelUtilities.GetExcelDataType(dataTypeDes);
             if (XbufferExcelUtilities.IsClassExcelDataType(ExcelDataType))
@@ -191,6 +211,15 @@ namespace XbufferExcelToData
                 var classComment = Comment;
                 MemberClassData = XbufferExcelUtilities.ParseDataTypeToClassData(DataTypeDes, className, classComment);
                 DataType = className;
+                BasicDataType = className;
+                if (ExcelDataType == ExcelDataType.CLASS_ONE_ARRAY)
+                {
+                    DataType = $"{DataType}[]";
+                }
+                else if(ExcelDataType == ExcelDataType.CLASS_TWO_ARRAY)
+                {
+                    DataType = $"{DataType}[][]";
+                }
             }
         }
 

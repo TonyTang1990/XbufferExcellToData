@@ -93,6 +93,16 @@ namespace XbufferExcelToData
         }
 
         /// <summary>
+        /// 指定基础数据类型是否是注释类型
+        /// </summary>
+        /// <param name="basicDataType"></param>
+        /// <returns></returns>
+        public static bool IsAnotationType(string basicDataType)
+        {
+            return string.Equals(ExcelDataConst.NotationTypeName, basicDataType);
+        }
+
+        /// <summary>
         /// 解析Excel数据信息到Excel类型数据
         /// </summary>
         /// <param name="excelInfo"></param>
@@ -131,15 +141,18 @@ namespace XbufferExcelToData
             var classDefinition = dataType.TrimStart('{');
             if (excelDataType == ExcelDataType.CLASS)
             {
-                classDefinition = classDefinition.TrimEnd("}");
+                var lastIndex = classDefinition.LastIndexOf("}");
+                classDefinition = classDefinition.Remove(lastIndex);
             }
             else if(excelDataType == ExcelDataType.CLASS_ONE_ARRAY)
             {
-                classDefinition = classDefinition.TrimEnd("}[]");
+                var lastIndex = classDefinition.LastIndexOf("}[]");
+                classDefinition = classDefinition.Remove(lastIndex);
             }
             else if(excelDataType == ExcelDataType.CLASS_TWO_ARRAY)
             {
-                classDefinition = classDefinition.TrimEnd("}[][]");
+                var lastIndex = classDefinition.LastIndexOf("}[][]");
+                classDefinition = classDefinition.Remove(lastIndex);
             }
             var classData = new ClassData(className, classComment);
             var memberDefinitions = classDefinition.Split(ExcelDataConst.CLASS_MEMBER_SPLITER);

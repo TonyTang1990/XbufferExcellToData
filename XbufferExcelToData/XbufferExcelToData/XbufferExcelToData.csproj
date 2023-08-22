@@ -54,6 +54,8 @@
   <ItemGroup>
     <Compile Include="Core\Singleton\SingletonTemplate.cs" />
     <Compile Include="Utilities\TimeCounter.cs" />
+    <Compile Include="Utilities\XTemplate.cs" />
+    <Compile Include="XbufferExcelToDataConfig\CodeGeneratorUtilities.cs" />
     <Compile Include="XbufferExcelToDataConfig\ExcelDataConst.cs" />
     <Compile Include="XbufferExcelToDataConfig\ExcelDataType.cs" />
     <Compile Include="XbufferExcelToDataConfig\Template\TTemplate.cs" />

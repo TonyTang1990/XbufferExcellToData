@@ -120,6 +120,11 @@ namespace XbufferExcelToData
         public const char TWO_DIMENSION_SPLITER = '|';
 
         /// <summary>
+        /// 嵌套类型成员数据定义分隔符
+        /// </summary>
+        public const char CLASS_MEMBER_VALUE_SPLITER = ';';
+
+        /// <summary>
         /// 嵌套类型成员定义分隔符
         /// </summary>
         public const char CLASS_MEMBER_SPLITER = ';';
