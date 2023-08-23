@@ -1,4 +1,4 @@
-// t_Global5的注释
+// 
 public class t_Global5
 {
 	public readonly int Id;				// 唯一id

@@ -8,6 +8,8 @@
 4. 基于Xbuffer的高效序列化反序列化性能以及内存占用
 5. 支持单Excel多sheet导出支持(**2022/1/20支持完成**)
 6. 支持二维数组配置导出**(二维分隔符固定用|，2023/1/5支持完成)**
+7. 支持嵌套类型配置导出(**嵌套类型格式:{类型1 字段名1;类型2 字段名2......}，支持一维和二维嵌套类型**)(**2023/8/23支持完成**)
+8. 配置表数据除了数组内部数据外都设计了只读
 
 ## Excel文件支持
 1. *.xlsx(实际上我只测试了这个，下面两个是理论上支持的)
@@ -18,7 +20,6 @@
 1. 导表工具相关配置通过配置ExportConfig.xml文件即可
     - ExcelInputPath(Excel目录配置)
     - TemplatePath(代码模板文件目录配置)
-    - DesFileOutputPath(Excel对应的描述文件输出目录配置)
     - ByteDataOutputPath(序列化数据输出目录配置)
     - CSClassCodeOutputPath(CS类代码输出目录配置)
     - CSBufferCodeOutputPath(CS序列化代码输出目录配置)
@@ -49,6 +50,7 @@
     - long
     - float
     - string
+    - {类型1 字段名1;类型2 字段名2}
     - 上面各基础类型的一维数组类型 T[]
     - notation(注释类型，不会参与序列化和反序列化的数据，仅供Excel查看使用)
 6. ~~分隔符配置限制~~**(2023/1/5不再支持自定义指定分隔符，一维分隔符固定用#，二维分隔符固定用|)**
@@ -86,10 +88,11 @@ C#工程里：
 1. ExportConfig.xml(导表工具相关路径配置文件)
 2. ExportConfig.cs(工具路径配置信息抽象类) &  XbufferExcelExportConfig.cs(工具路径配置信息读取管理类)
 3. ExcelDataReader.dll(第三方跨平台Excel读取库) & ExcelData.cs(单个表格数据抽象类) & ExcelDataManager.cs(所有Excel数据读取管理类)
-4. XbufferExcelToDesFile.cs(自动化生成Excel数据对应的数据结构定义文件类的单例类)
-5. XbufferDesFileToCSCode.cs(自动化根据数据结构文件生成CS对应代码的静态单例类)
+4. XbufferExcelToExportData.cs(自动化分析配置表数据到Class数据结构)
+5. XbufferExcelExportDataToCSCode.cs(自动化根据Class数据结构文件生成CS对应代码)
 6. XbufferExcelDataToBytes.cs(自动化将Excel数据通过Xbuffer序列化到二进制数据的单例类)
 7. XbufferTemplateToCSCode.cs(模板解析单例类，根据模板解析生成自动化加载管理相关的代码) & excelContainer.ftl(Excel对应的数据加载类模板) & GameDataManager.ftl(所有Excel数据统一管理加载的类模板)
+8. XbufferExcelUtilities.cs(Xbuffer Excel导表工具静态类)
 
 Unity工程：
 1. ConfLoader.cs(配置表加载辅助单例类 - 占时是放在Resource是目录下以TextAsset的形式加载)
@@ -174,17 +177,17 @@ ExportExcel_DisableCSOuput.bat -- 关闭生成CS代码功能的导表快捷方�
 
 ExportExcel_EnableCSOuput.bat -- 开启生成CS代码功能的导表快捷方式
 
-问题2:
+~~问题2:~~
 
-第二行写注释如果有空格符号会导致该表格无法生成对应的数据结构代码**(2023/1/5已解决，支持注释填写空格)**
+~~第二行写注释如果有空格符号会导致该表格无法生成对应的数据结构代码**(2023/1/5已解决，支持注释填写空格)**~~
 
-解决方案:
+~~解决方案:~~
 
-具体原因是*.xb文件的正则匹配上不允许注释中间出现任意空格符号，暂时没支持，所以临时解决方案是不要再注释中间写空格符号。**(2023/1/5已解决，支持注释填写空格)**
+~~具体原因是*.xb文件的正则匹配上不允许注释中间出现任意空格符号，暂时没支持，所以临时解决方案是不要再注释中间写空格符号。**(2023/1/5已解决，支持注释填写空格)**~~
 
 # 更多优化
 
-1. 支持自定义嵌套结构字段配置(e.g. {string name;int age}或{string name;int age}[])
+1. ~~支持自定义嵌套结构字段配置(e.g. {string name;int age}或{string name;int age}[])(2023/8/23)~~
 2. ~~配置表所有数据设计成只读避免错误修改(**底层一维数组和二维数组单个原始数据未支持只读，因为没有找到二维数组只读的现成数据结构(需要自己实现)**)(2023/08/03)~~
 3. 配置表字段做到按行甚至按字段按需加载
 

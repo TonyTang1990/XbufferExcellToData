@@ -12,21 +12,21 @@ namespace xbuffer
 {
     public class stringBuffer
     {
-        public unsafe static string deserialize(byte[] buffer, ref uint offset)
+        public unsafe static string Deserialize(byte[] buffer, ref uint offset)
         {
             fixed (byte* ptr = buffer)
             {
-                uint byteCount = uintBuffer.deserialize(buffer, ref offset);
+                uint byteCount = uintBuffer.Deserialize(buffer, ref offset);
                 string value = Encoding.UTF8.GetString(buffer, (int)offset, (int)byteCount);
                 offset += byteCount;
                 return value;
             }
         }
 
-        public unsafe static void serialize(string value, XSteam steam)
+        public unsafe static void Serialize(string value, XSteam steam)
         {
             var bytes = Encoding.UTF8.GetBytes(value);
-            uintBuffer.serialize((uint)bytes.Length, steam);
+            uintBuffer.Serialize((uint)bytes.Length, steam);
             for (int i = 0; i < bytes.Length; i++)
             {
                 steam.applySize(1);

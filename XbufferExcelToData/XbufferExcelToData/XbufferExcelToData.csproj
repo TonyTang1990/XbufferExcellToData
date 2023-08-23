@@ -71,10 +71,8 @@
     <Compile Include="XbufferExcelToDataConfig\ExportConfig.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XbufferExcelToDataConfig\XbufferDesFileToCSCode.cs" />
     <Compile Include="XbufferExcelToDataConfig\XbufferExcelDataToBytes.cs" />
     <Compile Include="XbufferExcelToDataConfig\XbufferExcelExportConfig.cs" />
-    <Compile Include="XbufferExcelToDataConfig\XbufferExcelToDesFile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -83,10 +81,6 @@
     <Folder Include="Extention\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Core\Xbuffer\xbuffer_parser\xbuffer_parser.csproj">
-      <Project>{00cf1d92-56bd-4048-8f4b-017775dd8c5b}</Project>
-      <Name>xbuffer_parser</Name>
-    </ProjectReference>
     <ProjectReference Include="Core\Xbuffer\xbuffer_runtime\xbuffer_runtime.csproj">
       <Project>{304d8131-c14a-4ceb-b053-2ed2649777ec}</Project>
       <Name>xbuffer_runtime</Name>

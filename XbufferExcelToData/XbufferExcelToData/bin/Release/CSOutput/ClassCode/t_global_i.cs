@@ -1,4 +1,4 @@
-// t_global_i的注释
+// 
 public class t_global_i
 {
 	public readonly string Key;				// 唯一Key

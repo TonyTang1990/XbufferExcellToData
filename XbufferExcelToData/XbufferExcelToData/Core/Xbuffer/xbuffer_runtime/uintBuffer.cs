@@ -14,7 +14,7 @@ namespace xbuffer
     {
         private static readonly uint size = sizeof(uint);
 
-        public unsafe static uint deserialize(byte[] buffer, ref uint offset)
+        public unsafe static uint Deserialize(byte[] buffer, ref uint offset)
         {
             fixed (byte* ptr = buffer)
             {
@@ -24,7 +24,7 @@ namespace xbuffer
             }
         }
 
-        public unsafe static void serialize(uint value, XSteam steam)
+        public unsafe static void Serialize(uint value, XSteam steam)
         {
             steam.applySize(size);
             fixed (byte* ptr = steam.contents[steam.index_group])

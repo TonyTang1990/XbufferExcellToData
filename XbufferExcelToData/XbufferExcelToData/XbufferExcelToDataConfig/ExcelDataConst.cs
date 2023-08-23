@@ -52,32 +52,32 @@ namespace XbufferExcelToData
         /// <summary>
         /// byteBuffer serialize方法信息
         /// </summary>
-        public static MethodInfo BYTE_BUFFER_SERIALIZE_METHOD = BYTE_BUFFER_TYPE.GetMethod("serialize");
+        public static MethodInfo BYTE_BUFFER_SERIALIZE_METHOD = BYTE_BUFFER_TYPE.GetMethod("Serialize");
 
         /// <summary>
         /// intBuffer serialize方法信息
         /// </summary>
-        public static MethodInfo INT_BUFFER_SERIALIZE_METHOD = INT_BUFFER_TYPE.GetMethod("serialize");
+        public static MethodInfo INT_BUFFER_SERIALIZE_METHOD = INT_BUFFER_TYPE.GetMethod("Serialize");
 
         /// <summary>
         /// longBuffer serialize方法信息
         /// </summary>
-        public static MethodInfo LONG_BUFFER_SERIALIZE_METHOD = LONG_BUFFER_TYPE.GetMethod("serialize");
+        public static MethodInfo LONG_BUFFER_SERIALIZE_METHOD = LONG_BUFFER_TYPE.GetMethod("Serialize");
 
         /// <summary>
         /// floatBuffer serialize方法信息
         /// </summary>
-        public static MethodInfo FLOAT_BUFFER_SERIALIZE_METHOD = FLOAT_BUFFER_TYPE.GetMethod("serialize");
+        public static MethodInfo FLOAT_BUFFER_SERIALIZE_METHOD = FLOAT_BUFFER_TYPE.GetMethod("Serialize");
         
         /// <summary>
         /// boolBuffer serialize方法信息
         /// </summary>
-        public static MethodInfo BOOL_BUFFER_SERIALIZE_METHOD = BOOL_BUFFER_TYPE.GetMethod("serialize");
+        public static MethodInfo BOOL_BUFFER_SERIALIZE_METHOD = BOOL_BUFFER_TYPE.GetMethod("Serialize");
 
         /// <summary>
         /// stringBuffer serialize方法信息
         /// </summary>
-        public static MethodInfo STRING_BUFFER_SERIALIZE_METHOD = STRING_BUFFER_TYPE.GetMethod("serialize");
+        public static MethodInfo STRING_BUFFER_SERIALIZE_METHOD = STRING_BUFFER_TYPE.GetMethod("Serialize");
 
         /// <summary>
         /// byteBuffer默认指字符串

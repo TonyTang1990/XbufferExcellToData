@@ -1,4 +1,4 @@
-// t_ui的注释
+// 
 public class t_ui
 {
 	public readonly string WinName;				// 窗口名

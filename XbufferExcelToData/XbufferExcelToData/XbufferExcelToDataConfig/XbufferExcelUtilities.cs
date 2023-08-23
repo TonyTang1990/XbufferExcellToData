@@ -125,20 +125,20 @@ namespace XbufferExcelToData
         /// <summary>
         /// 解析指定类型数据和类名到Excel类型数据
         /// </summary>
-        /// <param name="dataType"></param>
+        /// <param name="dataTypeDes"></param>
         /// <param name="className"></param>
         /// <param name="classComment"></param>
         /// <returns></returns>
-        public static ClassData ParseDataTypeToClassData(string dataType, string className, string classComment = "")
+        public static ClassData ParseDataTypeToClassData(string dataTypeDes, string className, string classComment = "")
         {
-            var excelDataType = GetExcelDataType(dataType);
-            if(excelDataType != ExcelDataType.CLASS ||
-                excelDataType != ExcelDataType.CLASS_ONE_ARRAY ||
+            var excelDataType = GetExcelDataType(dataTypeDes);
+            if(excelDataType != ExcelDataType.CLASS &&
+                excelDataType != ExcelDataType.CLASS_ONE_ARRAY &&
                 excelDataType != ExcelDataType.CLASS_TWO_ARRAY)
             {
                 return null;
             }
-            var classDefinition = dataType.TrimStart('{');
+            var classDefinition = dataTypeDes.TrimStart('{');
             if (excelDataType == ExcelDataType.CLASS)
             {
                 var lastIndex = classDefinition.LastIndexOf("}");
@@ -165,7 +165,7 @@ namespace XbufferExcelToData
                 var memberName = string.Empty;
                 if (memberInfoNum != 2)
                 {
-                    Console.WriteLine($"SheetName:{className}的字段名:{classComment}的数据类型:{dataType}的成员数据:{finalMemberDefinition}配置格式有误！");
+                    Console.WriteLine($"SheetName:{className}的字段名:{classComment}的数据类型:{dataTypeDes}的成员数据:{finalMemberDefinition}配置格式有误！");
                 }
                 else
                 {
@@ -175,12 +175,12 @@ namespace XbufferExcelToData
                     // 嵌套类型只支持基础类型
                     if (!ExcelDataManager.Singleton.isValideNormalType(memberType))
                     {
-                        Console.WriteLine($"SheetName:{className}的字段名:{classComment}的数据类型:{dataType}的成员数据:{finalMemberDefinition}的成员类型:{memberType}配置格式有误！");
+                        Console.WriteLine($"SheetName:{className}的字段名:{classComment}的数据类型:{dataTypeDes}的成员数据:{finalMemberDefinition}的成员类型:{memberType}配置格式有误！");
                         memberType = string.Empty;
                     }
                     if (string.IsNullOrEmpty(memberName))
                     {
-                        Console.WriteLine($"SheetName:{className}的字段名:{classComment}的数据类型:{dataType}的成员数据:{finalMemberDefinition}的成员名:{memberName}不能为空！");
+                        Console.WriteLine($"SheetName:{className}的字段名:{classComment}的数据类型:{dataTypeDes}的成员数据:{finalMemberDefinition}的成员名:{memberName}不能为空！");
                     }
                 }
                 var memberData = new MemberData(classData, memberName, memberType);

@@ -1,4 +1,4 @@
-// t_Global2的注释
+// 
 public class t_Global2
 {
 	public readonly int Id;				// 唯一id

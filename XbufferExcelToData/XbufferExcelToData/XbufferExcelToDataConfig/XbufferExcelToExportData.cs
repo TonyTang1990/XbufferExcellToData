@@ -193,6 +193,8 @@ namespace XbufferExcelToData
             DataTypeDes = dataTypeDes;
             DataType = dataTypeDes;
             BasicDataType = dataTypeDes;
+            Comment = comment;
+            ExcelDataType = XbufferExcelUtilities.GetExcelDataType(dataTypeDes);
             if (ExcelDataType == ExcelDataType.BASIC_ONE_ARRAY)
             {
                 var lastBracketIndex = BasicDataType.LastIndexOf("[]");
@@ -203,8 +205,6 @@ namespace XbufferExcelToData
                 var lastBracketIndex = BasicDataType.LastIndexOf("[][]");
                 BasicDataType = BasicDataType.Remove(lastBracketIndex);
             }
-            Comment = comment;
-            ExcelDataType = XbufferExcelUtilities.GetExcelDataType(dataTypeDes);
             if (XbufferExcelUtilities.IsClassExcelDataType(ExcelDataType))
             {
                 var className = XbufferExcelUtilities.GetExcelMemberClassName(classData.ClassName, Name);

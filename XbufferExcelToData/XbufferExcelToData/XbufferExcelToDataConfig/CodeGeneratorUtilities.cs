@@ -36,7 +36,7 @@ namespace XbufferExcelToData
                     template.setCondition("SINGLE", !(isOneArrayDataType || isTwoArrayDataType));
                     template.setCondition("ARRAY", isOneArrayDataType);
                     template.setCondition("TWO_ARRAY", isTwoArrayDataType);
-                    template.setValue("#VAR_TYPE#", memberData.DataType);
+                    template.setValue("#VAR_TYPE#", memberData.BasicDataType);
                     template.setValue("#VAR_NAME#", memberData.Name);
                     template.setValue("#VAR_COMMENT#", memberData.Comment);
                     template.nextLoop();
@@ -56,7 +56,7 @@ namespace XbufferExcelToData
                     template.setCondition("SINGLE", !(isOneArrayDataType || isTwoArrayDataType));
                     template.setCondition("ARRAY", isOneArrayDataType);
                     template.setCondition("TWO_ARRAY", isTwoArrayDataType);
-                    template.setValue("#VAR_TYPE#", memberData.DataType);
+                    template.setValue("#VAR_TYPE#", memberData.BasicDataType);
                     template.setValue("#VAR_NAME#", varName);
                     template.setValue("#VAR_COMMENT#", memberData.Comment);
                     template.nextLoop();
@@ -68,14 +68,14 @@ namespace XbufferExcelToData
             {
                 foreach (var memberData in classData.MemberDataList)
                 {
-                    template.setValue("#VAR_TYPE#", memberData.DataType);
                     template.setValue("#VAR_NAME#", memberData.Name);
-                    template.setValue("#VAR_COMMENT#", memberData.Comment);
                     template.nextLoop();
                 }
                 template.endLoop();
             }
-            File.WriteAllText(outputFolderPath, template.getContent());
+            var outputFileName = $"{classData.ClassName}{ConstValue.CSharpFilePostfix}";
+            var outputFilePath = Path.Combine(outputFolderPath, outputFileName);
+            File.WriteAllText(outputFilePath, template.getContent());
 
             // 递归生成嵌套成员Class定义代码文本
             foreach (var memberData in classData.MemberDataList)
@@ -112,7 +112,7 @@ namespace XbufferExcelToData
                     template.setCondition("SINGLE", !(isOneArrayDataType || isTwoArrayDataType));
                     template.setCondition("ARRAY", isOneArrayDataType);
                     template.setCondition("TWO_ARRAY", isTwoArrayDataType);
-                    template.setValue("#VAR_TYPE#", memberData.DataType);
+                    template.setValue("#VAR_TYPE#", memberData.BasicDataType);
                     template.setValue("#VAR_NAME#", memberData.Name);
                     template.setValue("#VAR_COMMENT#", memberData.Comment);
                     template.nextLoop();
@@ -127,7 +127,7 @@ namespace XbufferExcelToData
                     var memberData = classData.MemberDataList[i];
                     var isLastVariable = i == (length - 1);
                     var varName = isLastVariable ? memberData.Name : $"{memberData.Name},";
-                    template.setValue("#VAR_TYPE#", memberData.DataType);
+                    template.setValue("#VAR_TYPE#", memberData.BasicDataType);
                     template.setValue("#VAR_NAME#", varName);
                     template.setValue("#VAR_COMMENT#", memberData.Comment);
                     template.nextLoop();
@@ -144,21 +144,23 @@ namespace XbufferExcelToData
                     template.setCondition("SINGLE", !(isOneArrayDataType || isTwoArrayDataType));
                     template.setCondition("ARRAY", isOneArrayDataType);
                     template.setCondition("TWO_ARRAY", isTwoArrayDataType);
-                    template.setValue("#VAR_TYPE#", memberData.DataType);
+                    template.setValue("#VAR_TYPE#", memberData.BasicDataType);
                     template.setValue("#VAR_NAME#", memberData.Name);
                     template.setValue("#VAR_COMMENT#", memberData.Comment);
                     template.nextLoop();
                 }
                 template.endLoop();
             }
-            File.WriteAllText(outputFolderPath, template.getContent());
+            var outputFileName = $"{classData.ClassName}Buffer{ConstValue.CSharpFilePostfix}";
+            var outputFilePath = Path.Combine(outputFolderPath, outputFileName);
+            File.WriteAllText(outputFilePath, template.getContent());
 
             // 递归生成嵌套成员Class序列化代码文本
             foreach (var memberData in classData.MemberDataList)
             {
                 if (XbufferExcelUtilities.IsClassExcelDataType(memberData.ExcelDataType))
                 {
-                    GenerateClassDataToCSClassCode(memberData.MemberClassData, templateContent, outputFolderPath);
+                    GenerateClassDataToCSBufferCode(memberData.MemberClassData, templateContent, outputFolderPath);
                 }
             }
         }

@@ -99,7 +99,7 @@ namespace XbufferExcelToData
         private void serializeExcelOneLineDatas(ExcelData[] excelData, ClassData excelClassData, XSteam stream)
         {
             // 先写入数据是否为空的bool信息
-            serializeBasicExcelData(ExcelDataConst.BoolTypeName, excelData == null ? "true" : "false", stream);
+            serializNoneArrayData<boolBuffer>(excelData == null ? "true" : "false", stream);
             if(excelData != null)
             {
                 var memberDataList = excelClassData.MemberDataList;
@@ -294,6 +294,9 @@ namespace XbufferExcelToData
                 Console.WriteLine($"沒传递有效的Class结构数据，序列化Class结构数据失败！");
                 return false;
             }
+            // 先写入数据是否为空的bool信息
+            serializNoneArrayData<boolBuffer>(string.IsNullOrEmpty(excelData) ? "true" : "false", stream);
+
             var memberDataList = classData.MemberDataList;
             var datas = excelData.Split(ExcelDataConst.CLASS_MEMBER_VALUE_SPLITER);
             for(int index = 0, length = datas.Length; index < length; index++)

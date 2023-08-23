@@ -693,7 +693,7 @@ namespace XbufferExcelToData
         /// <returns></returns>
         public bool isValideOneArrayClassType(string type)
         {
-            return type.StartsWith("{") && type.EndsWith("}[]");
+            return type.StartsWith("{") && type.EndsWith("}[]") && !type.EndsWith("}[][]");
         }
 
         /// <summary>

@@ -155,7 +155,7 @@ namespace XbufferExcelToData
                 mTemplateInstance.endLoop();
 
                 // 输出生成内容到文件
-                var outputfilefullpath = TemplateCSOutputPath + "GameDataManager.cs";
+                var outputfilefullpath = Path.Combine(TemplateCSOutputPath, "GameDataManager.cs");
                 File.WriteAllText(outputfilefullpath, mTemplateInstance.getContent());
 
                 mTemplateInstance.resetContent(string.Empty);

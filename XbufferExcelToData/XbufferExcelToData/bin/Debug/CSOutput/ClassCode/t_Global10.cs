@@ -1,5 +1,5 @@
-// t_Global10的注释
-public class t_Global10
+// 
+public #CLASS_TYPE# t_Global10
 {
 	public readonly int Id;				// 唯一id
 	public readonly string stringvalue;				// 字符串数据

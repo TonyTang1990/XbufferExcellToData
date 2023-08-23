@@ -1,4 +1,4 @@
-// t_language_cn的注释
+// 
 public class t_language_cn
 {
 	public readonly string Key;				// 语言keyID

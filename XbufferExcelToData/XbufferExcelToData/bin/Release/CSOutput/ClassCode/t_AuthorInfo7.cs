@@ -1,4 +1,4 @@
-// t_AuthorInfo7的注释
+// 
 public class t_AuthorInfo7
 {
 	public readonly int Id;				// 唯一id

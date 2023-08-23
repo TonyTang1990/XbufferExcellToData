@@ -1,4 +1,4 @@
-// t_AuthorInfo的注释
+// 
 public class t_AuthorInfo
 {
 	public readonly int Id;				// 唯一id
@@ -8,6 +8,9 @@ public class t_AuthorInfo
 	public readonly bool hashouse;				// 拥有房子
 	public readonly long pbutctime;				// 出版utc时间
 	public readonly int[] luckynumber;				// 幸运数字
+	public readonly t_AuthorInfo_testclass testclass;				// 测试嵌套类型
+	public readonly t_AuthorInfo_testclassarray[] testclassarray;				// 测试嵌套类型数组
+	public readonly t_AuthorInfo_testclasstwoarray[][] testclasstwoarray;			// 测试嵌套类型二维数组
 
 	public t_AuthorInfo(
 		int Id,
@@ -16,7 +19,10 @@ public class t_AuthorInfo
 		float money,
 		bool hashouse,
 		long pbutctime,
-		int[] luckynumber
+		int[] luckynumber,
+		t_AuthorInfo_testclass testclass,
+		t_AuthorInfo_testclassarray[] testclassarray,
+		t_AuthorInfo_testclasstwoarray[][] testclasstwoarray
 	)
 	{
 		this.Id = Id;
@@ -26,5 +32,8 @@ public class t_AuthorInfo
 		this.hashouse = hashouse;
 		this.pbutctime = pbutctime;
 		this.luckynumber = luckynumber;
+		this.testclass = testclass;
+		this.testclassarray = testclassarray;
+		this.testclasstwoarray = testclasstwoarray;
 	}
 }

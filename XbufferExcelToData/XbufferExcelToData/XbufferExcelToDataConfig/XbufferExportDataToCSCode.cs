@@ -39,7 +39,7 @@ namespace XbufferExcelToData
         /// <param name="csbufferfolderpath">CS序列化代码文件生成目录</param>
         public void configFolderPath(string templatefolderpath, string csclassfolderpath, string csbufferfolderpath)
         {
-            TemplateFolderPath = TemplateFolderPath;
+            TemplateFolderPath = templatefolderpath;
             CSClassCodeFolderPath = csclassfolderpath;
             CSBufferCodeFolderPath = csbufferfolderpath;
         }
@@ -78,10 +78,9 @@ namespace XbufferExcelToData
                     foreach (var classDataValues in excelClassDataMap)
                     {
                         var classData = classDataValues.Value;
-                        var outputFileName = $"{classData.ClassName}{ConstValue.CSharpFilePostfix}";
-                        var outputFilePath = Path.Combine(CSClassCodeFolderPath, outputFileName);
-                        CodeGeneratorUtilities.GenerateClassDataToCSClassCode(classData, templateContent, outputFilePath);
+                        CodeGeneratorUtilities.GenerateClassDataToCSClassCode(classData, templateContent, CSClassCodeFolderPath);
                     }
+                    result = true;
                 }
             }
             var resultTxt = result ? "成功" : "失败";
@@ -108,10 +107,9 @@ namespace XbufferExcelToData
                     foreach (var classDataValues in excelClassDataMap)
                     {
                         var classData = classDataValues.Value;
-                        var outputFileName = $"{classData.ClassName}Buffer{ConstValue.CSharpFilePostfix}";
-                        var outputFilePath = Path.Combine(CSBufferCodeFolderPath, outputFileName);
-                        CodeGeneratorUtilities.GenerateClassDataToCSBufferCode(classData, templateContent, outputFilePath);
+                        CodeGeneratorUtilities.GenerateClassDataToCSBufferCode(classData, templateContent, CSBufferCodeFolderPath);
                     }
+                    result = true;
                 }
             }
             var resultTxt = result ? "成功" : "失败";

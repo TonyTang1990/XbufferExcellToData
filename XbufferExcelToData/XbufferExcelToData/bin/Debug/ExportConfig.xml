@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>  
 <ExportConfig>  
-   <ExcelInputPath>./Excels/</ExcelInputPath>  
+   <ExcelInputPath>./Excels/</ExcelInputPath>
    <TemplatePath>./Templates/</TemplatePath>
-   <DesFileOutputPath>./DesFiles/</DesFileOutputPath>
    <ByteDataOutputPath>./DataOutput/</ByteDataOutputPath>
    <CSClassCodeOutputPath>./CSOutput/ClassCode/</CSClassCodeOutputPath>
    <CSBufferCodeOutputPath>./CSOutput/BufferCode/</CSBufferCodeOutputPath>

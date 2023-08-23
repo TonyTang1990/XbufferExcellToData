@@ -1,5 +1,5 @@
-// t_AuthorInfo8的注释
-public class t_AuthorInfo8
+// 
+public #CLASS_TYPE# t_AuthorInfo8
 {
 	public readonly int Id;				// 唯一id
 	public readonly string author;				// 作者

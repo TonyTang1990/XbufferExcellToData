@@ -23,7 +23,7 @@ namespace xbuffer
         // 修复方案，定义一个全局的4字节byte数组，用于不满足内存4字节对齐时赋值用于解析float
         private static readonly byte[] fourByteAlginedArray = new byte[4];
 
-        public unsafe static float deserialize(byte[] buffer, ref uint offset)
+        public unsafe static float Deserialize(byte[] buffer, ref uint offset)
         {
             fixed (byte* ptr = buffer)
             {
@@ -48,7 +48,7 @@ namespace xbuffer
             }
         }
 
-        public unsafe static void serialize(float value, XSteam steam)
+        public unsafe static void Serialize(float value, XSteam steam)
         {
             steam.applySize(size);
             fixed (byte* ptr = steam.contents[steam.index_group])

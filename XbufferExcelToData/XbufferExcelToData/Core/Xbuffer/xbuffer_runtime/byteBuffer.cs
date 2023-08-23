@@ -12,14 +12,14 @@ namespace xbuffer
     {
         private static readonly uint size = sizeof(byte);
 
-        public unsafe static byte deserialize(byte[] buffer, ref uint offset)
+        public unsafe static byte Deserialize(byte[] buffer, ref uint offset)
         {
             var value = buffer[offset];
             offset += size;
             return value;
         }
 
-        public unsafe static void serialize(byte value, XSteam steam)
+        public unsafe static void Serialize(byte value, XSteam steam)
         {
             steam.applySize(size);
             steam.contents[steam.index_group][steam.index_cell] = value;

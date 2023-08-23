@@ -6,14 +6,14 @@ namespace xbuffer
         {
 
             // null
-            bool _null = boolBuffer.deserialize(buffer, ref offset);
+            bool _null = boolBuffer.Deserialize(buffer, ref offset);
             if (_null) return null;
 
-			// Key
-			string _Key = stringBuffer.deserialize(buffer, ref offset);
+			// Key(唯一Key)
+			string _Key = stringBuffer.Deserialize(buffer, ref offset);
 
-			// Value
-			bool _Value = boolBuffer.deserialize(buffer, ref offset);
+			// Value(bool值)
+			bool _Value = boolBuffer.Deserialize(buffer, ref offset);
 
 			// value
 			return new t_global_b(
@@ -26,14 +26,14 @@ namespace xbuffer
         {
 
             // null
-            boolBuffer.serialize(value == null, steam);
+            boolBuffer.Serialize(value == null, steam);
             if (value == null) return;
 
-			// Key
-			stringBuffer.serialize(value.Key, steam);
+			// Key(唯一Key)
+			stringBuffer.Serialize(value.Key, steam);
 
-			// Value
-			boolBuffer.serialize(value.Value, steam);
+			// Value(bool值)
+			boolBuffer.Serialize(value.Value, steam);
         }
     }
 }
