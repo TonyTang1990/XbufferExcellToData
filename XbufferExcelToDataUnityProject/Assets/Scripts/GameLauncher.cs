@@ -84,9 +84,35 @@ public class GameLauncher : MonoBehaviour {
             Debug.Log($"authorinfo.hashouse : {authorinfo.hashouse}");
             Debug.Log($"authorinfo.money : {authorinfo.money}");
             Debug.Log($"authorinfo.pbutctime : {authorinfo.pbutctime}");
+
+            Debug.Log($"authorinfo.lucknumber.Length : {authorinfo.luckynumber.Length}");
             foreach (var lucknumber in authorinfo.luckynumber)
             {
                 Debug.Log($"authorinfo.lucknumber : {lucknumber}");
+            }
+
+            Debug.Log($"authorinfo.testclass.id : {authorinfo.testclass.id}");
+            Debug.Log($"authorinfo.testclass.num : {authorinfo.testclass.num}");
+            Debug.Log($"authorinfo.testclass.des : {authorinfo.testclass.des}");
+
+            Debug.Log($"authorinfo.testclassarray.Length : {authorinfo.testclassarray.Length}");
+            foreach (var testclass in authorinfo.testclassarray)
+            {
+                Debug.Log($"authorinfo.testclassarray.testclass.param1 : {testclass.param1}");
+                Debug.Log($"authorinfo.testclassarray.testclass.param2 : {testclass.param2}");
+                Debug.Log($"authorinfo.testclassarray.testclass.param3 : {testclass.param3}");
+            }
+
+            Debug.Log($"authorinfo.testclasstwoarray.Length : {authorinfo.testclasstwoarray.Length}");
+            foreach (var testclasstwo in authorinfo.testclasstwoarray)
+            {
+                Debug.Log($"testclasstwo.Length : {testclasstwo.Length}");
+                foreach(var testclass in testclasstwo)
+                {
+                    Debug.Log($"authorinfo.testclasstwoarray.testclasstwo.testclass.param11 : {testclass.param11}");
+                    Debug.Log($"authorinfo.testclasstwoarray.testclasstwo..testclass.param22 : {testclass.param22}");
+                    Debug.Log($"authorinfo.testclasstwoarray.testclasstwo..testclass.param33 : {testclass.param33}");
+                }
             }
         }
     }
