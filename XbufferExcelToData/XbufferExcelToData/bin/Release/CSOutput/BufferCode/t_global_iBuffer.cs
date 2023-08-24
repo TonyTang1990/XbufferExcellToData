@@ -5,7 +5,7 @@ namespace xbuffer
         public static t_global_i Deserialize(byte[] buffer, ref uint offset)
         {
 
-            // null
+            // 是否为空数据
             bool _null = boolBuffer.deserialize(buffer, ref offset);
             if (_null) return null;
 
@@ -15,7 +15,6 @@ namespace xbuffer
 			// Value
 			int _Value = intBuffer.deserialize(buffer, ref offset);
 
-			// value
 			return new t_global_i(
                 _Key,
                 _Value

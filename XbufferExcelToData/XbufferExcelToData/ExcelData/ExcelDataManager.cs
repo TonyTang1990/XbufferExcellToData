@@ -44,41 +44,6 @@ namespace XbufferExcelToData
             ExcelDataConst.IntTypeName,
             ExcelDataConst.StringTypeName,
         };
-
-        /// <summary>
-        /// 字段名字行号
-        /// </summary>
-        private const int FieldNameLineNumber = 1;
-
-        /// <summary>
-        /// 字段注释行号
-        /// </summary>
-        private const int FieldNotationLineNumber = 2;
-
-        /// <summary>
-        /// 数据类型行号
-        /// </summary>
-        private const int FieldTypeLineNumber = 3;
-
-        /// <summary>
-        /// 分割信息(仅用于一维和多维数组数据)行号
-        /// </summary>
-        private const int FieldSpliterLineNumber = 4;
-
-        /// <summary>
-        /// 占位符1行号
-        /// </summary>
-        private const int FieldPlaceHolder1LineNumber = 5;
-
-        /// <summary>
-        /// 占位符2行号
-        /// </summary>
-        private const int FieldPlaceHolder2LineNumber = 6;
-
-        /// <summary>
-        /// 数据开始行号
-        /// </summary>
-        private const int DataLineNumber = 7;
         #endregion
 
         /// <summary>
@@ -105,12 +70,6 @@ namespace XbufferExcelToData
         /// 有效的分割符号配置
         /// </summary>
         //private List<char> ValideSplitersList;
-
-        /// <summary>
-        /// 有效的类型与Xbuffer支持的类型映射Map(用于快速访问表格配置的对应Xbuffer的类型字符串)
-        /// Key为有效的类型名，Value为对应Xbuffer支持的对应类型名
-        /// </summary>
-        private Dictionary<string, string> mValideTypesXbufferTypeMap;
 
         /// <summary>
         /// 临时id判定Map(优化GC问题)
@@ -140,29 +99,6 @@ namespace XbufferExcelToData
                 $"{ExcelDataConst.LongTypeName}[][]", $"{ExcelDataConst.BoolTypeName}[][]", $"{ExcelDataConst.ByteTypeName}[][]",
             };
 
-            // 为了避免使用过于常见的分隔符，这里定死了支持的分隔符配置
-            //ValideSplitersList = new List<char>(new char[] { '+', ';', ',', '|'});      
-            mValideTypesXbufferTypeMap = new Dictionary<string, string>();
-            mValideTypesXbufferTypeMap.Add(ExcelDataConst.NotationTypeName, ExcelDataConst.NotationTypeName);
-            mValideTypesXbufferTypeMap.Add(ExcelDataConst.IntTypeName, ExcelDataConst.IntTypeName);
-            mValideTypesXbufferTypeMap.Add(ExcelDataConst.FloatTypeName, ExcelDataConst.FloatTypeName);
-            mValideTypesXbufferTypeMap.Add(ExcelDataConst.StringTypeName, ExcelDataConst.StringTypeName);
-            mValideTypesXbufferTypeMap.Add(ExcelDataConst.LongTypeName, ExcelDataConst.LongTypeName);
-            mValideTypesXbufferTypeMap.Add(ExcelDataConst.BoolTypeName, ExcelDataConst.BoolTypeName);
-            mValideTypesXbufferTypeMap.Add(ExcelDataConst.ByteTypeName, ExcelDataConst.ByteTypeName);
-            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.IntTypeName}[]", $"[{ExcelDataConst.IntTypeName}]");
-            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.FloatTypeName}[]", $"[{ExcelDataConst.FloatTypeName}]");
-            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.StringTypeName}[]", $"[{ExcelDataConst.StringTypeName}]");
-            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.LongTypeName}[]", $"[{ExcelDataConst.LongTypeName}]");
-            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.BoolTypeName}[]", $"[{ExcelDataConst.BoolTypeName}]");
-            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.ByteTypeName}[]", $"[{ExcelDataConst.ByteTypeName}]");
-            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.IntTypeName}[][]", $"[[{ExcelDataConst.IntTypeName}]]");
-            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.FloatTypeName}[][]", $"[[{ExcelDataConst.FloatTypeName}]]");
-            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.StringTypeName}[][]", $"[[{ExcelDataConst.StringTypeName}]]");
-            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.LongTypeName}[][]", $"[[{ExcelDataConst.LongTypeName}]]");
-            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.BoolTypeName}[][]", $"[[{ExcelDataConst.BoolTypeName}]]");
-            mValideTypesXbufferTypeMap.Add($"{ExcelDataConst.ByteTypeName}[][]", $"[[{ExcelDataConst.ByteTypeName}]]");
-
             mTempIdMap = new Dictionary<string, string>();
         }
 
@@ -170,41 +106,23 @@ namespace XbufferExcelToData
         /// 配置Excel目录路径
         /// </summary>
         /// <param name="excelfolderpath"></param>
-        public void configExcelFolderPath(string excelfolderpath)
+        public void ConfigExcelFolderPath(string excelfolderpath)
         {
             ExcelFolderPath = excelfolderpath;
-        }
-
-        /// <summary>
-        /// 获取对应Xbuffer里支持配置的类型字符串
-        /// </summary>
-        /// <param name="typename"></param>
-        /// <returns></returns>
-        public string getFinalXbufferTypeName(string typename)
-        {
-            if(mValideTypesXbufferTypeMap.ContainsKey(typename))
-            {
-                return mValideTypesXbufferTypeMap[typename];
-            }
-            else
-            {
-                Console.WriteLine(string.Format("找不到类型名 : {0}在Xbuffer里对应的类型名!", typename));
-                return string.Empty;
-            }
         }
 
         /// <summary>
         /// 加载所有的Excel数据信息
         /// </summary>
         /// <returns></returns>
-        public bool loadAllDataFromExcelFile()
+        public bool LoadAllDataFromExcelFile()
         {
-            if(!readAllExcelFiles())
+            if(!ReadAllExcelFiles())
             {
                 return false;
             }
 
-            if(!readAllExcelFilesInfo())
+            if(!ReadAllExcelFilesInfo())
             {
                 return false;
             }
@@ -217,7 +135,7 @@ namespace XbufferExcelToData
         /// </summary>
         /// <param name="typename">类型名字</param>
         /// <returns></returns>
-        public bool isNotationType(string typename)
+        public bool IsNotationType(string typename)
         {
             return ExcelDataConst.NotationTypeName.Equals(typename);
         }
@@ -225,7 +143,7 @@ namespace XbufferExcelToData
         /// <summary>
         /// 读取所有Excel文件
         /// </summary>
-        private bool readAllExcelFiles()
+        private bool ReadAllExcelFiles()
         {
             if (Directory.Exists(ExcelFolderPath))
             {
@@ -257,7 +175,7 @@ namespace XbufferExcelToData
         /// <summary>
         /// 读取所有Excel文件内部信息
         /// </summary>
-        private bool readAllExcelFilesInfo()
+        private bool ReadAllExcelFilesInfo()
         {
             ExcelsInfoMap.Clear();
             bool issuccess = true;
@@ -285,9 +203,9 @@ namespace XbufferExcelToData
                     var dataset = excelreader.AsDataSet();
                     for (int index = 0, length = dataset.Tables.Count; index < length; index++)
                     {
-                        if (isValideSheet(excelreader.Name))
+                        if (IsValideSheet(excelreader.Name))
                         {
-                            if (hasSheetNameExist(excelreader.Name))
+                            if (HasSheetNameExist(excelreader.Name))
                             {
                                 Console.WriteLine(string.Format("Excel:{0}有重名Sheet:{1}!", excelfile, excelreader.Name));
                                 issuccess = false;
@@ -308,57 +226,57 @@ namespace XbufferExcelToData
                                     }
 
                                     // 字段信息行
-                                    if (currentlinenumber == FieldNameLineNumber)
+                                    if (currentlinenumber == ExcelDataConst.FieldNameLineNumber)
                                     {
                                         // 确保字段名不会因为错误的空格导致报错
                                         Utilities.TrimAllWhiteSpace(datas);
                                         excelinfo.FieldNames = datas;
                                     }
                                     // 字段注释信息行
-                                    else if (currentlinenumber == FieldNotationLineNumber)
+                                    else if (currentlinenumber == ExcelDataConst.FieldNotationLineNumber)
                                     {
                                         excelinfo.FieldNotations = datas;
                                     }
                                     // 字段类型信息行
-                                    else if (currentlinenumber == FieldTypeLineNumber)
+                                    else if (currentlinenumber == ExcelDataConst.FieldTypeLineNumber)
                                     {
                                         // 确保类型数据不会因为错误的空格导致报错
                                         Utilities.TrimAllWhiteSpace(datas);
                                         excelinfo.FieldTypes = datas;
                                     }
                                     // 字段分隔符信息行
-                                    else if (currentlinenumber == FieldSpliterLineNumber)
+                                    else if (currentlinenumber == ExcelDataConst.FieldSpliterLineNumber)
                                     {
                                         //excelinfo.FieldSpliters = datas;
                                     }
                                     // 字段占位符1信息行
-                                    else if (currentlinenumber == FieldPlaceHolder1LineNumber)
+                                    else if (currentlinenumber == ExcelDataConst.FieldPlaceHolder1LineNumber)
                                     {
                                         excelinfo.FieldPlaceholder1s = datas;
                                     }
                                     // 字段占位符2信息行
-                                    else if (currentlinenumber == FieldPlaceHolder2LineNumber)
+                                    else if (currentlinenumber == ExcelDataConst.FieldPlaceHolder2LineNumber)
                                     {
                                         excelinfo.FieldPlaceholder2s = datas;
                                     }
-                                    else if (currentlinenumber >= DataLineNumber)
+                                    else if (currentlinenumber >= ExcelDataConst.DataLineNumber)
                                     {
                                         // 存储数据之前，检查一次各字段名字，字段信息等配置是否正确
-                                        if (currentlinenumber == DataLineNumber)
+                                        if (currentlinenumber == ExcelDataConst.DataLineNumber)
                                         {
-                                            if (hasInvalideName(excelinfo.FieldNames, excelinfo.FieldTypes))
+                                            if (HasInvalideName(excelinfo.FieldNames, excelinfo.FieldTypes))
                                             {
                                                 Console.WriteLine(string.Format("Excel Table:{0}", excelreader.Name));
                                                 issuccess = false;
                                                 break;
                                             }
-                                            if (hasInvalideType(excelinfo.FieldTypes))
+                                            if (HasInvalideType(excelinfo.FieldTypes))
                                             {
                                                 Console.WriteLine(string.Format("Excel Table:{0}", excelreader.Name));
                                                 issuccess = false;
                                                 break;
                                             }
-                                            //if (hasInvalideSpliter(excelinfo.FieldSpliters))
+                                            //if (HasInvalideSpliter(excelinfo.FieldSpliters))
                                             //{
                                             //    Console.WriteLine(string.Format("Excel Table:{0}", excelreader.Name));
                                             //    issuccess = false;
@@ -384,7 +302,7 @@ namespace XbufferExcelToData
                                         }
                                         else
                                         {
-                                            excelinfo.addData(exceldatas);
+                                            excelinfo.AddData(exceldatas);
                                         }
                                     }
                                     else
@@ -397,7 +315,7 @@ namespace XbufferExcelToData
                                 }
 
                                 // 检查是否有重复的id
-                                if (!isIdValide(excelinfo))
+                                if (!IsIdValide(excelinfo))
                                 {
                                     Console.WriteLine($"Excel Sheet:{excelinfo.ExcelName}的配置有问题!");
                                     issuccess = false;
@@ -414,7 +332,7 @@ namespace XbufferExcelToData
 
             if(!issuccess)
             {
-                clearExcelInfo();
+                ClearExcelInfo();
                 return false;
             }
             else
@@ -435,7 +353,7 @@ namespace XbufferExcelToData
         /// </summary>
         /// <param name="sheetname"></param>
         /// <returns></returns>
-        private bool isValideSheet(string sheetname)
+        private bool IsValideSheet(string sheetname)
         {
             return !sheetname.StartsWith(BLACK_LIST_PREFIX);
         }
@@ -445,7 +363,7 @@ namespace XbufferExcelToData
         /// </summary>
         /// <param name="sheetName"></param>
         /// <returns></returns>
-        private bool hasSheetNameExist(string sheetName)
+        private bool HasSheetNameExist(string sheetName)
         {
             foreach(var excelInfo in ExcelsInfoMap)
             {
@@ -464,7 +382,7 @@ namespace XbufferExcelToData
         /// </summary>
         /// <param name="names"></param>
         /// <returns></returns>
-        private bool hasInvalideName(string[] names, string[] types)
+        private bool HasInvalideName(string[] names, string[] types)
         {
             var length = names != null ? names.Length : 0;
             if(length == 0)
@@ -483,7 +401,7 @@ namespace XbufferExcelToData
                     else
                     {
                         // 注释类型强制不允许配置字段名，注释类型不需要名字检查
-                        bool isnotationtype = ExcelDataManager.Singleton.isNotationType(types[i]);
+                        bool isnotationtype = ExcelDataManager.Singleton.IsNotationType(types[i]);
                         if(isnotationtype)
                         {
                             if (!string.IsNullOrEmpty(names[i]))
@@ -518,18 +436,18 @@ namespace XbufferExcelToData
         /// </summary>
         /// <param name="types"></param>
         /// <returns></returns>
-        private bool hasInvalideType(string[] types)
+        private bool HasInvalideType(string[] types)
         {
             for(int i = 0, length = types.Length; i < length; i++)
             {
-                if(i == 0 && !isValideIdType(types[i]))
+                if(i == 0 && !IsValideIdType(types[i]))
                 {
                     Console.WriteLine($"配置错误 : 第一列的数据类型:{types[i]}不支持");
                     return true;
                 }
                 else
                 {
-                    if (!isValideType(types[i]))
+                    if (!IsValideType(types[i]))
                     {
                         Console.WriteLine(string.Format("配置错误 : 不支持的数据类型配置:{0}", types[i]));
                         return true;
@@ -544,7 +462,7 @@ namespace XbufferExcelToData
         /// </summary>
         /// <param name="spliters"></param>
         /// <returns></returns>
-        //private bool hasInvalideSpliter(string[] spliters)
+        //private bool HasInvalideSpliter(string[] spliters)
         //{
         //    foreach (var spliter in spliters)
         //    {
@@ -581,15 +499,15 @@ namespace XbufferExcelToData
         /// <summary>
         /// Id是否有效
         /// </summary>
-        private bool isIdValide(ExcelInfo excelInfo)
+        private bool IsIdValide(ExcelInfo excelInfo)
         {
-            var idType = excelInfo.getIdType();
-            if (!isValideIdType(idType))
+            var idType = excelInfo.GetIdType();
+            if (!IsValideIdType(idType))
             {
                 Console.WriteLine($"id类型:{idType}不支持,仅支持int和string!");
                 return false;
             }
-            if(hasDuplicatedId(excelInfo))
+            if(HasDuplicatedId(excelInfo))
             {
                 return false;
             }
@@ -601,7 +519,7 @@ namespace XbufferExcelToData
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        private bool isValideIdType(string type)
+        private bool IsValideIdType(string type)
         {
             return ValideIdTypeList.Contains(type);
         }
@@ -611,21 +529,21 @@ namespace XbufferExcelToData
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public bool isValideType(string type)
+        public bool IsValideType(string type)
         {
-            if(isValideNormalType(type))
+            if(IsValideNormalType(type))
             {
                 return true;
             }
-            if (isValideOneArrayNormalType(type))
+            if (IsValideOneArrayNormalType(type))
             {
                 return true;
             }
-            if (isValideTwoArrayNormalType(type))
+            if (IsValideTwoArrayNormalType(type))
             {
                 return true;
             }
-            if (isValideClassType(type))
+            if (IsValideClassType(type))
             {
                 return true;
             }
@@ -637,7 +555,7 @@ namespace XbufferExcelToData
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
-        public bool isValideNormalType(string type)
+        public bool IsValideNormalType(string type)
         {
             return ValideTypesList.Contains(type);
         }
@@ -647,7 +565,7 @@ namespace XbufferExcelToData
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public bool isValideOneArrayNormalType(string type)
+        public bool IsValideOneArrayNormalType(string type)
         {
             return ValideOneArrayTypesList.Contains(type);
         }
@@ -657,7 +575,7 @@ namespace XbufferExcelToData
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public bool isValideTwoArrayNormalType(string type)
+        public bool IsValideTwoArrayNormalType(string type)
         {
             return ValideTwoArrayTypesList.Contains(type);
         }
@@ -667,9 +585,9 @@ namespace XbufferExcelToData
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public bool isValideClassType(string type)
+        public bool IsValideClassType(string type)
         {
-            if(isValideNormalClassType(type) || isValideOneArrayClassType(type) || isValideTwoArrayClassType(type))
+            if(IsValideNormalClassType(type) || IsValideOneArrayClassType(type) || IsValideTwoArrayClassType(type))
             {
                 return true;
             }
@@ -681,7 +599,7 @@ namespace XbufferExcelToData
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
-        public bool isValideNormalClassType(string type)
+        public bool IsValideNormalClassType(string type)
         {
             return type.StartsWith("{") && type.EndsWith("}");
         }
@@ -691,9 +609,9 @@ namespace XbufferExcelToData
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public bool isValideOneArrayClassType(string type)
+        public bool IsValideOneArrayClassType(string type)
         {
-            return type.StartsWith("{") && type.EndsWith("}[]") && !type.EndsWith("}[][]");
+            return type.StartsWith("{") && type.EndsWith("}[]");
         }
 
         /// <summary>
@@ -701,7 +619,7 @@ namespace XbufferExcelToData
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public bool isValideTwoArrayClassType(string type)
+        public bool IsValideTwoArrayClassType(string type)
         {
             return type.StartsWith("{") && type.EndsWith("}[][]");
         }
@@ -711,7 +629,7 @@ namespace XbufferExcelToData
         /// </summary>
         /// <param name="excelinfo"></param>
         /// <returns></returns>
-        private bool hasDuplicatedId(ExcelInfo excelinfo)
+        private bool HasDuplicatedId(ExcelInfo excelinfo)
         {
             if(excelinfo != null)
             {
@@ -735,7 +653,7 @@ namespace XbufferExcelToData
         /// <summary>
         /// 清除Excel信息
         /// </summary>
-        private void clearExcelInfo()
+        private void ClearExcelInfo()
         {
             ExcelsInfoMap.Clear();
         }

@@ -5,7 +5,7 @@ namespace xbuffer
         public static t_AuthorInfo_testclassarray Deserialize(byte[] buffer, ref uint offset)
         {
 
-            // null
+            // 是否为空数据
             bool _null = boolBuffer.deserialize(buffer, ref offset);
             if (_null) return null;
 
@@ -18,7 +18,6 @@ namespace xbuffer
 			// param3
 			string _param3 = stringBuffer.deserialize(buffer, ref offset);
 
-			// value
 			return new t_AuthorInfo_testclassarray(
                 _param1,
                 _param2,

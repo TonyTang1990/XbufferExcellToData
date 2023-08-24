@@ -5,7 +5,7 @@ namespace xbuffer
         public static t_AuthorInfo2 Deserialize(byte[] buffer, ref uint offset)
         {
 
-            // null
+            // 是否为空数据
             bool _null = boolBuffer.deserialize(buffer, ref offset);
             if (_null) return null;
 
@@ -35,7 +35,6 @@ namespace xbuffer
                 _luckynumber[i] = intBuffer.deserialize(buffer, ref offset);
             }
 
-			// value
 			return new t_AuthorInfo2(
                 _Id,
                 _author,

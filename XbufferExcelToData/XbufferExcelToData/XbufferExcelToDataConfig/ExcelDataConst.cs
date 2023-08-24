@@ -5,11 +5,7 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using xbuffer;
 
 namespace XbufferExcelToData
@@ -20,139 +16,188 @@ namespace XbufferExcelToData
     public static class ExcelDataConst
     {
         /// <summary>
+        /// 字段名字行号
+        /// </summary>
+        public const int FieldNameLineNumber = 1;
+
+        /// <summary>
+        /// 字段注释行号
+        /// </summary>
+        public const int FieldNotationLineNumber = 2;
+
+        /// <summary>
+        /// 数据类型行号
+        /// </summary>
+        public const int FieldTypeLineNumber = 3;
+
+        /// <summary>
+        /// 分割信息(仅用于一维和多维数组数据)行号
+        /// </summary>
+        public const int FieldSpliterLineNumber = 4;
+
+        /// <summary>
+        /// 占位符1行号
+        /// </summary>
+        public const int FieldPlaceHolder1LineNumber = 5;
+
+        /// <summary>
+        /// 占位符2行号
+        /// </summary>
+        public const int FieldPlaceHolder2LineNumber = 6;
+
+        /// <summary>
+        /// 数据开始行号
+        /// </summary>
+        public const int DataLineNumber = 7;
+
+        /// <summary>
         /// byteBuffer类型信息
         /// </summary>
-        public static Type BYTE_BUFFER_TYPE = typeof(byteBuffer);
+        public static Type ByteBufferType = typeof(byteBuffer);
 
         /// <summary>
         /// intBuffer类型信息
         /// </summary>
-        public static Type INT_BUFFER_TYPE = typeof(intBuffer);
+        public static Type IntBufferType = typeof(intBuffer);
 
         /// <summary>
         /// longBuffer类型信息
         /// </summary>
-        public static Type LONG_BUFFER_TYPE = typeof(longBuffer);
+        public static Type LongBufferType = typeof(longBuffer);
 
         /// <summary>
         /// floatBuffer类型信息
         /// </summary>
-        public static Type FLOAT_BUFFER_TYPE = typeof(floatBuffer);
+        public static Type FloatBufferType = typeof(floatBuffer);
 
         /// <summary>
         /// boolBuffer类型信息
         /// </summary>
-        public static Type BOOL_BUFFER_TYPE = typeof(boolBuffer);
+        public static Type BoolBufferType = typeof(boolBuffer);
 
         /// <summary>
         /// stringBuffer类型信息
         /// </summary>
-        public static Type STRING_BUFFER_TYPE = typeof(stringBuffer);
+        public static Type StringBufferType = typeof(stringBuffer);
 
         /// <summary>
         /// byteBuffer serialize方法信息
         /// </summary>
-        public static MethodInfo BYTE_BUFFER_SERIALIZE_METHOD = BYTE_BUFFER_TYPE.GetMethod("Serialize");
+        public static MethodInfo ByteBufferSerializeMethod = ByteBufferType.GetMethod("Serialize");
 
         /// <summary>
         /// intBuffer serialize方法信息
         /// </summary>
-        public static MethodInfo INT_BUFFER_SERIALIZE_METHOD = INT_BUFFER_TYPE.GetMethod("Serialize");
+        public static MethodInfo IntBufferSerializeMethod = IntBufferType.GetMethod("Serialize");
 
         /// <summary>
         /// longBuffer serialize方法信息
         /// </summary>
-        public static MethodInfo LONG_BUFFER_SERIALIZE_METHOD = LONG_BUFFER_TYPE.GetMethod("Serialize");
+        public static MethodInfo LongBufferSerializeMethod = LongBufferType.GetMethod("Serialize");
 
         /// <summary>
         /// floatBuffer serialize方法信息
         /// </summary>
-        public static MethodInfo FLOAT_BUFFER_SERIALIZE_METHOD = FLOAT_BUFFER_TYPE.GetMethod("Serialize");
+        public static MethodInfo FloatBufferSerializeMethod = FloatBufferType.GetMethod("Serialize");
         
         /// <summary>
         /// boolBuffer serialize方法信息
         /// </summary>
-        public static MethodInfo BOOL_BUFFER_SERIALIZE_METHOD = BOOL_BUFFER_TYPE.GetMethod("Serialize");
+        public static MethodInfo BoolBufferSerializeMethod = BoolBufferType.GetMethod("Serialize");
 
         /// <summary>
         /// stringBuffer serialize方法信息
         /// </summary>
-        public static MethodInfo STRING_BUFFER_SERIALIZE_METHOD = STRING_BUFFER_TYPE.GetMethod("Serialize");
+        public static MethodInfo StringBufferSerializeMethod = StringBufferType.GetMethod("Serialize");
 
         /// <summary>
-        /// byteBuffer默认指字符串
+        /// byte默认值
         /// </summary>
-        public static string BYTE_BUFFER_DEFAULT_STRING_VALUE = default(byte).ToString();
+        public const byte ByteDefaultValue = default(byte);
 
         /// <summary>
-        /// intBuffer默认指字符串
+        /// int默认值
         /// </summary>
-        public static string INT_BUFFER_DEFAULT_STRING_VALUE = default(int).ToString();
+        public const int IntDefaultValue = default(int);
 
         /// <summary>
-        /// longBuffer默认指字符串
+        /// long默认值
         /// </summary>
-        public static string LONG_BUFFER_DEFAULT_STRING_VALUE = default(long).ToString();
+        public const long LongDefaultValue = default(long);
 
         /// <summary>
-        /// floatBuffer默认指字符串
+        /// float默认值
         /// </summary>
-        public static string FLOAT_BUFFER_DEFAULT_STRING_VALUE = default(float).ToString();
+        public const float FloatDefaultValue = default(float);
 
         /// <summary>
-        /// boolBuffer默认指字符串
+        /// bool默认值
         /// </summary>
-        public static string BOOL_BUFFER_DEFAULT_STRING_VALUE = default(bool).ToString();
+        public const bool BoolDefaultValue = default(bool);
 
         /// <summary>
-        /// stringBuffer默认指字符串
+        /// string默认值
         /// </summary>
-        public static string STRING_BUFFER_DEFAULT_STRING_VALUE = string.Empty;
+        public const string StringDefaultValue = "";
 
         /// <summary>
         /// 一维数组分隔符
         /// </summary>
-        public const char ONE_DIMENSION_SPLITER = '#';
+        public const char OneDimensionSpliter = '#';
 
         /// <summary>
         /// 二维数组分隔符
         /// </summary>
-        public const char TWO_DIMENSION_SPLITER = '|';
+        public const char TwoDimensionSpliter = '|';
 
         /// <summary>
         /// 嵌套类型成员数据定义分隔符
         /// </summary>
-        public const char CLASS_MEMBER_VALUE_SPLITER = ';';
+        public const char ClassMemberValueSpliter = ';';
 
         /// <summary>
         /// 嵌套类型成员定义分隔符
         /// </summary>
-        public const char CLASS_MEMBER_SPLITER = ';';
+        public const char ClassMemberSpliter = ';';
 
         /// <summary>
         /// 嵌套类型成员类型名字分隔符
         /// </summary>
-        public const char CLASS_MEMBER_TYPE_NAME_SPLITER = ' ';
+        public const char ClassMemberTypeNameSpliter = ' ';
 
-        /// <summary> 注释类型名 /// </summary>
+        /// <summary>
+        /// 注释类型名
+        /// </summary>
         public const string NotationTypeName = "notation";
 
-        /// <summary> int类型名 /// </summary>
+        /// <summary>
+        /// int类型名
+        /// </summary>
         public const string IntTypeName = "int";
 
-        /// <summary> float类型名 /// </summary>
+        /// <summary>
+        /// float类型名
+        /// </summary>
         public const string FloatTypeName = "float";
 
-        /// <summary> String类型名 /// </summary>
+        /// <summary>
+        /// String类型名
+        /// </summary>
         public const string StringTypeName = "string";
 
-        /// <summary> long类型名 /// </summary>
+        /// <summary>
+        /// long类型名
+        /// </summary>
         public const string LongTypeName = "long";
 
-        /// <summary> bool类型名 /// </summary>
+        /// <summary>
+        /// bool类型名
+        /// </summary>
         public const string BoolTypeName = "bool";
 
-        /// <summary> byte类型名 /// </summary>
+        /// <summary>
+        /// byte类型名
+        /// </summary>
         public const string ByteTypeName = "byte";
     }
 }

@@ -5,7 +5,7 @@ namespace xbuffer
         public static #CLASS_NAME# Deserialize(byte[] buffer, ref uint offset)
         {
 #IF_DESERIALIZE_CLASS#
-            // null
+            // 是否为空数据
             bool _null = boolBuffer.deserialize(buffer, ref offset);
             if (_null) return null;
 #END_DESERIALIZE_CLASS#
@@ -37,7 +37,6 @@ namespace xbuffer
 #END_TWO_ARRAY#
 #DESERIALIZE_PROCESS#
 
-			// value
 			return new #CLASS_NAME#(
 #DESERIALIZE_RETURN#
                 _#VAR_NAME##DESERIALIZE_RETURN#

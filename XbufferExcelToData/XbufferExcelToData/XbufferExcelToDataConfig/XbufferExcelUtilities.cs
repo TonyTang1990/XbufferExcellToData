@@ -54,27 +54,27 @@ namespace XbufferExcelToData
         /// <returns></returns>
         public static ExcelDataType GetExcelDataType(string dataType)
         {
-            if (ExcelDataManager.Singleton.isValideNormalType(dataType))
+            if (ExcelDataManager.Singleton.IsValideNormalType(dataType))
             {
                 return ExcelDataType.BASIC;
             }
-            else if (ExcelDataManager.Singleton.isValideOneArrayNormalType(dataType))
+            else if (ExcelDataManager.Singleton.IsValideOneArrayNormalType(dataType))
             {
                 return ExcelDataType.BASIC_ONE_ARRAY;
             }
-            else if (ExcelDataManager.Singleton.isValideTwoArrayNormalType(dataType))
+            else if (ExcelDataManager.Singleton.IsValideTwoArrayNormalType(dataType))
             {
                 return ExcelDataType.BASIC_TWO_ARRAY;
             }
-            else if (ExcelDataManager.Singleton.isValideNormalClassType(dataType))
+            else if (ExcelDataManager.Singleton.IsValideNormalClassType(dataType))
             {
                 return ExcelDataType.CLASS;
             }
-            else if (ExcelDataManager.Singleton.isValideOneArrayClassType(dataType))
+            else if (ExcelDataManager.Singleton.IsValideOneArrayClassType(dataType))
             {
                 return ExcelDataType.CLASS_ONE_ARRAY;
             }
-            else if (ExcelDataManager.Singleton.isValideTwoArrayClassType(dataType))
+            else if (ExcelDataManager.Singleton.IsValideTwoArrayClassType(dataType))
             {
                 return ExcelDataType.CLASS_TWO_ARRAY;
             }
@@ -155,11 +155,11 @@ namespace XbufferExcelToData
                 classDefinition = classDefinition.Remove(lastIndex);
             }
             var classData = new ClassData(className, classComment);
-            var memberDefinitions = classDefinition.Split(ExcelDataConst.CLASS_MEMBER_SPLITER);
+            var memberDefinitions = classDefinition.Split(ExcelDataConst.ClassMemberSpliter);
             foreach(var memberDefinition in memberDefinitions)
             {
                 var finalMemberDefinition = memberDefinition.Trim();
-                var memberInfos = finalMemberDefinition.Split(ExcelDataConst.CLASS_MEMBER_TYPE_NAME_SPLITER);
+                var memberInfos = finalMemberDefinition.Split(ExcelDataConst.ClassMemberTypeNameSpliter);
                 var memberInfoNum = memberInfos.Length;
                 string memberType = string.Empty;
                 var memberName = string.Empty;
@@ -173,7 +173,7 @@ namespace XbufferExcelToData
                     memberName = memberInfos[1];
                     // Note:
                     // 嵌套类型只支持基础类型
-                    if (!ExcelDataManager.Singleton.isValideNormalType(memberType))
+                    if (!ExcelDataManager.Singleton.IsValideNormalType(memberType))
                     {
                         Console.WriteLine($"SheetName:{className}的字段名:{classComment}的数据类型:{dataTypeDes}的成员数据:{finalMemberDefinition}的成员类型:{memberType}配置格式有误！");
                         memberType = string.Empty;

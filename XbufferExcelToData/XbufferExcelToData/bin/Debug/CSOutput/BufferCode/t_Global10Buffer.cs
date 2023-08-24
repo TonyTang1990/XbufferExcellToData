@@ -5,7 +5,7 @@ namespace xbuffer
         public static t_Global10 Deserialize(byte[] buffer, ref uint offset)
         {
 
-            // null
+            // 是否为空数据
             bool _null = boolBuffer.deserialize(buffer, ref offset);
             if (_null) return null;
 
@@ -37,7 +37,6 @@ namespace xbuffer
                 _stringarrayvalue[i] = stringBuffer.deserialize(buffer, ref offset);
             }
 
-			// value
 			return new t_Global10(
                 _Id,
                 _stringvalue,

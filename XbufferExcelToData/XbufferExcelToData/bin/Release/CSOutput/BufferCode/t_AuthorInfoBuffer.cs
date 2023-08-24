@@ -5,7 +5,7 @@ namespace xbuffer
         public static t_AuthorInfo Deserialize(byte[] buffer, ref uint offset)
         {
 
-            // null
+            // 是否为空数据
             bool _null = boolBuffer.deserialize(buffer, ref offset);
             if (_null) return null;
 
@@ -35,6 +35,9 @@ namespace xbuffer
                 _luckynumber[i] = intBuffer.deserialize(buffer, ref offset);
             }
 
+			// weekday
+			byte _weekday = byteBuffer.deserialize(buffer, ref offset);
+
 			// testclass
 			t_AuthorInfo_testclass _testclass = t_AuthorInfo_testclassBuffer.deserialize(buffer, ref offset);
 
@@ -59,7 +62,6 @@ namespace xbuffer
                 }
             }
 
-			// value
 			return new t_AuthorInfo(
                 _Id,
                 _author,
@@ -68,6 +70,7 @@ namespace xbuffer
                 _hashouse,
                 _pbutctime,
                 _luckynumber,
+                _weekday,
                 _testclass,
                 _testclassarray,
                 _testclasstwoarray
@@ -105,6 +108,9 @@ namespace xbuffer
             {
                 intBuffer.serialize(value.luckynumber[i], steam);
             }
+
+			// weekday
+			byteBuffer.serialize(value.weekday, steam);
 
 			// testclass
 			t_AuthorInfo_testclassBuffer.serialize(value.testclass, steam);

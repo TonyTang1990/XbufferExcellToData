@@ -5,20 +5,19 @@ namespace xbuffer
         public static t_AuthorInfo_testclasstwoarray Deserialize(byte[] buffer, ref uint offset)
         {
 
-            // null
-            bool _null = boolBuffer.Deserialize(buffer, ref offset);
+            // 是否为空数据
+            bool _null = boolBuffer.deserialize(buffer, ref offset);
             if (_null) return null;
 
-			// param11()
-			int _param11 = intBuffer.Deserialize(buffer, ref offset);
+			// param11
+			int _param11 = intBuffer.deserialize(buffer, ref offset);
 
-			// param22()
-			bool _param22 = boolBuffer.Deserialize(buffer, ref offset);
+			// param22
+			bool _param22 = boolBuffer.deserialize(buffer, ref offset);
 
-			// param33()
-			string _param33 = stringBuffer.Deserialize(buffer, ref offset);
+			// param33
+			string _param33 = stringBuffer.deserialize(buffer, ref offset);
 
-			// value
 			return new t_AuthorInfo_testclasstwoarray(
                 _param11,
                 _param22,
@@ -30,17 +29,17 @@ namespace xbuffer
         {
 
             // null
-            boolBuffer.Serialize(value == null, steam);
+            boolBuffer.serialize(value == null, steam);
             if (value == null) return;
 
-			// param11()
-			intBuffer.Serialize(value.param11, steam);
+			// param11
+			intBuffer.serialize(value.param11, steam);
 
-			// param22()
-			boolBuffer.Serialize(value.param22, steam);
+			// param22
+			boolBuffer.serialize(value.param22, steam);
 
-			// param33()
-			stringBuffer.Serialize(value.param33, steam);
+			// param33
+			stringBuffer.serialize(value.param33, steam);
         }
     }
 }

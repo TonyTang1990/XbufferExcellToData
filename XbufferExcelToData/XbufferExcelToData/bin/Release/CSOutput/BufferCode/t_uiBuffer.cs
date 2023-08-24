@@ -5,7 +5,7 @@ namespace xbuffer
         public static t_ui Deserialize(byte[] buffer, ref uint offset)
         {
 
-            // null
+            // 是否为空数据
             bool _null = boolBuffer.deserialize(buffer, ref offset);
             if (_null) return null;
 
@@ -21,7 +21,6 @@ namespace xbuffer
 			// Layer
 			int _Layer = intBuffer.deserialize(buffer, ref offset);
 
-			// value
 			return new t_ui(
                 _WinName,
                 _ResPath,

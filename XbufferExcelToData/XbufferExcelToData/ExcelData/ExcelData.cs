@@ -56,7 +56,7 @@ namespace XbufferExcelToData
         /// 添加数据信息
         /// </summary>
         /// <param name="exceldata"></param>
-        public void addData(ExcelData[] exceldata)
+        public void AddData(ExcelData[] exceldata)
         {
             DatasList.Add(exceldata);
         }
@@ -65,7 +65,7 @@ namespace XbufferExcelToData
         /// 获取Id字段名字
         /// </summary>
         /// <returns></returns>
-        public string getIdName()
+        public string GetIdName()
         {
             return FieldNames != null ? FieldNames[0] : string.Empty;
         }
@@ -74,7 +74,7 @@ namespace XbufferExcelToData
         /// 获取Id的类型(仅支持int和string)
         /// </summary>
         /// <returns></returns>
-        public string getIdType()
+        public string GetIdType()
         {
             return FieldTypes != null ? FieldTypes[0] : string.Empty;
         }
@@ -82,7 +82,7 @@ namespace XbufferExcelToData
         /// <summary>
         /// 打印所有Excel信息
         /// </summary>
-        public void printOutAllExcelInfo()
+        public void PrintOutAllExcelInfo()
         {
             Console.WriteLine(string.Format("ExcelName : {0}", ExcelName));
             printOutArrayInfo(FieldNames);

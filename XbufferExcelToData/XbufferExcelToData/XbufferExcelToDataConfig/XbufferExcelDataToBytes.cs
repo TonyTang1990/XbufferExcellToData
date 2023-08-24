@@ -34,7 +34,7 @@ namespace XbufferExcelToData
         /// 配置二进制数据输出目录
         /// </summary>
         /// <param name="folderpath"></param>
-        public void configBytesOutputFolderPath(string folderpath)
+        public void ConfigBytesOutputFolderPath(string folderpath)
         {
             BytesFolderPath = folderpath;
         }
@@ -45,7 +45,7 @@ namespace XbufferExcelToData
         /// <param name="excelinfo">excel数据信息</param>
         /// <param name="excelClassData">Excel类型数据</param>
         /// <returns></returns>
-        public bool writeExcelDataToBytes(ExcelInfo excelinfo, ClassData excelClassData)
+        public bool WriteExcelDataToBytes(ExcelInfo excelinfo, ClassData excelClassData)
         {
             Console.WriteLine(string.Format("当前正在序列化表格 : {0}", excelinfo.ExcelName));
             // 因为考虑到Xbuffer的内存分配策略是递增的
@@ -61,12 +61,19 @@ namespace XbufferExcelToData
                 int currentlinenmber = 0;
                 try
                 {
+                    var result = true;
                     //接下来的写入格式: 每一行数据字节数长度 + 数据字节
                     for (int i = 0, length = exceldatalist.Count; i < length; i++)
                     {
                         //这里分配足够小，确保不会因为数据写入没有导致内存分配扩张导致wast计算不正确
                         XSteam stream = new XSteam(1, 32);
-                        serializeExcelOneLineDatas(exceldatalist[i], excelClassData, stream);
+                        if(!SerializeExcelOneLineDatas(exceldatalist[i], excelClassData, stream))
+                        {
+                            var lineNum = i + ExcelDataConst.DataLineNumber;
+                            Console.WriteLine($"序列化配置表:{excelinfo.ExcelName}第{lineNum}行数据出错！");
+                            result = false;
+                            break;
+                        }
                         var bytes = stream.getBytes();
                         // 写入单行数据长度信息
                         bw.Write(bytes.Length);
@@ -74,6 +81,7 @@ namespace XbufferExcelToData
                         bw.Write(bytes);
                         currentlinenmber = i;
                     }
+                    return result;
                 }
                 catch (System.Exception e)
                 {
@@ -87,7 +95,6 @@ namespace XbufferExcelToData
                     bw.Close();
                 }
             }
-            return true;
         }
 
         /// <summary>
@@ -96,10 +103,10 @@ namespace XbufferExcelToData
         /// <param name="excelData">Excel当行数据数组</param>
         /// <param name="excelClassData">Excel类型数据</param>
         /// <param name="stream">Excel二进制写入流</param>
-        private void serializeExcelOneLineDatas(ExcelData[] excelData, ClassData excelClassData, XSteam stream)
+        private bool SerializeExcelOneLineDatas(ExcelData[] excelData, ClassData excelClassData, XSteam stream)
         {
             // 先写入数据是否为空的bool信息
-            serializNoneArrayData<boolBuffer>(excelData == null ? "true" : "false", stream);
+            SerializNoneArrayData<boolBuffer>(excelData == null ? "true" : "false", stream);
             if(excelData != null)
             {
                 var memberDataList = excelClassData.MemberDataList;
@@ -109,9 +116,14 @@ namespace XbufferExcelToData
                     var data = excelData[index];
                     // 理论上数据结构和数据数量一致一一对应
                     var memberData = memberDataList[index];
-                    serializeExcelData(memberData, data.Data, stream);
+                    if(!SerializeExcelData(memberData, data.Data, stream))
+                    {
+                        Console.WriteLine($"字段名:{data.Name}数据:{data.Data}配置有误，序列化失败！");
+                        return false;
+                    }
                 }
             }
+            return true;
         }
 
         /// <summary>
@@ -121,31 +133,31 @@ namespace XbufferExcelToData
         /// <param name="dataTypeDes">数据类型字符串</param>
         /// <param name="data">数据</param>
         /// <param name="stream">Xbuffer的内存管理分配对象</param>
-        private bool serializeExcelData(MemberData memberData, string data, XSteam stream)
+        private bool SerializeExcelData(MemberData memberData, string data, XSteam stream)
         {
             if(memberData.ExcelDataType == ExcelDataType.BASIC)
             {
-                return serializeBasicExcelData(memberData.BasicDataType, data, stream);
+                return SerializeBasicExcelData(memberData.BasicDataType, data, stream);
             }
             else if (memberData.ExcelDataType == ExcelDataType.BASIC_ONE_ARRAY)
             {
-                return serializeBasicOneArrayExcelData(memberData.BasicDataType, data, stream);
+                return SerializeBasicOneArrayExcelData(memberData.BasicDataType, data, stream);
             }
             else if (memberData.ExcelDataType == ExcelDataType.BASIC_TWO_ARRAY)
             {
-                return serializeBasicTwoArrayExcelData(memberData.BasicDataType, data, stream);
+                return SerializeBasicTwoArrayExcelData(memberData.BasicDataType, data, stream);
             }
             else if (memberData.ExcelDataType == ExcelDataType.CLASS)
             {
-                return serializeClassExcelData(memberData.MemberClassData, memberData.BasicDataType, data, stream);
+                return SerializeClassExcelData(memberData.MemberClassData, data, stream);
             }
             else if (memberData.ExcelDataType == ExcelDataType.CLASS_ONE_ARRAY)
             {
-                return serializeClassOneArrayExcelData(memberData.MemberClassData, memberData.BasicDataType, data, stream);
+                return SerializeClassOneArrayExcelData(memberData.MemberClassData, data, stream);
             }
             else if (memberData.ExcelDataType == ExcelDataType.CLASS_TWO_ARRAY)
             {
-                return serializeClassTwoArrayExcelData(memberData.MemberClassData, memberData.BasicDataType, data, stream);
+                return SerializeClassTwoArrayExcelData(memberData.MemberClassData, data, stream);
             }
             else
             {
@@ -161,7 +173,7 @@ namespace XbufferExcelToData
         /// <param name="data"></param>
         /// <param name="stream"></param>
         /// <returns></returns>
-        private bool serializeBasicExcelData(string basicDataType, string data, XSteam stream)
+        private bool SerializeBasicExcelData(string basicDataType, string data, XSteam stream)
         {
             //注释类型只用于表格查看，不作为实际的数据
             //不需要进行序列化
@@ -172,28 +184,21 @@ namespace XbufferExcelToData
             switch (basicDataType)
             {
                 case ExcelDataConst.IntTypeName:
-                    serializNoneArrayData<intBuffer>(data, stream);
-                    break;
+                    return SerializNoneArrayData<intBuffer>(data, stream);
                 case ExcelDataConst.FloatTypeName:
-                    serializNoneArrayData<floatBuffer>(data, stream);
-                    break;
+                    return SerializNoneArrayData<floatBuffer>(data, stream);
                 case ExcelDataConst.StringTypeName:
-                    serializNoneArrayData<stringBuffer>(data, stream);
-                    break;
+                    return SerializNoneArrayData<stringBuffer>(data, stream);
                 case ExcelDataConst.LongTypeName:
-                    serializNoneArrayData<longBuffer>(data, stream);
-                    break;
+                    return SerializNoneArrayData<longBuffer>(data, stream);
                 case ExcelDataConst.BoolTypeName:
-                    serializNoneArrayData<boolBuffer>(data, stream);
-                    break;
+                    return SerializNoneArrayData<boolBuffer>(data, stream);
                 case ExcelDataConst.ByteTypeName:
-                    serializNoneArrayData<byteBuffer>(data, stream);
-                    break;
+                    return SerializNoneArrayData<byteBuffer>(data, stream);
                 default:
                     Console.WriteLine(string.Format("严重错误! 不支持的序列化基础数据类型 : {0}", basicDataType));
                     return false;
             }
-            return true;
         }
 
         /// <summary>
@@ -203,7 +208,7 @@ namespace XbufferExcelToData
         /// <param name="excelData">Excel配置数据</param>
         /// <param name="stream">Xbuffer的内存管理分配对象</param>
         /// <returns></returns>
-        private bool serializeBasicOneArrayExcelData(string basicDataType, string excelData, XSteam stream)
+        private bool SerializeBasicOneArrayExcelData(string basicDataType, string excelData, XSteam stream)
         {
             //注释类型只用于表格查看，不作为实际的数据
             //不需要进行序列化
@@ -214,28 +219,21 @@ namespace XbufferExcelToData
             switch (basicDataType)
             {
                 case ExcelDataConst.IntTypeName:
-                    serializOneDimensionArrayData<intBuffer>(excelData, stream);
-                    break;
+                    return SerializOneDimensionArrayData<intBuffer>(excelData, stream);
                 case ExcelDataConst.FloatTypeName:
-                    serializOneDimensionArrayData<floatBuffer>(excelData, stream);
-                    break;
+                    return SerializOneDimensionArrayData<floatBuffer>(excelData, stream);
                 case ExcelDataConst.StringTypeName:
-                    serializOneDimensionArrayData<stringBuffer>(excelData, stream);
-                    break;
+                    return SerializOneDimensionArrayData<stringBuffer>(excelData, stream);
                 case ExcelDataConst.LongTypeName:
-                    serializOneDimensionArrayData<longBuffer>(excelData, stream);
-                    break;
+                    return SerializOneDimensionArrayData<longBuffer>(excelData, stream);
                 case ExcelDataConst.BoolTypeName:
-                    serializOneDimensionArrayData<boolBuffer>(excelData, stream);
-                    break;
+                    return SerializOneDimensionArrayData<boolBuffer>(excelData, stream);
                 case ExcelDataConst.ByteTypeName:
-                    serializOneDimensionArrayData<byteBuffer>(excelData, stream);
-                    break;
+                    return SerializOneDimensionArrayData<byteBuffer>(excelData, stream);
                 default:
                     Console.WriteLine(string.Format("严重错误! 不支持的序列化一维数组数据类型 : {0}", basicDataType));
                     return false;
             }
-            return true;
         }
 
         /// <summary>
@@ -245,7 +243,7 @@ namespace XbufferExcelToData
         /// <param name="excelData">Excel配置数据</param>
         /// <param name="stream">Xbuffer的内存管理分配对象</param>
         /// <returns></returns>
-        private bool serializeBasicTwoArrayExcelData(string basicDataType, string excelData, XSteam stream)
+        private bool SerializeBasicTwoArrayExcelData(string basicDataType, string excelData, XSteam stream)
         {
             //注释类型只用于表格查看，不作为实际的数据
             //不需要进行序列化
@@ -256,23 +254,17 @@ namespace XbufferExcelToData
             switch (basicDataType)
             {
                 case ExcelDataConst.IntTypeName:
-                    serializTwoDimensionArrayData<intBuffer>(excelData, stream);
-                    break;
+                    return SerializTwoDimensionArrayData<intBuffer>(excelData, stream);
                 case ExcelDataConst.FloatTypeName:
-                    serializTwoDimensionArrayData<floatBuffer>(excelData, stream);
-                    break;
+                    return SerializTwoDimensionArrayData<floatBuffer>(excelData, stream);
                 case ExcelDataConst.StringTypeName:
-                    serializTwoDimensionArrayData<stringBuffer>(excelData, stream);
-                    break;
+                    return SerializTwoDimensionArrayData<stringBuffer>(excelData, stream);
                 case ExcelDataConst.LongTypeName:
-                    serializTwoDimensionArrayData<longBuffer>(excelData, stream);
-                    break;
+                    return SerializTwoDimensionArrayData<longBuffer>(excelData, stream);
                 case ExcelDataConst.BoolTypeName:
-                    serializTwoDimensionArrayData<boolBuffer>(excelData, stream);
-                    break;
+                    return SerializTwoDimensionArrayData<boolBuffer>(excelData, stream);
                 case ExcelDataConst.ByteTypeName:
-                    serializTwoDimensionArrayData<byteBuffer>(excelData, stream);
-                    break;
+                    return SerializTwoDimensionArrayData<byteBuffer>(excelData, stream);
                 default:
                     Console.WriteLine(string.Format("严重错误! 不支持的序列化二维数组数据类型 : {0}", basicDataType));
                     return false;
@@ -284,10 +276,9 @@ namespace XbufferExcelToData
         /// 序列化Class结构数据类型Excel数据
         /// </summary>
         /// <param name="classData">Class结构数据</param>
-        /// <param name="basicDataType">基础数据类型字符串</param>
         /// <param name="excelData">Excel配置数据</param>
         /// <param name="stream">Xbuffer的内存管理分配对象</param>
-        private bool serializeClassExcelData(ClassData classData, string basicDataType, string excelData, XSteam stream)
+        private bool SerializeClassExcelData(ClassData classData, string excelData, XSteam stream)
         {
             if(classData == null)
             {
@@ -295,10 +286,10 @@ namespace XbufferExcelToData
                 return false;
             }
             // 先写入数据是否为空的bool信息
-            serializNoneArrayData<boolBuffer>(string.IsNullOrEmpty(excelData) ? "true" : "false", stream);
+            SerializNoneArrayData<boolBuffer>(string.IsNullOrEmpty(excelData) ? "true" : "false", stream);
 
             var memberDataList = classData.MemberDataList;
-            var datas = excelData.Split(ExcelDataConst.CLASS_MEMBER_VALUE_SPLITER);
+            var datas = excelData.Split(ExcelDataConst.ClassMemberValueSpliter);
             for(int index = 0, length = datas.Length; index < length; index++)
             {
                 var memberData = memberDataList[index];
@@ -309,7 +300,11 @@ namespace XbufferExcelToData
                     continue;
                 }
                 var data = datas[index];
-                serializeBasicExcelData(memberData.BasicDataType, data, stream);
+                if(!SerializeBasicExcelData(memberData.BasicDataType, data, stream))
+                {
+                    Console.WriteLine($"Class Name:{classData.ClassName}的成员:{memberData.Name}数据:{data}配置有误，解析失败！");
+                    return false;
+                }
             }
             return true;
         }
@@ -318,10 +313,9 @@ namespace XbufferExcelToData
         /// 序列化Class结构一维数组数据类型Excel数据
         /// </summary>
         /// <param name="classData">Class结构数据</param>
-        /// <param name="basicDataType">数据类型字符串</param>
         /// <param name="excelData">Excel数据</param>
         /// <param name="stream">Xbuffer的内存管理分配对象</param>
-        private bool serializeClassOneArrayExcelData(ClassData classData, string basicDataType, string excelData, XSteam stream)
+        private bool SerializeClassOneArrayExcelData(ClassData classData, string excelData, XSteam stream)
         {
             if (classData == null)
             {
@@ -331,18 +325,23 @@ namespace XbufferExcelToData
             if (string.IsNullOrEmpty(excelData))
             {
                 // 未配置一维数据，默认长度默认为0
-                serializNoneArrayData<intBuffer>("0", stream);
+                SerializNoneArrayData<intBuffer>("0", stream);
             }
             else
             {
                 // 只支持1维数据的配置和快速解析
-                var datas = excelData.Split(ExcelDataConst.ONE_DIMENSION_SPLITER);
+                var datas = excelData.Split(ExcelDataConst.OneDimensionSpliter);
                 // 写入一维数组的长度字节数信息
-                serializNoneArrayData<intBuffer>(datas.Length.ToString(), stream);
+                SerializNoneArrayData<intBuffer>(datas.Length.ToString(), stream);
                 // 开始序列化一维数组数据
-                foreach (var data in datas)
+                for(int index = 0, length = datas.Length; index < length; index++)
                 {
-                    serializeClassExcelData(classData, basicDataType, data, stream);
+                    var data = datas[index];
+                    if(!SerializeClassExcelData(classData, data, stream))
+                    {
+                        Console.WriteLine($"Class Name:{classData.ClassName}的第[{index}]数据:{data}配置有误，解析失败！");
+                        return false;
+                    }
                 }
             }
             return true;
@@ -352,10 +351,9 @@ namespace XbufferExcelToData
         /// 序列化Class结构二维数组数据类型Excel数据
         /// </summary>
         /// <param name="classData">Class结构数据</param>
-        /// <param name="basicDataType">数据类型字符串</param>
         /// <param name="excelDdata">Excel数据</param>
         /// <param name="stream">Xbuffer的内存管理分配对象</param>
-        private bool serializeClassTwoArrayExcelData(ClassData classData, string basicDataType, string excelDdata, XSteam stream)
+        private bool SerializeClassTwoArrayExcelData(ClassData classData, string excelDdata, XSteam stream)
         {
             if (classData == null)
             {
@@ -365,25 +363,31 @@ namespace XbufferExcelToData
             if (string.IsNullOrEmpty(excelDdata))
             {
                 // 未配置二维数据，默认长度默认为0
-                serializNoneArrayData<intBuffer>("0", stream);
+                SerializNoneArrayData<intBuffer>("0", stream);
             }
             else
             {
-                var twoDimensionDatas = excelDdata.Split(ExcelDataConst.TWO_DIMENSION_SPLITER);
+                var twoDimensionDatas = excelDdata.Split(ExcelDataConst.TwoDimensionSpliter);
                 // 写入二维数组第一维度的长度字节数信息
-                serializNoneArrayData<intBuffer>(twoDimensionDatas.Length.ToString(), stream);
+                SerializNoneArrayData<intBuffer>(twoDimensionDatas.Length.ToString(), stream);
 
                 // 开始序列化第一维度数组数据
-                foreach (var twoDimensionData in twoDimensionDatas)
+                for(int index1 = 0, length1 = twoDimensionDatas.Length; index1 < length1; index1++)
                 {
+                    var twoDimensionData = twoDimensionDatas[index1];
                     // 写入每一维度数据长度+每一维度的数据
-                    var oneDimensionDatas = twoDimensionData.Split(ExcelDataConst.ONE_DIMENSION_SPLITER);
+                    var oneDimensionDatas = twoDimensionData.Split(ExcelDataConst.OneDimensionSpliter);
                     // 写入每一维度数组的长度字节数信息
-                    serializNoneArrayData<intBuffer>(oneDimensionDatas.Length.ToString(), stream);
+                    SerializNoneArrayData<intBuffer>(oneDimensionDatas.Length.ToString(), stream);
                     // 序列化Class数据
-                    foreach (var oneDimensionData in oneDimensionDatas)
+                    for(int index2 = 0, length2 = oneDimensionDatas.Length; index2 < length2; index2++)
                     {
-                        serializeClassExcelData(classData, basicDataType, oneDimensionData, stream);
+                        var oneDimensionData = oneDimensionDatas[index2];
+                        if (!SerializeClassExcelData(classData, oneDimensionData, stream))
+                        {
+                            Console.WriteLine($"Class Name:{classData.ClassName}的第[{index1}][{index2}]数据:{oneDimensionData}配置有误，解析失败！");
+                            return false;
+                        }
                     }
                 }
             }
@@ -395,8 +399,9 @@ namespace XbufferExcelToData
         /// </summary>
         /// <param name="data">数据</param>
         /// <param name="stream">Xbuffer的内存管理分配对象</param>
-        private void serializNoneArrayData<T>(string data, XSteam stream)
+        private bool SerializNoneArrayData<T>(string data, XSteam stream)
         {
+            var result = true;
             var type = typeof(T);
             var serilizemethod = GetSerializeMethodInfoByType(type);
             if(serilizemethod != null)
@@ -404,98 +409,103 @@ namespace XbufferExcelToData
                 // 填写数据之前需要解析数据到对应的类型
                 // 支持不填数据采用默认数值的形式
                 object finaldata = null;
-                if (type == ExcelDataConst.INT_BUFFER_TYPE)
+                if (type == ExcelDataConst.IntBufferType)
                 {
                     if(string.IsNullOrEmpty(data))
                     {
-                        finaldata = default(int);
+                        finaldata = ExcelDataConst.IntDefaultValue;
                     }
                     else
                     {
                         int finalIntData;
                         if(!int.TryParse(data, out finalIntData))
                         {
-                            finalIntData = default(int);
-                            Console.WriteLine($"数据:{data} 类型:{type.Name} 配置数据格式有误,解析失败!");
+                            finalIntData = ExcelDataConst.IntDefaultValue;
+                            Console.WriteLine($"配置类型:{ExcelDataConst.IntTypeName}的数据:{data}配置数据格式有误,解析失败!");
+                            result = false;
                         }
                         finaldata = finalIntData;
                     }
                 }
-                else if(type == ExcelDataConst.FLOAT_BUFFER_TYPE)
+                else if(type == ExcelDataConst.FloatBufferType)
                 {
                     if (string.IsNullOrEmpty(data))
                     {
-                        finaldata = default(float);
+                        finaldata = ExcelDataConst.FloatDefaultValue;
                     }
                     else
                     {
                         float finaFloatData;
                         if (!float.TryParse(data, out finaFloatData))
                         {
-                            finaFloatData = default(float);
-                            Console.WriteLine($"数据:{data} 类型:{type.Name} 配置数据格式有误,解析失败!");
+                            finaFloatData = ExcelDataConst.FloatDefaultValue;
+                            Console.WriteLine($"配置类型:{ExcelDataConst.FloatTypeName}的数据:{data}配置数据格式有误,解析失败!");
+                            result = false;
                         }
                         finaldata = finaFloatData;
                     }
                 }
-                else if (type == ExcelDataConst.STRING_BUFFER_TYPE)
+                else if (type == ExcelDataConst.StringBufferType)
                 {
                     if (string.IsNullOrEmpty(data))
                     {
-                        finaldata = string.Empty;
+                        finaldata = ExcelDataConst.StringDefaultValue;
                     }
                     else
                     {
                         finaldata = data;
                     }
                 }
-                else if (type == ExcelDataConst.LONG_BUFFER_TYPE)
+                else if (type == ExcelDataConst.LongBufferType)
                 {
                     if (string.IsNullOrEmpty(data))
                     {
-                        finaldata = default(long);
+                        finaldata = ExcelDataConst.LongDefaultValue;
                     }
                     else
                     {
                         long finaLongData;
                         if (!long.TryParse(data, out finaLongData))
                         {
-                            finaLongData = default(long);
-                            Console.WriteLine($"数据:{data} 类型:{type.Name} 配置数据格式有误,解析失败!");
+                            finaLongData = ExcelDataConst.LongDefaultValue;
+                            Console.WriteLine($"配置类型:{ExcelDataConst.LongTypeName}的数据:{data}配置数据格式有误,解析失败!");
+                            result = false;
                         }
                         finaldata = finaLongData;
                     }
                 }
-                else if (type == ExcelDataConst.BOOL_BUFFER_TYPE)
+                else if (type == ExcelDataConst.BoolBufferType)
                 {
                     if (string.IsNullOrEmpty(data))
                     {
-                        finaldata = default(bool);
+                        finaldata = ExcelDataConst.BoolDefaultValue;
                     }
                     else
                     {
                         bool finBoolData;
                         if (!bool.TryParse(data, out finBoolData))
                         {
-                            finBoolData = default(bool);
-                            Console.WriteLine($"数据:{data} 类型:{type.Name} 配置数据格式有误,解析失败!");
+                            finBoolData = ExcelDataConst.BoolDefaultValue;
+                            Console.WriteLine($"配置类型:{ExcelDataConst.BoolTypeName}的数据:{data}配置数据格式有误,解析失败!");
+                            result = false;
                         }
                         finaldata = finBoolData;
                     }
                 }
-                else if(type == ExcelDataConst.BYTE_BUFFER_TYPE)
+                else if(type == ExcelDataConst.ByteBufferType)
                 {
                     if (string.IsNullOrEmpty(data))
                     {
-                        finaldata = default(byte);
+                        finaldata = ExcelDataConst.ByteDefaultValue;
                     }
                     else
                     {
                         byte finByteData;
                         if (!byte.TryParse(data, out finByteData))
                         {
-                            finByteData = default(byte);
-                            Console.WriteLine($"数据:{data} 类型:{type.Name} 配置数据格式有误,解析失败!");
+                            finByteData = ExcelDataConst.ByteDefaultValue;
+                            Console.WriteLine($"配置类型:{ExcelDataConst.ByteTypeName}的数据:{data}配置数据格式有误,解析失败!");
+                            result = false;
                         }
                         finaldata = finByteData;
                     }
@@ -504,8 +514,10 @@ namespace XbufferExcelToData
             }
             else
             {
-                Console.WriteLine(string.Format("没有找到类型T : {0}的serialize方法!", type.ToString()));
+                Console.WriteLine(string.Format("没有找到类型T : {0}的serialize方法，序列化数据失败!", type.ToString()));
+                result = false;
             }
+            return result;
         }
 
         /// <summary>
@@ -515,29 +527,29 @@ namespace XbufferExcelToData
         /// <returns></returns>
         private MethodInfo GetSerializeMethodInfoByType(Type type)
         {
-            if(type == ExcelDataConst.INT_BUFFER_TYPE)
+            if(type == ExcelDataConst.IntBufferType)
             {
-                return ExcelDataConst.INT_BUFFER_SERIALIZE_METHOD;
+                return ExcelDataConst.IntBufferSerializeMethod;
             }
-            else if (type == ExcelDataConst.FLOAT_BUFFER_TYPE)
+            else if (type == ExcelDataConst.FloatBufferType)
             {
-                return ExcelDataConst.FLOAT_BUFFER_SERIALIZE_METHOD;
+                return ExcelDataConst.FloatBufferSerializeMethod;
             }
-            else if (type == ExcelDataConst.STRING_BUFFER_TYPE)
+            else if (type == ExcelDataConst.StringBufferType)
             {
-                return ExcelDataConst.STRING_BUFFER_SERIALIZE_METHOD;
+                return ExcelDataConst.StringBufferSerializeMethod;
             }
-            else if (type == ExcelDataConst.LONG_BUFFER_TYPE)
+            else if (type == ExcelDataConst.LongBufferType)
             {
-                return ExcelDataConst.LONG_BUFFER_SERIALIZE_METHOD;
+                return ExcelDataConst.LongBufferSerializeMethod;
             }
-            else if (type == ExcelDataConst.BOOL_BUFFER_TYPE)
+            else if (type == ExcelDataConst.BoolBufferType)
             {
-                return ExcelDataConst.BOOL_BUFFER_SERIALIZE_METHOD;
+                return ExcelDataConst.BoolBufferSerializeMethod;
             }
-            else if (type == ExcelDataConst.BYTE_BUFFER_TYPE)
+            else if (type == ExcelDataConst.ByteBufferType)
             {
-                return ExcelDataConst.BYTE_BUFFER_SERIALIZE_METHOD;
+                return ExcelDataConst.ByteBufferSerializeMethod;
             }
             else
             {
@@ -552,26 +564,32 @@ namespace XbufferExcelToData
         /// <param name="data">数据</param>
         /// <param name="spilter">分隔符</param>
         /// <param name="stream">Xbuffer的内存管理分配对象</param>
-        private void serializOneDimensionArrayData<T>(string data, XSteam stream)
+        private bool SerializOneDimensionArrayData<T>(string data, XSteam stream)
         {
             if(string.IsNullOrEmpty(data))
             {
                 // 未配置一维数据，默认长度默认为0
-                serializNoneArrayData<intBuffer>("0", stream);
+                SerializNoneArrayData<intBuffer>("0", stream);
             }
             else
             {
                 // 只支持1维数据的配置和快速解析
-                var datas = data.Split(ExcelDataConst.ONE_DIMENSION_SPLITER);
+                var datas = data.Split(ExcelDataConst.OneDimensionSpliter);
                 // 写入一维数组的长度字节数信息
-                serializNoneArrayData<intBuffer>(datas.Length.ToString(), stream);
+                SerializNoneArrayData<intBuffer>(datas.Length.ToString(), stream);
 
                 // 开始序列化一维数组数据
-                foreach (var dt in datas)
+                for(int index = 0, length = datas.Length; index < length; index++)
                 {
-                    serializNoneArrayData<T>(dt, stream);
+                    var dt = datas[index];
+                    if(!SerializNoneArrayData<T>(dt, stream))
+                    {
+                        Console.WriteLine($"一维数组[{index}]数据:{data}配置有误，解析失败！");
+                        return false;
+                    }
                 }
             }
+            return true;
         }
 
         /// <summary>
@@ -579,32 +597,39 @@ namespace XbufferExcelToData
         /// </summary>
         /// <param name="data">数据</param>
         /// <param name="stream">Xbuffer的内存管理分配对象</param>
-        private void serializTwoDimensionArrayData<T>(string data, XSteam stream)
+        private bool SerializTwoDimensionArrayData<T>(string data, XSteam stream)
         {
             if (string.IsNullOrEmpty(data))
             {
                 // 未配置二维数据，默认长度默认为0
-                serializNoneArrayData<intBuffer>("0", stream);
+                SerializNoneArrayData<intBuffer>("0", stream);
             }
             else
             {
-                var twoDimensionDatas = data.Split(ExcelDataConst.TWO_DIMENSION_SPLITER);
+                var twoDimensionDatas = data.Split(ExcelDataConst.TwoDimensionSpliter);
                 // 写入二维数组第一维度的长度字节数信息
-                serializNoneArrayData<intBuffer>(twoDimensionDatas.Length.ToString(), stream);
+                SerializNoneArrayData<intBuffer>(twoDimensionDatas.Length.ToString(), stream);
 
                 // 开始序列化第一维度数组数据
-                foreach (var twoDimensionData in twoDimensionDatas)
+                for(int index1 = 0, length1 = twoDimensionDatas.Length; index1 < length1; index1++)
                 {
+                    var twoDimensionData = twoDimensionDatas[index1];
                     // 写入每一维度数据长度+每一维度的数据
-                    var oneDimensionDatas = twoDimensionData.Split(ExcelDataConst.ONE_DIMENSION_SPLITER);
+                    var oneDimensionDatas = twoDimensionData.Split(ExcelDataConst.OneDimensionSpliter);
                     // 写入每一维度数组的长度字节数信息
-                    serializNoneArrayData<intBuffer>(oneDimensionDatas.Length.ToString(), stream);
-                    foreach(var oneDimensionData in oneDimensionDatas)
+                    SerializNoneArrayData<intBuffer>(oneDimensionDatas.Length.ToString(), stream);
+                    for(int index2 = 0, length2 = oneDimensionDatas.Length; index2 < length2; index2++)
                     {
-                        serializNoneArrayData<T>(oneDimensionData, stream);
+                        var oneDimensionData = oneDimensionDatas[index2];
+                        if (!SerializNoneArrayData<T>(oneDimensionData, stream))
+                        {
+                            Console.WriteLine($"二维数组[{index1}][{index2}]数据:{data}配置有误，解析失败！");
+                            return false;
+                        }
                     }
                 }
             }
+            return true;
         }
 
         /// <summary>
@@ -618,7 +643,7 @@ namespace XbufferExcelToData
         /// <param name="data">数据</param>
         /// <param name="finaldatalist">最终所有数组分割存储在一个扁平化的列表里</param>
         /// <returns></returns>
-        //private void dataSplit(char[] spliters, int spilterindex, int spliterlength, string data, List<string> finaldatalist)
+        //private void DataSplit(char[] spliters, int spilterindex, int spliterlength, string data, List<string> finaldatalist)
         //{
         //    if(spilterindex < spliterlength)
         //    {
@@ -626,7 +651,7 @@ namespace XbufferExcelToData
         //        spilterindex++;
         //        foreach (var dt in datas)
         //        {
-        //            dataSplit(spliters, spilterindex, spliterlength, dt, finaldatalist);
+        //            DataSplit(spliters, spilterindex, spliterlength, dt, finaldatalist);
         //        }
         //    }
         //    else
@@ -635,47 +660,5 @@ namespace XbufferExcelToData
         //        finaldatalist.Add(data);
         //    }
         //}
-
-        /// <summary>
-        /// 获取序列化***Buffer对应的字符串默认值
-        /// 比如:
-        /// intBuffer对应int的默认值"0"
-        /// stringBuffer对应string的string.Empty(string默认的default(string)值为null，这里不采用)
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        private string getBufferCorrespondingDV<T>()
-        {
-            var type = typeof(T);
-            if (type == ExcelDataConst.INT_BUFFER_TYPE)
-            {
-                return ExcelDataConst.INT_BUFFER_DEFAULT_STRING_VALUE;
-            }
-            else if(type == ExcelDataConst.FLOAT_BUFFER_TYPE)
-            {
-                return ExcelDataConst.FLOAT_BUFFER_DEFAULT_STRING_VALUE;
-            }
-            else if (type == ExcelDataConst.STRING_BUFFER_TYPE)
-            {
-                return ExcelDataConst.STRING_BUFFER_DEFAULT_STRING_VALUE;
-            }
-            else if (type == ExcelDataConst.LONG_BUFFER_TYPE)
-            {
-                return ExcelDataConst.LONG_BUFFER_DEFAULT_STRING_VALUE;
-            }
-            else if (type == ExcelDataConst.BOOL_BUFFER_TYPE)
-            {
-                return ExcelDataConst.BOOL_BUFFER_DEFAULT_STRING_VALUE;
-            }
-            else if(type == ExcelDataConst.BYTE_BUFFER_TYPE)
-            {
-                return ExcelDataConst.BYTE_BUFFER_DEFAULT_STRING_VALUE;
-            }
-            else
-            {
-                Console.WriteLine(string.Format("不支持的数据类型 : {0}!无法正确的获取默认值!", typeof(T).ToString()));
-                return string.Empty;
-            }
-        }
     }
 }

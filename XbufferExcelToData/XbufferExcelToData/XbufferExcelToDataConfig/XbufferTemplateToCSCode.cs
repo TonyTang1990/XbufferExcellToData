@@ -47,7 +47,7 @@ namespace XbufferExcelToData
         /// <param name="templatefolderpath">模板目录</param>
         /// <param name="templatecsoutputpath">模板CS代码输出目录</param>
         /// <param name="excelinfolist">excel信息列表</param>
-        public void configTemplateInfo(string templatefolderpath, string templatecsoutputpath, List<ExcelInfo> excelinfolist)
+        public void ConfigTemplateInfo(string templatefolderpath, string templatecsoutputpath, List<ExcelInfo> excelinfolist)
         {
             TempalteFolderPath = templatefolderpath;
             TemplateCSOutputPath = templatecsoutputpath;
@@ -58,7 +58,7 @@ namespace XbufferExcelToData
         /// 解析表格容器模板
         /// </summary>
         /// </summary>
-        public void parseExcelContainerTemplate()
+        public void ParseExcelContainerTemplate()
         {
             if(!Directory.Exists(TempalteFolderPath))
             {
@@ -85,8 +85,8 @@ namespace XbufferExcelToData
                     mTemplateInstance.resetContent(templateContent);
                     // 替换表格加载管理里的类名
                     mTemplateInstance.setValue("#CLASS_NAME#", excelInfo.ExcelName);
-                    mTemplateInstance.setValue("#ID_TYPE#", excelInfo.getIdType());
-                    mTemplateInstance.setValue("#ID_NAME#", excelInfo.getIdName());
+                    mTemplateInstance.setValue("#ID_TYPE#", excelInfo.GetIdType());
+                    mTemplateInstance.setValue("#ID_NAME#", excelInfo.GetIdName());
                     // 输出生成内容到文件
                     var outputfilefullpath = TemplateCSOutputPath + excelInfo.ExcelName + "Container.cs";
                     File.WriteAllText(outputfilefullpath, mTemplateInstance.getContent());
@@ -100,7 +100,7 @@ namespace XbufferExcelToData
         /// 解析数据加载管理模板
         /// </summary>
         /// </summary>
-        public void parseGameDataManagerTemplate()
+        public void ParseGameDataManagerTemplate()
         {
             if (!Directory.Exists(TempalteFolderPath))
             {
@@ -149,7 +149,7 @@ namespace XbufferExcelToData
                 {
                     // 替换配置获取List和Map循环里的类名
                     mTemplateInstance.setValue("#LOOP_CLASS_NAME#", excelinfo.ExcelName);
-                    mTemplateInstance.setValue("#ID_TYPE#", excelinfo.getIdType());
+                    mTemplateInstance.setValue("#ID_TYPE#", excelinfo.GetIdType());
                     mTemplateInstance.nextLoop();
                 }
                 mTemplateInstance.endLoop();

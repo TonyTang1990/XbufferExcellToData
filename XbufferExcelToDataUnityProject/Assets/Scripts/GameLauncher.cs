@@ -91,6 +91,8 @@ public class GameLauncher : MonoBehaviour {
                 Debug.Log($"authorinfo.lucknumber : {lucknumber}");
             }
 
+            Debug.Log($"authorinfo.weekday:{authorinfo.weekday}");
+
             Debug.Log($"authorinfo.testclass.id : {authorinfo.testclass.id}");
             Debug.Log($"authorinfo.testclass.num : {authorinfo.testclass.num}");
             Debug.Log($"authorinfo.testclass.des : {authorinfo.testclass.des}");

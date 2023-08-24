@@ -37,7 +37,7 @@ namespace XbufferExcelToData
         /// <param name="templatefolderpath">Xbuffer模本文件目录</param>
         /// <param name="csclassfolderpath">CS类代码文件生成目录</param>
         /// <param name="csbufferfolderpath">CS序列化代码文件生成目录</param>
-        public void configFolderPath(string templatefolderpath, string csclassfolderpath, string csbufferfolderpath)
+        public void ConfigFolderPath(string templatefolderpath, string csclassfolderpath, string csbufferfolderpath)
         {
             TemplateFolderPath = templatefolderpath;
             CSClassCodeFolderPath = csclassfolderpath;
@@ -49,12 +49,12 @@ namespace XbufferExcelToData
         /// </summary>
         /// <param name="excelClassDataMap">Excel类型数据Map</param>
         /// <returns></returns>
-        public bool writeAllExportDataToCSCode(Dictionary<string, ClassData> excelClassDataMap)
+        public bool WriteAllExportDataToCSCode(Dictionary<string, ClassData> excelClassDataMap)
         {
             Utilities.RecreateSpecificFolder(CSClassCodeFolderPath);
             Utilities.RecreateSpecificFolder(CSBufferCodeFolderPath);
-            startExportDataToCSClass(excelClassDataMap);
-            startExportDataToCSBuffer(excelClassDataMap);
+            StartExportDataToCSClass(excelClassDataMap);
+            StartExportDataToCSBuffer(excelClassDataMap);
             return true;
         }
 
@@ -62,7 +62,7 @@ namespace XbufferExcelToData
         /// 开始根据Excel结构数据生成CS类代码
         /// </summary>
         /// <param name="excelClassDataMap">Excel类型数据Map</param>
-        private void startExportDataToCSClass(Dictionary<string, ClassData> excelClassDataMap)
+        private void StartExportDataToCSClass(Dictionary<string, ClassData> excelClassDataMap)
         {
             var result = false;
             var csClassTemplateFilePath = GetCSClassTemplateFilePath();
@@ -91,7 +91,7 @@ namespace XbufferExcelToData
         /// 开始Xbuffer生成CS序列化代码
         /// </summary>
         /// <param name="excelClassDataMap">Excel类型数据Map</param>
-        private void startExportDataToCSBuffer(Dictionary<string, ClassData> excelClassDataMap)
+        private void StartExportDataToCSBuffer(Dictionary<string, ClassData> excelClassDataMap)
         {
             var result = false;
             var csBufferTemplateFilePath = GetCSBufferTemplateFilePath();

@@ -5,20 +5,19 @@ namespace xbuffer
         public static t_AuthorInfo_testclass Deserialize(byte[] buffer, ref uint offset)
         {
 
-            // null
-            bool _null = boolBuffer.Deserialize(buffer, ref offset);
+            // 是否为空数据
+            bool _null = boolBuffer.deserialize(buffer, ref offset);
             if (_null) return null;
 
-			// id()
-			int _id = intBuffer.Deserialize(buffer, ref offset);
+			// id
+			int _id = intBuffer.deserialize(buffer, ref offset);
 
-			// num()
-			int _num = intBuffer.Deserialize(buffer, ref offset);
+			// num
+			int _num = intBuffer.deserialize(buffer, ref offset);
 
-			// des()
-			string _des = stringBuffer.Deserialize(buffer, ref offset);
+			// des
+			string _des = stringBuffer.deserialize(buffer, ref offset);
 
-			// value
 			return new t_AuthorInfo_testclass(
                 _id,
                 _num,
@@ -30,17 +29,17 @@ namespace xbuffer
         {
 
             // null
-            boolBuffer.Serialize(value == null, steam);
+            boolBuffer.serialize(value == null, steam);
             if (value == null) return;
 
-			// id()
-			intBuffer.Serialize(value.id, steam);
+			// id
+			intBuffer.serialize(value.id, steam);
 
-			// num()
-			intBuffer.Serialize(value.num, steam);
+			// num
+			intBuffer.serialize(value.num, steam);
 
-			// des()
-			stringBuffer.Serialize(value.des, steam);
+			// des
+			stringBuffer.serialize(value.des, steam);
         }
     }
 }

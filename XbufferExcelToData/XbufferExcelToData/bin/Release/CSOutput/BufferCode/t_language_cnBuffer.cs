@@ -5,7 +5,7 @@ namespace xbuffer
         public static t_language_cn Deserialize(byte[] buffer, ref uint offset)
         {
 
-            // null
+            // 是否为空数据
             bool _null = boolBuffer.deserialize(buffer, ref offset);
             if (_null) return null;
 
@@ -15,7 +15,6 @@ namespace xbuffer
 			// Value
 			string _Value = stringBuffer.deserialize(buffer, ref offset);
 
-			// value
 			return new t_language_cn(
                 _Key,
                 _Value
