@@ -6,14 +6,14 @@ namespace xbuffer
         {
 
             // 是否为空数据
-            bool _null = boolBuffer.deserialize(buffer, ref offset);
+            bool _null = boolBuffer.Deserialize(buffer, ref offset);
             if (_null) return null;
 
 			// Key
-			string _Key = stringBuffer.deserialize(buffer, ref offset);
+			string _Key = stringBuffer.Deserialize(buffer, ref offset);
 
 			// Value
-			int _Value = intBuffer.deserialize(buffer, ref offset);
+			int _Value = intBuffer.Deserialize(buffer, ref offset);
 
 			return new t_global_i(
                 _Key,
@@ -25,14 +25,14 @@ namespace xbuffer
         {
 
             // null
-            boolBuffer.serialize(value == null, steam);
+            boolBuffer.Serialize(value == null, steam);
             if (value == null) return;
 
 			// Key
-			stringBuffer.serialize(value.Key, steam);
+			stringBuffer.Serialize(value.Key, steam);
 
 			// Value
-			intBuffer.serialize(value.Value, steam);
+			intBuffer.Serialize(value.Value, steam);
         }
     }
 }

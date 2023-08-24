@@ -6,33 +6,33 @@ namespace xbuffer
         {
 
             // 是否为空数据
-            bool _null = boolBuffer.deserialize(buffer, ref offset);
+            bool _null = boolBuffer.Deserialize(buffer, ref offset);
             if (_null) return null;
 
 			// Id
-			int _Id = intBuffer.deserialize(buffer, ref offset);
+			int _Id = intBuffer.Deserialize(buffer, ref offset);
 
 			// author
-			string _author = stringBuffer.deserialize(buffer, ref offset);
+			string _author = stringBuffer.Deserialize(buffer, ref offset);
 
 			// age
-			int _age = intBuffer.deserialize(buffer, ref offset);
+			int _age = intBuffer.Deserialize(buffer, ref offset);
 
 			// money
-			float _money = floatBuffer.deserialize(buffer, ref offset);
+			float _money = floatBuffer.Deserialize(buffer, ref offset);
 
 			// hashouse
-			bool _hashouse = boolBuffer.deserialize(buffer, ref offset);
+			bool _hashouse = boolBuffer.Deserialize(buffer, ref offset);
 
 			// pbutctime
-			long _pbutctime = longBuffer.deserialize(buffer, ref offset);
+			long _pbutctime = longBuffer.Deserialize(buffer, ref offset);
 
 			// luckynumber
-			int _luckynumber_length = intBuffer.deserialize(buffer, ref offset);
+			int _luckynumber_length = intBuffer.Deserialize(buffer, ref offset);
             int[] _luckynumber = new int[_luckynumber_length];
             for (int i = 0; i < _luckynumber_length; i++)
             {
-                _luckynumber[i] = intBuffer.deserialize(buffer, ref offset);
+                _luckynumber[i] = intBuffer.Deserialize(buffer, ref offset);
             }
 
 			return new t_AuthorInfo7(
@@ -50,32 +50,32 @@ namespace xbuffer
         {
 
             // null
-            boolBuffer.serialize(value == null, steam);
+            boolBuffer.Serialize(value == null, steam);
             if (value == null) return;
 
 			// Id
-			intBuffer.serialize(value.Id, steam);
+			intBuffer.Serialize(value.Id, steam);
 
 			// author
-			stringBuffer.serialize(value.author, steam);
+			stringBuffer.Serialize(value.author, steam);
 
 			// age
-			intBuffer.serialize(value.age, steam);
+			intBuffer.Serialize(value.age, steam);
 
 			// money
-			floatBuffer.serialize(value.money, steam);
+			floatBuffer.Serialize(value.money, steam);
 
 			// hashouse
-			boolBuffer.serialize(value.hashouse, steam);
+			boolBuffer.Serialize(value.hashouse, steam);
 
 			// pbutctime
-			longBuffer.serialize(value.pbutctime, steam);
+			longBuffer.Serialize(value.pbutctime, steam);
 
 			// luckynumber
-            intBuffer.serialize(value.luckynumber.Length, steam);
+            intBuffer.Serialize(value.luckynumber.Length, steam);
             for (int i = 0; i < value.luckynumber.Length; i++)
             {
-                intBuffer.serialize(value.luckynumber[i], steam);
+                intBuffer.Serialize(value.luckynumber[i], steam);
             }
         }
     }

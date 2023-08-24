@@ -1,5 +1,5 @@
 // 
-public #CLASS_TYPE# t_AuthorInfo2
+public class t_AuthorInfo2
 {
 	public readonly int Id;				// 唯一id
 	public readonly string author;				// 作者

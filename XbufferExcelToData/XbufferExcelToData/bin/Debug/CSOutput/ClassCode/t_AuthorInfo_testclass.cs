@@ -1,5 +1,5 @@
 // 测试嵌套类型
-public #CLASS_TYPE# t_AuthorInfo_testclass
+public class t_AuthorInfo_testclass
 {
 	public readonly int id;				// 
 	public readonly int num;				// 

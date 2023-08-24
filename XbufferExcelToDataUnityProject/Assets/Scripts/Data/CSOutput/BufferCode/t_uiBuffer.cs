@@ -6,61 +6,61 @@ namespace xbuffer
         {
 
             // 是否为空数据
-            bool _null = boolBuffer.deserialize(buffer, ref offset);
+            bool _null = boolBuffer.Deserialize(buffer, ref offset);
             if (_null) return null;
 
 			// WinName
-			string _WinName = stringBuffer.deserialize(buffer, ref offset);
+			string _WinName = stringBuffer.Deserialize(buffer, ref offset);
 
 			// ResPath
-			string _ResPath = stringBuffer.deserialize(buffer, ref offset);
+			string _ResPath = stringBuffer.Deserialize(buffer, ref offset);
 
 			// TestSpace1
-			string _TestSpace1 = stringBuffer.deserialize(buffer, ref offset);
+			string _TestSpace1 = stringBuffer.Deserialize(buffer, ref offset);
 
 			// IsFullScreen
-			bool _IsFullScreen = boolBuffer.deserialize(buffer, ref offset);
+			bool _IsFullScreen = boolBuffer.Deserialize(buffer, ref offset);
 
 			// Layer
-			int _Layer = intBuffer.deserialize(buffer, ref offset);
+			int _Layer = intBuffer.Deserialize(buffer, ref offset);
 
 			// TestSpace2
-			string _TestSpace2 = stringBuffer.deserialize(buffer, ref offset);
+			string _TestSpace2 = stringBuffer.Deserialize(buffer, ref offset);
 
 			// TestByte
-			byte _TestByte = byteBuffer.deserialize(buffer, ref offset);
+			byte _TestByte = byteBuffer.Deserialize(buffer, ref offset);
 
 			// TestByteArray
-			int _TestByteArray_length = intBuffer.deserialize(buffer, ref offset);
+			int _TestByteArray_length = intBuffer.Deserialize(buffer, ref offset);
             byte[] _TestByteArray = new byte[_TestByteArray_length];
             for (int i = 0; i < _TestByteArray_length; i++)
             {
-                _TestByteArray[i] = byteBuffer.deserialize(buffer, ref offset);
+                _TestByteArray[i] = byteBuffer.Deserialize(buffer, ref offset);
             }
 
 			// TestIntTwoArray
-            int _TestIntTwoArray_two_length = intBuffer.deserialize(buffer, ref offset);
+            int _TestIntTwoArray_two_length = intBuffer.Deserialize(buffer, ref offset);
             int[][] _TestIntTwoArray = new int[_TestIntTwoArray_two_length][];
             for (int i = 0; i < _TestIntTwoArray_two_length; i++)
             {
-                int _TestIntTwoArray_one_length = intBuffer.deserialize(buffer, ref offset);
+                int _TestIntTwoArray_one_length = intBuffer.Deserialize(buffer, ref offset);
                 _TestIntTwoArray[i] = new int[_TestIntTwoArray_one_length];
                 for(int j = 0; j < _TestIntTwoArray_one_length; j++)
                 {
-                    _TestIntTwoArray[i][j] = intBuffer.deserialize(buffer, ref offset);
+                    _TestIntTwoArray[i][j] = intBuffer.Deserialize(buffer, ref offset);
                 }
             }
 
 			// TestStringTwoArray
-            int _TestStringTwoArray_two_length = intBuffer.deserialize(buffer, ref offset);
+            int _TestStringTwoArray_two_length = intBuffer.Deserialize(buffer, ref offset);
             string[][] _TestStringTwoArray = new string[_TestStringTwoArray_two_length][];
             for (int i = 0; i < _TestStringTwoArray_two_length; i++)
             {
-                int _TestStringTwoArray_one_length = intBuffer.deserialize(buffer, ref offset);
+                int _TestStringTwoArray_one_length = intBuffer.Deserialize(buffer, ref offset);
                 _TestStringTwoArray[i] = new string[_TestStringTwoArray_one_length];
                 for(int j = 0; j < _TestStringTwoArray_one_length; j++)
                 {
-                    _TestStringTwoArray[i][j] = stringBuffer.deserialize(buffer, ref offset);
+                    _TestStringTwoArray[i][j] = stringBuffer.Deserialize(buffer, ref offset);
                 }
             }
 
@@ -82,60 +82,60 @@ namespace xbuffer
         {
 
             // null
-            boolBuffer.serialize(value == null, steam);
+            boolBuffer.Serialize(value == null, steam);
             if (value == null) return;
 
 			// WinName
-			stringBuffer.serialize(value.WinName, steam);
+			stringBuffer.Serialize(value.WinName, steam);
 
 			// ResPath
-			stringBuffer.serialize(value.ResPath, steam);
+			stringBuffer.Serialize(value.ResPath, steam);
 
 			// TestSpace1
-			stringBuffer.serialize(value.TestSpace1, steam);
+			stringBuffer.Serialize(value.TestSpace1, steam);
 
 			// IsFullScreen
-			boolBuffer.serialize(value.IsFullScreen, steam);
+			boolBuffer.Serialize(value.IsFullScreen, steam);
 
 			// Layer
-			intBuffer.serialize(value.Layer, steam);
+			intBuffer.Serialize(value.Layer, steam);
 
 			// TestSpace2
-			stringBuffer.serialize(value.TestSpace2, steam);
+			stringBuffer.Serialize(value.TestSpace2, steam);
 
 			// TestByte
-			byteBuffer.serialize(value.TestByte, steam);
+			byteBuffer.Serialize(value.TestByte, steam);
 
 			// TestByteArray
-            intBuffer.serialize(value.TestByteArray.Length, steam);
+            intBuffer.Serialize(value.TestByteArray.Length, steam);
             for (int i = 0; i < value.TestByteArray.Length; i++)
             {
-                byteBuffer.serialize(value.TestByteArray[i], steam);
+                byteBuffer.Serialize(value.TestByteArray[i], steam);
             }
 
 			// TestIntTwoArray
             int _TestIntTwoArray_two_length = value.TestIntTwoArray.Length;
-            intBuffer.serialize(_TestIntTwoArray_two_length, steam);
+            intBuffer.Serialize(_TestIntTwoArray_two_length, steam);
             for (int i = 0; i < _TestIntTwoArray_two_length; i++)
             {
                 int _TestIntTwoArray_one_length = value.TestIntTwoArray[i].Length;
-                intBuffer.serialize(_TestIntTwoArray_one_length, steam);
+                intBuffer.Serialize(_TestIntTwoArray_one_length, steam);
                 for(int j = 0; j < _TestIntTwoArray_one_length; j++)
                 {
-                    intBuffer.serialize(value.TestIntTwoArray[i][j], steam);
+                    intBuffer.Serialize(value.TestIntTwoArray[i][j], steam);
                 }
             }
 
 			// TestStringTwoArray
             int _TestStringTwoArray_two_length = value.TestStringTwoArray.Length;
-            intBuffer.serialize(_TestStringTwoArray_two_length, steam);
+            intBuffer.Serialize(_TestStringTwoArray_two_length, steam);
             for (int i = 0; i < _TestStringTwoArray_two_length; i++)
             {
                 int _TestStringTwoArray_one_length = value.TestStringTwoArray[i].Length;
-                intBuffer.serialize(_TestStringTwoArray_one_length, steam);
+                intBuffer.Serialize(_TestStringTwoArray_one_length, steam);
                 for(int j = 0; j < _TestStringTwoArray_one_length; j++)
                 {
-                    stringBuffer.serialize(value.TestStringTwoArray[i][j], steam);
+                    stringBuffer.Serialize(value.TestStringTwoArray[i][j], steam);
                 }
             }
         }

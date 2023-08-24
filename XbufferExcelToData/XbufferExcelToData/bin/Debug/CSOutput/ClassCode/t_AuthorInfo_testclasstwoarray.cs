@@ -1,5 +1,5 @@
 // 测试嵌套类型二维数组
-public #CLASS_TYPE# t_AuthorInfo_testclasstwoarray
+public class t_AuthorInfo_testclasstwoarray
 {
 	public readonly int param11;				// 
 	public readonly bool param22;				// 

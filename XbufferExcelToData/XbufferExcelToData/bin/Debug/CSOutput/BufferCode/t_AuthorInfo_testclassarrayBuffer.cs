@@ -6,17 +6,17 @@ namespace xbuffer
         {
 
             // 是否为空数据
-            bool _null = boolBuffer.deserialize(buffer, ref offset);
+            bool _null = boolBuffer.Deserialize(buffer, ref offset);
             if (_null) return null;
 
 			// param1
-			int _param1 = intBuffer.deserialize(buffer, ref offset);
+			int _param1 = intBuffer.Deserialize(buffer, ref offset);
 
 			// param2
-			bool _param2 = boolBuffer.deserialize(buffer, ref offset);
+			bool _param2 = boolBuffer.Deserialize(buffer, ref offset);
 
 			// param3
-			string _param3 = stringBuffer.deserialize(buffer, ref offset);
+			string _param3 = stringBuffer.Deserialize(buffer, ref offset);
 
 			return new t_AuthorInfo_testclassarray(
                 _param1,
@@ -29,17 +29,17 @@ namespace xbuffer
         {
 
             // null
-            boolBuffer.serialize(value == null, steam);
+            boolBuffer.Serialize(value == null, steam);
             if (value == null) return;
 
 			// param1
-			intBuffer.serialize(value.param1, steam);
+			intBuffer.Serialize(value.param1, steam);
 
 			// param2
-			boolBuffer.serialize(value.param2, steam);
+			boolBuffer.Serialize(value.param2, steam);
 
 			// param3
-			stringBuffer.serialize(value.param3, steam);
+			stringBuffer.Serialize(value.param3, steam);
         }
     }
 }

@@ -1,5 +1,5 @@
 // 
-public #CLASS_TYPE# t_ui
+public class t_ui
 {
 	public readonly string WinName;				// 窗口名
 	public readonly string ResPath;				// 资源路径

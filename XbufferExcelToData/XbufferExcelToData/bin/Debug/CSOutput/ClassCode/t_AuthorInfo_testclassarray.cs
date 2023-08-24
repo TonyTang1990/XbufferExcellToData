@@ -1,5 +1,5 @@
 // 测试嵌套类型数组
-public #CLASS_TYPE# t_AuthorInfo_testclassarray
+public class t_AuthorInfo_testclassarray
 {
 	public readonly int param1;				// 
 	public readonly bool param2;				// 

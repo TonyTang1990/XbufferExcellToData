@@ -1,5 +1,5 @@
 // 
-public #CLASS_TYPE# t_Global4
+public class t_Global4
 {
 	public readonly int Id;				// 唯一id
 	public readonly string stringvalue;				// 字符串数据

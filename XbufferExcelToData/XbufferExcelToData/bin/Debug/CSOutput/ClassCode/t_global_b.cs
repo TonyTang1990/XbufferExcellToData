@@ -1,5 +1,5 @@
 // 
-public #CLASS_TYPE# t_global_b
+public class t_global_b
 {
 	public readonly string Key;				// 唯一Key
 	public readonly bool Value;				// bool值

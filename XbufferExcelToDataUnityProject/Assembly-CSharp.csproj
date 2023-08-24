@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\Data\CSOutput\ClassCode\t_global_b.cs" />
     <Compile Include="Assets\Scripts\Data\CSOutput\BufferCode\t_global_iBuffer.cs" />
     <Compile Include="Assets\Scripts\Data\CSOutput\ClassCode\t_AuthorInfo3.cs" />
+    <Compile Include="Assets\Scripts\Data\CSOutput\ClassCode\t_AuthorInfo_testclasstwoarray.cs" />
     <Compile Include="Assets\Scripts\Data\CSOutput\ClassCode\t_AuthorInfo9.cs" />
     <Compile Include="Assets\Scripts\GameLauncher.cs" />
     <Compile Include="Assets\Scripts\Data\CSOutput\BufferCode\t_Global7Buffer.cs" />
@@ -115,16 +116,20 @@
     <Compile Include="Assets\Scripts\Data\CSOutput\ClassCode\t_Global5.cs" />
     <Compile Include="Assets\Scripts\Data\CSOutput\ClassCode\t_Global8.cs" />
     <Compile Include="Assets\Scripts\Data\CSOutput\ClassCode\t_Global7.cs" />
+    <Compile Include="Assets\Scripts\Data\CSOutput\BufferCode\t_AuthorInfo_testclassBuffer.cs" />
     <Compile Include="Assets\Scripts\Data\CSTemplateOutput\t_AuthorInfo3Container.cs" />
     <Compile Include="Assets\Scripts\Data\CSOutput\BufferCode\t_AuthorInfo4Buffer.cs" />
     <Compile Include="Assets\Scripts\Data\CSOutput\ClassCode\t_Global9.cs" />
     <Compile Include="Assets\Scripts\Data\CSOutput\ClassCode\t_ui.cs" />
+    <Compile Include="Assets\Scripts\Data\CSOutput\ClassCode\t_AuthorInfo_testclass.cs" />
     <Compile Include="Assets\Scripts\Data\CSOutput\BufferCode\t_AuthorInfoBuffer.cs" />
     <Compile Include="Assets\Scripts\Data\CSTemplateOutput\t_global_bContainer.cs" />
     <Compile Include="Assets\Scripts\Data\CSTemplateOutput\t_AuthorInfo10Container.cs" />
     <Compile Include="Assets\Scripts\Data\CSOutput\BufferCode\t_global_bBuffer.cs" />
+    <Compile Include="Assets\Scripts\Data\CSOutput\BufferCode\t_AuthorInfo_testclassarrayBuffer.cs" />
     <Compile Include="Assets\Scripts\Data\CSOutput\ClassCode\t_Global10.cs" />
     <Compile Include="Assets\Scripts\Data\CSOutput\ClassCode\t_Global2.cs" />
+    <Compile Include="Assets\Scripts\Data\CSOutput\ClassCode\t_AuthorInfo_testclassarray.cs" />
     <Compile Include="Assets\Scripts\Data\CSTemplateOutput\t_AuthorInfo2Container.cs" />
     <Compile Include="Assets\Scripts\Data\CSOutput\ClassCode\t_AuthorInfo6.cs" />
     <Compile Include="Assets\Scripts\Core\Singleton\SingletonMonoBehaviourTemplate.cs" />
@@ -136,6 +141,7 @@
     <Compile Include="Assets\Scripts\Data\CSTemplateOutput\t_AuthorInfo5Container.cs" />
     <Compile Include="Assets\Scripts\Data\CSOutput\ClassCode\t_AuthorInfo4.cs" />
     <Compile Include="Assets\Scripts\Data\CSOutput\ClassCode\t_AuthorInfo.cs" />
+    <Compile Include="Assets\Scripts\Data\CSOutput\BufferCode\t_AuthorInfo_testclasstwoarrayBuffer.cs" />
     <Compile Include="Assets\Scripts\Data\CSOutput\ClassCode\t_language_cn.cs" />
     <Compile Include="Assets\Scripts\DebugTools\TimeCounter.cs" />
     <Compile Include="Assets\Scripts\Data\CSTemplateOutput\GameDataManager.cs" />

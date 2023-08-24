@@ -6,20 +6,20 @@ namespace xbuffer
         {
 
             // 是否为空数据
-            bool _null = boolBuffer.deserialize(buffer, ref offset);
+            bool _null = boolBuffer.Deserialize(buffer, ref offset);
             if (_null) return null;
 
 			// WinName
-			string _WinName = stringBuffer.deserialize(buffer, ref offset);
+			string _WinName = stringBuffer.Deserialize(buffer, ref offset);
 
 			// ResPath
-			string _ResPath = stringBuffer.deserialize(buffer, ref offset);
+			string _ResPath = stringBuffer.Deserialize(buffer, ref offset);
 
 			// IsFullScreen
-			bool _IsFullScreen = boolBuffer.deserialize(buffer, ref offset);
+			bool _IsFullScreen = boolBuffer.Deserialize(buffer, ref offset);
 
 			// Layer
-			int _Layer = intBuffer.deserialize(buffer, ref offset);
+			int _Layer = intBuffer.Deserialize(buffer, ref offset);
 
 			return new t_ui(
                 _WinName,
@@ -33,20 +33,20 @@ namespace xbuffer
         {
 
             // null
-            boolBuffer.serialize(value == null, steam);
+            boolBuffer.Serialize(value == null, steam);
             if (value == null) return;
 
 			// WinName
-			stringBuffer.serialize(value.WinName, steam);
+			stringBuffer.Serialize(value.WinName, steam);
 
 			// ResPath
-			stringBuffer.serialize(value.ResPath, steam);
+			stringBuffer.Serialize(value.ResPath, steam);
 
 			// IsFullScreen
-			boolBuffer.serialize(value.IsFullScreen, steam);
+			boolBuffer.Serialize(value.IsFullScreen, steam);
 
 			// Layer
-			intBuffer.serialize(value.Layer, steam);
+			intBuffer.Serialize(value.Layer, steam);
         }
     }
 }

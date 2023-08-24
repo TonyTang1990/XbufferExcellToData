@@ -1,5 +1,5 @@
 // 
-public #CLASS_TYPE# t_global_s
+public class t_global_s
 {
 	public readonly string Key;				// 唯一Key
 	public readonly string Value;				// 字符串值
