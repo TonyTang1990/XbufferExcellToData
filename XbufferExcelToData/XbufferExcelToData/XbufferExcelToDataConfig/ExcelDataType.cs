@@ -11,7 +11,8 @@ namespace XbufferExcelToData
     /// </summary>
     public enum ExcelDataType
     {
-        BASIC = 1,          // 基础数据类型
+        INVALIDE = 0,       // 无效类型
+        BASIC,              // 基础数据类型
         BASIC_ONE_ARRAY,    // 一维数组基础数据类型
         BASIC_TWO_ARRAY,    // 二维数组基础数据类型
         CLASS,              // 嵌套CLASS类型

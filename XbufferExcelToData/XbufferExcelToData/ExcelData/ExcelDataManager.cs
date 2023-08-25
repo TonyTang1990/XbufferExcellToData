@@ -131,16 +131,6 @@ namespace XbufferExcelToData
         }
 
         /// <summary>
-        /// 是否是注释类型
-        /// </summary>
-        /// <param name="typename">类型名字</param>
-        /// <returns></returns>
-        public bool IsNotationType(string typename)
-        {
-            return ExcelDataConst.NotationTypeName.Equals(typename);
-        }
-
-        /// <summary>
         /// 读取所有Excel文件
         /// </summary>
         private bool ReadAllExcelFiles()
@@ -285,15 +275,21 @@ namespace XbufferExcelToData
                                         }
 
                                         // 记录每一行所有数据的字段名，字段类型，字段数据
-                                        ExcelData[] exceldatas = new ExcelData[datas.Length];
+                                        List<ExcelData> exceldatas = new List<ExcelData>();
                                         for (int m = 0; m < datas.Length; m++)
                                         {
+                                            var fieldType = excelinfo.FieldTypes[m];
+                                            // 注释类型不参与导出配置，不添加到数据成员里
+                                            if(XbufferExcelUtilities.IsNotationType(fieldType))
+                                            {
+                                                continue;
+                                            }
                                             ExcelData cd = new ExcelData();
                                             cd.Type = excelinfo.FieldTypes[m];
                                             cd.Name = excelinfo.FieldNames[m];
                                             //cd.Spliter = excelinfo.FieldSpliters[m];
                                             cd.Data = datas[m];
-                                            exceldatas[m] = cd;
+                                            exceldatas.Add(cd);
                                         }
 
                                         if (issuccess == false)
@@ -401,7 +397,7 @@ namespace XbufferExcelToData
                     else
                     {
                         // 注释类型强制不允许配置字段名，注释类型不需要名字检查
-                        bool isnotationtype = ExcelDataManager.Singleton.IsNotationType(types[i]);
+                        bool isnotationtype = XbufferExcelUtilities.IsNotationType(types[i]);
                         if(isnotationtype)
                         {
                             if (!string.IsNullOrEmpty(names[i]))

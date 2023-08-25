@@ -180,6 +180,15 @@ namespace XbufferExcelToData
         }
 
         /// <summary>
+        /// 是否是注释类型成员数据
+        /// </summary>
+        public bool IsNotationType
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="classData"></param>
@@ -195,6 +204,7 @@ namespace XbufferExcelToData
             BasicDataType = dataTypeDes;
             Comment = comment;
             ExcelDataType = XbufferExcelUtilities.GetExcelDataType(dataTypeDes);
+            IsNotationType = XbufferExcelUtilities.IsNotationType(dataTypeDes);
             if (ExcelDataType == ExcelDataType.BASIC_ONE_ARRAY)
             {
                 var lastBracketIndex = BasicDataType.LastIndexOf("[]");
@@ -229,7 +239,7 @@ namespace XbufferExcelToData
         /// <returns></returns>
         public bool IsValide()
         {
-            if (string.IsNullOrEmpty(Name))
+            if (!IsNotationType && string.IsNullOrEmpty(Name))
             {
                 Console.WriteLine($"Sheet:{OwnerClassData.ClassName}不允许配置空字段名成员数据！");
                 return false;
@@ -239,7 +249,7 @@ namespace XbufferExcelToData
                 Console.WriteLine($"Sheet:{OwnerClassData.ClassName},字段:{Name}不允许配置空字段类型数据！");
                 return false;
             }
-            if (XbufferExcelUtilities.IsClassExcelDataType(ExcelDataType) && (MemberClassData == null || !MemberClassData.IsValide()))
+            if (!IsNotationType && XbufferExcelUtilities.IsClassExcelDataType(ExcelDataType) && (MemberClassData == null || !MemberClassData.IsValide()))
             {
                 Console.WriteLine($"Sheet:{OwnerClassData.ClassName}的成员数据有无效数据！");
                 return false;

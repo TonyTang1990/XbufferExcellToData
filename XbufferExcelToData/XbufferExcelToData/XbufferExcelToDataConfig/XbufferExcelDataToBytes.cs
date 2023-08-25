@@ -100,20 +100,20 @@ namespace XbufferExcelToData
         /// <summary>
         /// 序列化一行Excel数据信息
         /// </summary>
-        /// <param name="excelData">Excel当行数据数组</param>
+        /// <param name="excelDataList">Excel当行数据数组</param>
         /// <param name="excelClassData">Excel类型数据</param>
         /// <param name="stream">Excel二进制写入流</param>
-        private bool SerializeExcelOneLineDatas(ExcelData[] excelData, ClassData excelClassData, XSteam stream)
+        private bool SerializeExcelOneLineDatas(List<ExcelData> excelDataList, ClassData excelClassData, XSteam stream)
         {
             // 先写入数据是否为空的bool信息
-            SerializNoneArrayData<boolBuffer>(excelData == null ? "true" : "false", stream);
-            if(excelData != null)
+            SerializNoneArrayData<boolBuffer>(excelDataList == null ? "true" : "false", stream);
+            if(excelDataList != null)
             {
                 var memberDataList = excelClassData.MemberDataList;
                 // 数据不为空才写入数据信息
-                for (int index = 0, length = excelData.Length; index < length; index++)
+                for (int index = 0, length = excelDataList.Count; index < length; index++)
                 {
-                    var data = excelData[index];
+                    var data = excelDataList[index];
                     // 理论上数据结构和数据数量一致一一对应
                     var memberData = memberDataList[index];
                     if(!SerializeExcelData(memberData, data.Data, stream))
@@ -135,6 +135,12 @@ namespace XbufferExcelToData
         /// <param name="stream">Xbuffer的内存管理分配对象</param>
         private bool SerializeExcelData(MemberData memberData, string data, XSteam stream)
         {
+            //注释类型只用于表格查看，不作为实际的数据，不应该进入序列化
+            if (memberData.IsNotationType)
+            {
+                Console.WriteLine($"成员字段:{memberData.Name}不应该参与数据序列化！");
+                return false;
+            }
             if(memberData.ExcelDataType == ExcelDataType.BASIC)
             {
                 return SerializeBasicExcelData(memberData.BasicDataType, data, stream);
@@ -175,12 +181,6 @@ namespace XbufferExcelToData
         /// <returns></returns>
         private bool SerializeBasicExcelData(string basicDataType, string data, XSteam stream)
         {
-            //注释类型只用于表格查看，不作为实际的数据
-            //不需要进行序列化
-            if (XbufferExcelUtilities.IsAnotationType(basicDataType))
-            {
-                return false;
-            }
             switch (basicDataType)
             {
                 case ExcelDataConst.IntTypeName:
@@ -210,12 +210,6 @@ namespace XbufferExcelToData
         /// <returns></returns>
         private bool SerializeBasicOneArrayExcelData(string basicDataType, string excelData, XSteam stream)
         {
-            //注释类型只用于表格查看，不作为实际的数据
-            //不需要进行序列化
-            if (XbufferExcelUtilities.IsAnotationType(basicDataType))
-            {
-                return false;
-            }
             switch (basicDataType)
             {
                 case ExcelDataConst.IntTypeName:
@@ -245,12 +239,6 @@ namespace XbufferExcelToData
         /// <returns></returns>
         private bool SerializeBasicTwoArrayExcelData(string basicDataType, string excelData, XSteam stream)
         {
-            //注释类型只用于表格查看，不作为实际的数据
-            //不需要进行序列化
-            if (XbufferExcelUtilities.IsAnotationType(basicDataType))
-            {
-                return false;
-            }
             switch (basicDataType)
             {
                 case ExcelDataConst.IntTypeName:
@@ -298,7 +286,7 @@ namespace XbufferExcelToData
                     var memberData = memberDataList[index];
                     //注释类型只用于表格查看，不作为实际的数据
                     //不需要进行序列化
-                    if (XbufferExcelUtilities.IsAnotationType(memberData.BasicDataType))
+                    if (XbufferExcelUtilities.IsNotationType(memberData.BasicDataType))
                     {
                         continue;
                     }

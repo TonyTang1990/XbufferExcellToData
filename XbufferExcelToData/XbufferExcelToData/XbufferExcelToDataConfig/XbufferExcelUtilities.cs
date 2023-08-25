@@ -78,7 +78,7 @@ namespace XbufferExcelToData
             {
                 return ExcelDataType.CLASS_TWO_ARRAY;
             }
-            return ExcelDataType.BASIC;
+            return ExcelDataType.INVALIDE;
         }
 
         /// <summary>
@@ -93,11 +93,11 @@ namespace XbufferExcelToData
         }
 
         /// <summary>
-        /// 指定基础数据类型是否是注释类型
+        /// 指定基础数据类型描述是否是注释类型
         /// </summary>
         /// <param name="basicDataType"></param>
         /// <returns></returns>
-        public static bool IsAnotationType(string basicDataType)
+        public static bool IsNotationType(string basicDataType)
         {
             return string.Equals(ExcelDataConst.NotationTypeName, basicDataType);
         }
@@ -113,8 +113,13 @@ namespace XbufferExcelToData
             var memberNum = excelInfo.FieldNames.Length;
             for (int memberIndex = 0, length = memberNum; memberIndex < length; memberIndex++)
             {
-                var memberName = excelInfo.FieldNames[memberIndex];
                 var memberType = excelInfo.FieldTypes[memberIndex];
+                // 注释类型不参与导出配置，不添加到数据成员里
+                if (XbufferExcelUtilities.IsNotationType(memberType))
+                {
+                    continue;
+                }
+                var memberName = excelInfo.FieldNames[memberIndex];
                 var memberComment = excelInfo.FieldNotations[memberIndex];
                 var memberData = new MemberData(classData, memberName, memberType, memberComment);
                 classData.AddMemberData(memberData);

@@ -38,7 +38,7 @@ namespace XbufferExcelToData
         public string[] FieldPlaceholder2s { get; set; }
 
         /// <summary> 表格数据信息列表 /// </summary>
-        public List<ExcelData[]> DatasList { get; private set; }
+        public List<List<ExcelData>> DatasList { get; private set; }
 
         public ExcelInfo()
         {
@@ -49,16 +49,16 @@ namespace XbufferExcelToData
             //FieldSpliters = null;
             FieldPlaceholder1s = null;
             FieldPlaceholder2s = null;
-            DatasList = new List<ExcelData[]>();
+            DatasList = new List<List<ExcelData>>();
         }
 
         /// <summary>
         /// 添加数据信息
         /// </summary>
-        /// <param name="exceldata"></param>
-        public void AddData(ExcelData[] exceldata)
+        /// <param name="excelDataList"></param>
+        public void AddData(List<ExcelData> excelDataList)
         {
-            DatasList.Add(exceldata);
+            DatasList.Add(excelDataList);
         }
 
         /// <summary>
