@@ -389,7 +389,7 @@ namespace XbufferExcelToData
                         oneDimensionArrayLength = oneDimensionDatas.Length;
                     }
                     // 写入每一维度数组的长度字节数信息
-                    SerializNoneArrayData<intBuffer>(oneDimensionDatas.Length.ToString(), stream);
+                    SerializNoneArrayData<intBuffer>(oneDimensionArrayLength.ToString(), stream);
                     if(oneDimensionArrayLength != 0)
                     {
                         // 序列化Class数据
