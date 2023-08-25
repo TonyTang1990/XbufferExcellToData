@@ -91,7 +91,10 @@ namespace XbufferExcelToData
             }
             for(int i = 0, length = datas.Length; i < length; i++)
             {
-                datas[i] = datas[i].Trim();
+                if(datas[i] != null)
+                {
+                    datas[i] = datas[i].Trim();
+                }
             }
         }
     }
