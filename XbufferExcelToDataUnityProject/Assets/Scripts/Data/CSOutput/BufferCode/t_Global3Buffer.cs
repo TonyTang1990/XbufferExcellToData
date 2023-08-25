@@ -6,44 +6,52 @@ namespace xbuffer
         {
 
             // 是否为空数据
-            bool _null = boolBuffer.Deserialize(buffer, ref offset);
-            if (_null) return null;
+            bool isNull = boolBuffer.Deserialize(buffer, ref offset);
+            if (isNull) return null;
 
 			// Id
-			int _Id = intBuffer.Deserialize(buffer, ref offset);
+			int Id = intBuffer.Deserialize(buffer, ref offset);
 
 			// stringvalue
-			string _stringvalue = stringBuffer.Deserialize(buffer, ref offset);
+			string stringvalue = stringBuffer.Deserialize(buffer, ref offset);
 
 			// intvalue
-			int _intvalue = intBuffer.Deserialize(buffer, ref offset);
+			int intvalue = intBuffer.Deserialize(buffer, ref offset);
 
 			// floatvalue
-			float _floatvalue = floatBuffer.Deserialize(buffer, ref offset);
+			float floatvalue = floatBuffer.Deserialize(buffer, ref offset);
 
 			// intarrayvalue
-			int _intarrayvalue_length = intBuffer.Deserialize(buffer, ref offset);
-            int[] _intarrayvalue = new int[_intarrayvalue_length];
-            for (int i = 0; i < _intarrayvalue_length; i++)
+			int intarrayvalueLength = intBuffer.Deserialize(buffer, ref offset);
+            int[] intarrayvalue = null;
+            if(intarrayvalueLength != 0)
             {
-                _intarrayvalue[i] = intBuffer.Deserialize(buffer, ref offset);
+                intarrayvalue = new int[intarrayvalueLength];
+                for (int i = 0; i < intarrayvalueLength; i++)
+                {
+                    intarrayvalue[i] = intBuffer.Deserialize(buffer, ref offset);
+                }            
             }
 
 			// stringarrayvalue
-			int _stringarrayvalue_length = intBuffer.Deserialize(buffer, ref offset);
-            string[] _stringarrayvalue = new string[_stringarrayvalue_length];
-            for (int i = 0; i < _stringarrayvalue_length; i++)
+			int stringarrayvalueLength = intBuffer.Deserialize(buffer, ref offset);
+            string[] stringarrayvalue = null;
+            if(stringarrayvalueLength != 0)
             {
-                _stringarrayvalue[i] = stringBuffer.Deserialize(buffer, ref offset);
+                stringarrayvalue = new string[stringarrayvalueLength];
+                for (int i = 0; i < stringarrayvalueLength; i++)
+                {
+                    stringarrayvalue[i] = stringBuffer.Deserialize(buffer, ref offset);
+                }            
             }
 
 			return new t_Global3(
-                _Id,
-                _stringvalue,
-                _intvalue,
-                _floatvalue,
-                _intarrayvalue,
-                _stringarrayvalue
+                Id,
+                stringvalue,
+                intvalue,
+                floatvalue,
+                intarrayvalue,
+                stringarrayvalue
             );
         }
 
@@ -67,17 +75,25 @@ namespace xbuffer
 			floatBuffer.Serialize(value.floatvalue, steam);
 
 			// intarrayvalue
-            intBuffer.Serialize(value.intarrayvalue.Length, steam);
-            for (int i = 0; i < value.intarrayvalue.Length; i++)
+            int intarrayvalueLength = value.intarrayvalue != null ? value.intarrayvalue.Length : 0;
+            intBuffer.Serialize(intarrayvalueLength, steam);
+            if(intarrayvalueLength != 0)
             {
-                intBuffer.Serialize(value.intarrayvalue[i], steam);
+                for (int i = 0; i < intarrayvalueLength; i++)
+                {
+                    intBuffer.Serialize(value.intarrayvalue[i], steam);
+                }
             }
 
 			// stringarrayvalue
-            intBuffer.Serialize(value.stringarrayvalue.Length, steam);
-            for (int i = 0; i < value.stringarrayvalue.Length; i++)
+            int stringarrayvalueLength = value.stringarrayvalue != null ? value.stringarrayvalue.Length : 0;
+            intBuffer.Serialize(stringarrayvalueLength, steam);
+            if(stringarrayvalueLength != 0)
             {
-                stringBuffer.Serialize(value.stringarrayvalue[i], steam);
+                for (int i = 0; i < stringarrayvalueLength; i++)
+                {
+                    stringBuffer.Serialize(value.stringarrayvalue[i], steam);
+                }
             }
         }
     }

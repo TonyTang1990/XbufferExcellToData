@@ -40,7 +40,6 @@ G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelTo
 G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\obj\Debug\XbufferExcelToData.csproj.CopyComplete
 G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\obj\Debug\XbufferExcelToData.exe
 G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\obj\Debug\XbufferExcelToData.pdb
-G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Debug\xbuffer_runtime.pdb
 E:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Debug\XbufferExcelToData.exe.config
 E:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Debug\XbufferExcelToData.exe
 E:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Debug\XbufferExcelToData.pdb
@@ -73,3 +72,4 @@ D:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToDat
 D:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\obj\Debug\XbufferExcelToData.csproj.CopyComplete
 D:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\obj\Debug\XbufferExcelToData.exe
 D:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\obj\Debug\XbufferExcelToData.pdb
+G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Debug\xbuffer_runtime.pdb

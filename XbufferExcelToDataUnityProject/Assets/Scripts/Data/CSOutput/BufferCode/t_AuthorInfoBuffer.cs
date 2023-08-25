@@ -6,74 +6,89 @@ namespace xbuffer
         {
 
             // 是否为空数据
-            bool _null = boolBuffer.Deserialize(buffer, ref offset);
-            if (_null) return null;
+            bool isNull = boolBuffer.Deserialize(buffer, ref offset);
+            if (isNull) return null;
 
 			// Id
-			int _Id = intBuffer.Deserialize(buffer, ref offset);
+			int Id = intBuffer.Deserialize(buffer, ref offset);
 
 			// author
-			string _author = stringBuffer.Deserialize(buffer, ref offset);
+			string author = stringBuffer.Deserialize(buffer, ref offset);
 
 			// age
-			int _age = intBuffer.Deserialize(buffer, ref offset);
+			int age = intBuffer.Deserialize(buffer, ref offset);
 
 			// money
-			float _money = floatBuffer.Deserialize(buffer, ref offset);
+			float money = floatBuffer.Deserialize(buffer, ref offset);
 
 			// hashouse
-			bool _hashouse = boolBuffer.Deserialize(buffer, ref offset);
+			bool hashouse = boolBuffer.Deserialize(buffer, ref offset);
 
 			// pbutctime
-			long _pbutctime = longBuffer.Deserialize(buffer, ref offset);
+			long pbutctime = longBuffer.Deserialize(buffer, ref offset);
 
 			// luckynumber
-			int _luckynumber_length = intBuffer.Deserialize(buffer, ref offset);
-            int[] _luckynumber = new int[_luckynumber_length];
-            for (int i = 0; i < _luckynumber_length; i++)
+			int luckynumberLength = intBuffer.Deserialize(buffer, ref offset);
+            int[] luckynumber = null;
+            if(luckynumberLength != 0)
             {
-                _luckynumber[i] = intBuffer.Deserialize(buffer, ref offset);
+                luckynumber = new int[luckynumberLength];
+                for (int i = 0; i < luckynumberLength; i++)
+                {
+                    luckynumber[i] = intBuffer.Deserialize(buffer, ref offset);
+                }            
             }
 
 			// weekday
-			byte _weekday = byteBuffer.Deserialize(buffer, ref offset);
+			byte weekday = byteBuffer.Deserialize(buffer, ref offset);
 
 			// testclass
-			t_AuthorInfo_testclass _testclass = t_AuthorInfo_testclassBuffer.Deserialize(buffer, ref offset);
+			t_AuthorInfo_testclass testclass = t_AuthorInfo_testclassBuffer.Deserialize(buffer, ref offset);
 
 			// testclassarray
-			int _testclassarray_length = intBuffer.Deserialize(buffer, ref offset);
-            t_AuthorInfo_testclassarray[] _testclassarray = new t_AuthorInfo_testclassarray[_testclassarray_length];
-            for (int i = 0; i < _testclassarray_length; i++)
+			int testclassarrayLength = intBuffer.Deserialize(buffer, ref offset);
+            t_AuthorInfo_testclassarray[] testclassarray = null;
+            if(testclassarrayLength != 0)
             {
-                _testclassarray[i] = t_AuthorInfo_testclassarrayBuffer.Deserialize(buffer, ref offset);
+                testclassarray = new t_AuthorInfo_testclassarray[testclassarrayLength];
+                for (int i = 0; i < testclassarrayLength; i++)
+                {
+                    testclassarray[i] = t_AuthorInfo_testclassarrayBuffer.Deserialize(buffer, ref offset);
+                }            
             }
 
 			// testclasstwoarray
-            int _testclasstwoarray_two_length = intBuffer.Deserialize(buffer, ref offset);
-            t_AuthorInfo_testclasstwoarray[][] _testclasstwoarray = new t_AuthorInfo_testclasstwoarray[_testclasstwoarray_two_length][];
-            for (int i = 0; i < _testclasstwoarray_two_length; i++)
+            int testclasstwoarrayTwoLength = intBuffer.Deserialize(buffer, ref offset);
+            t_AuthorInfo_testclasstwoarray[][] testclasstwoarray = null;
+            if(testclasstwoarrayTwoLength != 0)
             {
-                int _testclasstwoarray_one_length = intBuffer.Deserialize(buffer, ref offset);
-                _testclasstwoarray[i] = new t_AuthorInfo_testclasstwoarray[_testclasstwoarray_one_length];
-                for(int j = 0; j < _testclasstwoarray_one_length; j++)
+                testclasstwoarray = new t_AuthorInfo_testclasstwoarray[testclasstwoarrayTwoLength][];
+                for (int i = 0; i < testclasstwoarrayTwoLength; i++)
                 {
-                    _testclasstwoarray[i][j] = t_AuthorInfo_testclasstwoarrayBuffer.Deserialize(buffer, ref offset);
+                    int testclasstwoarrayOneLength = intBuffer.Deserialize(buffer, ref offset);
+                    if(testclasstwoarrayOneLength != 0)
+                    {
+                        testclasstwoarray[i] = new t_AuthorInfo_testclasstwoarray[testclasstwoarrayOneLength];
+                        for(int j = 0; j < testclasstwoarrayOneLength; j++)
+                        {
+                            testclasstwoarray[i][j] = t_AuthorInfo_testclasstwoarrayBuffer.Deserialize(buffer, ref offset);
+                        }
+                    }
                 }
             }
 
 			return new t_AuthorInfo(
-                _Id,
-                _author,
-                _age,
-                _money,
-                _hashouse,
-                _pbutctime,
-                _luckynumber,
-                _weekday,
-                _testclass,
-                _testclassarray,
-                _testclasstwoarray
+                Id,
+                author,
+                age,
+                money,
+                hashouse,
+                pbutctime,
+                luckynumber,
+                weekday,
+                testclass,
+                testclassarray,
+                testclasstwoarray
             );
         }
 
@@ -103,10 +118,14 @@ namespace xbuffer
 			longBuffer.Serialize(value.pbutctime, steam);
 
 			// luckynumber
-            intBuffer.Serialize(value.luckynumber.Length, steam);
-            for (int i = 0; i < value.luckynumber.Length; i++)
+            int luckynumberLength = value.luckynumber != null ? value.luckynumber.Length : 0;
+            intBuffer.Serialize(luckynumberLength, steam);
+            if(luckynumberLength != 0)
             {
-                intBuffer.Serialize(value.luckynumber[i], steam);
+                for (int i = 0; i < luckynumberLength; i++)
+                {
+                    intBuffer.Serialize(value.luckynumber[i], steam);
+                }
             }
 
 			// weekday
@@ -116,20 +135,24 @@ namespace xbuffer
 			t_AuthorInfo_testclassBuffer.Serialize(value.testclass, steam);
 
 			// testclassarray
-            intBuffer.Serialize(value.testclassarray.Length, steam);
-            for (int i = 0; i < value.testclassarray.Length; i++)
+            int testclassarrayLength = value.testclassarray != null ? value.testclassarray.Length : 0;
+            intBuffer.Serialize(testclassarrayLength, steam);
+            if(testclassarrayLength != 0)
             {
-                t_AuthorInfo_testclassarrayBuffer.Serialize(value.testclassarray[i], steam);
+                for (int i = 0; i < testclassarrayLength; i++)
+                {
+                    t_AuthorInfo_testclassarrayBuffer.Serialize(value.testclassarray[i], steam);
+                }
             }
 
 			// testclasstwoarray
-            int _testclasstwoarray_two_length = value.testclasstwoarray.Length;
-            intBuffer.Serialize(_testclasstwoarray_two_length, steam);
-            for (int i = 0; i < _testclasstwoarray_two_length; i++)
+            int testclasstwoarrayTwoLength = value.testclasstwoarray != null ? value.testclasstwoarray.Length : 0;
+            intBuffer.Serialize(testclasstwoarrayTwoLength, steam);
+            for (int i = 0; i < testclasstwoarrayTwoLength; i++)
             {
-                int _testclasstwoarray_one_length = value.testclasstwoarray[i].Length;
-                intBuffer.Serialize(_testclasstwoarray_one_length, steam);
-                for(int j = 0; j < _testclasstwoarray_one_length; j++)
+                int testclasstwoarrayOneLength = value.testclasstwoarray[i] != null ? value.testclasstwoarray[i].Length : 0;
+                intBuffer.Serialize(testclasstwoarrayOneLength, steam);
+                for(int j = 0; j < testclasstwoarrayOneLength; j++)
                 {
                     t_AuthorInfo_testclasstwoarrayBuffer.Serialize(value.testclasstwoarray[i][j], steam);
                 }

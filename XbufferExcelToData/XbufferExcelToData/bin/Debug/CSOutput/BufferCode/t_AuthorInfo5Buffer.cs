@@ -6,43 +6,47 @@ namespace xbuffer
         {
 
             // 是否为空数据
-            bool _null = boolBuffer.Deserialize(buffer, ref offset);
-            if (_null) return null;
+            bool isNull = boolBuffer.Deserialize(buffer, ref offset);
+            if (isNull) return null;
 
 			// Id
-			int _Id = intBuffer.Deserialize(buffer, ref offset);
+			int Id = intBuffer.Deserialize(buffer, ref offset);
 
 			// author
-			string _author = stringBuffer.Deserialize(buffer, ref offset);
+			string author = stringBuffer.Deserialize(buffer, ref offset);
 
 			// age
-			int _age = intBuffer.Deserialize(buffer, ref offset);
+			int age = intBuffer.Deserialize(buffer, ref offset);
 
 			// money
-			float _money = floatBuffer.Deserialize(buffer, ref offset);
+			float money = floatBuffer.Deserialize(buffer, ref offset);
 
 			// hashouse
-			bool _hashouse = boolBuffer.Deserialize(buffer, ref offset);
+			bool hashouse = boolBuffer.Deserialize(buffer, ref offset);
 
 			// pbutctime
-			long _pbutctime = longBuffer.Deserialize(buffer, ref offset);
+			long pbutctime = longBuffer.Deserialize(buffer, ref offset);
 
 			// luckynumber
-			int _luckynumber_length = intBuffer.Deserialize(buffer, ref offset);
-            int[] _luckynumber = new int[_luckynumber_length];
-            for (int i = 0; i < _luckynumber_length; i++)
+			int luckynumberLength = intBuffer.Deserialize(buffer, ref offset);
+            int[] luckynumber = null;
+            if(luckynumberLength != 0)
             {
-                _luckynumber[i] = intBuffer.Deserialize(buffer, ref offset);
+                luckynumber = new int[luckynumberLength];
+                for (int i = 0; i < luckynumberLength; i++)
+                {
+                    luckynumber[i] = intBuffer.Deserialize(buffer, ref offset);
+                }            
             }
 
 			return new t_AuthorInfo5(
-                _Id,
-                _author,
-                _age,
-                _money,
-                _hashouse,
-                _pbutctime,
-                _luckynumber
+                Id,
+                author,
+                age,
+                money,
+                hashouse,
+                pbutctime,
+                luckynumber
             );
         }
 
@@ -72,10 +76,14 @@ namespace xbuffer
 			longBuffer.Serialize(value.pbutctime, steam);
 
 			// luckynumber
-            intBuffer.Serialize(value.luckynumber.Length, steam);
-            for (int i = 0; i < value.luckynumber.Length; i++)
+            int luckynumberLength = value.luckynumber != null ? value.luckynumber.Length : 0;
+            intBuffer.Serialize(luckynumberLength, steam);
+            if(luckynumberLength != 0)
             {
-                intBuffer.Serialize(value.luckynumber[i], steam);
+                for (int i = 0; i < luckynumberLength; i++)
+                {
+                    intBuffer.Serialize(value.luckynumber[i], steam);
+                }
             }
         }
     }

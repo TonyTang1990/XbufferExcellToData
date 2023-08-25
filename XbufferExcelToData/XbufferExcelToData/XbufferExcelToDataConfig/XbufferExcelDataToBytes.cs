@@ -286,24 +286,28 @@ namespace XbufferExcelToData
                 return false;
             }
             // 先写入数据是否为空的bool信息
-            SerializNoneArrayData<boolBuffer>(string.IsNullOrEmpty(excelData) ? "true" : "false", stream);
+            bool isNull = string.IsNullOrEmpty(excelData);
+            SerializNoneArrayData<boolBuffer>(isNull ? "true" : "false", stream);
 
-            var memberDataList = classData.MemberDataList;
-            var datas = excelData.Split(ExcelDataConst.ClassMemberValueSpliter);
-            for(int index = 0, length = datas.Length; index < length; index++)
+            if(!isNull)
             {
-                var memberData = memberDataList[index];
-                //注释类型只用于表格查看，不作为实际的数据
-                //不需要进行序列化
-                if (XbufferExcelUtilities.IsAnotationType(memberData.BasicDataType))
+                var memberDataList = classData.MemberDataList;
+                var datas = excelData.Split(ExcelDataConst.ClassMemberValueSpliter);
+                for (int index = 0, length = datas.Length; index < length; index++)
                 {
-                    continue;
-                }
-                var data = datas[index];
-                if(!SerializeBasicExcelData(memberData.BasicDataType, data, stream))
-                {
-                    Console.WriteLine($"Class Name:{classData.ClassName}的成员:{memberData.Name}数据:{data}配置有误，解析失败！");
-                    return false;
+                    var memberData = memberDataList[index];
+                    //注释类型只用于表格查看，不作为实际的数据
+                    //不需要进行序列化
+                    if (XbufferExcelUtilities.IsAnotationType(memberData.BasicDataType))
+                    {
+                        continue;
+                    }
+                    var data = datas[index];
+                    if (!SerializeBasicExcelData(memberData.BasicDataType, data, stream))
+                    {
+                        Console.WriteLine($"Class Name:{classData.ClassName}的成员:{memberData.Name}数据:{data}配置有误，解析失败！");
+                        return false;
+                    }
                 }
             }
             return true;
@@ -322,17 +326,17 @@ namespace XbufferExcelToData
                 Console.WriteLine($"沒传递有效的Class结构数据，序列化Class结构一维数组数据失败！");
                 return false;
             }
-            if (string.IsNullOrEmpty(excelData))
+            int arrayLength = 0;
+            string[] datas = null;
+            if (!string.IsNullOrEmpty(excelData))
             {
-                // 未配置一维数据，默认长度默认为0
-                SerializNoneArrayData<intBuffer>("0", stream);
+                datas = excelData.Split(ExcelDataConst.OneDimensionSpliter);
+                arrayLength = datas.Length;
             }
-            else
+            // 写入一维数组的长度字节数信息
+            SerializNoneArrayData<intBuffer>(arrayLength.ToString(), stream);
+            if(arrayLength != 0)
             {
-                // 只支持1维数据的配置和快速解析
-                var datas = excelData.Split(ExcelDataConst.OneDimensionSpliter);
-                // 写入一维数组的长度字节数信息
-                SerializNoneArrayData<intBuffer>(datas.Length.ToString(), stream);
                 // 开始序列化一维数组数据
                 for(int index = 0, length = datas.Length; index < length; index++)
                 {
@@ -360,33 +364,43 @@ namespace XbufferExcelToData
                 Console.WriteLine($"沒传递有效的Class结构数据，序列化Class结构二维数组数据失败！");
                 return false;
             }
-            if (string.IsNullOrEmpty(excelDdata))
+            int twoDimensionArrayLength = 0;
+            string[] twoDimensionDatas = null;
+            if (!string.IsNullOrEmpty(excelDdata))
             {
-                // 未配置二维数据，默认长度默认为0
-                SerializNoneArrayData<intBuffer>("0", stream);
+                twoDimensionDatas = excelDdata.Split(ExcelDataConst.TwoDimensionSpliter);
+                twoDimensionArrayLength = twoDimensionDatas.Length;
             }
-            else
+            // 写入二维数组第一维度的长度字节数信息
+            SerializNoneArrayData<intBuffer>(twoDimensionArrayLength.ToString(), stream);
+            // 只有二维数组有数据时才序列化数据，反序列化同理(优化数组不配数据时的情况)
+            if (twoDimensionArrayLength != 0)
             {
-                var twoDimensionDatas = excelDdata.Split(ExcelDataConst.TwoDimensionSpliter);
-                // 写入二维数组第一维度的长度字节数信息
-                SerializNoneArrayData<intBuffer>(twoDimensionDatas.Length.ToString(), stream);
-
                 // 开始序列化第一维度数组数据
                 for(int index1 = 0, length1 = twoDimensionDatas.Length; index1 < length1; index1++)
                 {
                     var twoDimensionData = twoDimensionDatas[index1];
-                    // 写入每一维度数据长度+每一维度的数据
-                    var oneDimensionDatas = twoDimensionData.Split(ExcelDataConst.OneDimensionSpliter);
+                    int oneDimensionArrayLength = 0;
+                    string[] oneDimensionDatas = null;
+                    if (!string.IsNullOrEmpty(twoDimensionData))
+                    {
+                        // 写入每一维度数据长度+每一维度的数据
+                        oneDimensionDatas = twoDimensionData.Split(ExcelDataConst.OneDimensionSpliter);
+                        oneDimensionArrayLength = oneDimensionDatas.Length;
+                    }
                     // 写入每一维度数组的长度字节数信息
                     SerializNoneArrayData<intBuffer>(oneDimensionDatas.Length.ToString(), stream);
-                    // 序列化Class数据
-                    for(int index2 = 0, length2 = oneDimensionDatas.Length; index2 < length2; index2++)
+                    if(oneDimensionArrayLength != 0)
                     {
-                        var oneDimensionData = oneDimensionDatas[index2];
-                        if (!SerializeClassExcelData(classData, oneDimensionData, stream))
+                        // 序列化Class数据
+                        for (int index2 = 0, length2 = oneDimensionDatas.Length; index2 < length2; index2++)
                         {
-                            Console.WriteLine($"Class Name:{classData.ClassName}的第[{index1}][{index2}]数据:{oneDimensionData}配置有误，解析失败！");
-                            return false;
+                            var oneDimensionData = oneDimensionDatas[index2];
+                            if (!SerializeClassExcelData(classData, oneDimensionData, stream))
+                            {
+                                Console.WriteLine($"Class Name:{classData.ClassName}的第[{index1}][{index2}]数据:{oneDimensionData}配置有误，解析失败！");
+                                return false;
+                            }
                         }
                     }
                 }
@@ -566,23 +580,23 @@ namespace XbufferExcelToData
         /// <param name="stream">Xbuffer的内存管理分配对象</param>
         private bool SerializOneDimensionArrayData<T>(string data, XSteam stream)
         {
-            if(string.IsNullOrEmpty(data))
+            int arrayLength = 0;
+            string[] datas = null;
+            if (!string.IsNullOrEmpty(data))
             {
-                // 未配置一维数据，默认长度默认为0
-                SerializNoneArrayData<intBuffer>("0", stream);
+                datas = data.Split(ExcelDataConst.OneDimensionSpliter);
+                arrayLength = datas.Length;
             }
-            else
+            // 写入一维数组的长度字节数信息
+            SerializNoneArrayData<intBuffer>(arrayLength.ToString(), stream);
+            // 只有一维数组有数据时才序列化数据，反序列化同理(优化数组不配数据时的情况)
+            if (arrayLength != 0 && datas != null)
             {
-                // 只支持1维数据的配置和快速解析
-                var datas = data.Split(ExcelDataConst.OneDimensionSpliter);
-                // 写入一维数组的长度字节数信息
-                SerializNoneArrayData<intBuffer>(datas.Length.ToString(), stream);
-
                 // 开始序列化一维数组数据
-                for(int index = 0, length = datas.Length; index < length; index++)
+                for (int index = 0, length = datas.Length; index < length; index++)
                 {
                     var dt = datas[index];
-                    if(!SerializNoneArrayData<T>(dt, stream))
+                    if (!SerializNoneArrayData<T>(dt, stream))
                     {
                         Console.WriteLine($"一维数组[{index}]数据:{data}配置有误，解析失败！");
                         return false;
@@ -599,36 +613,47 @@ namespace XbufferExcelToData
         /// <param name="stream">Xbuffer的内存管理分配对象</param>
         private bool SerializTwoDimensionArrayData<T>(string data, XSteam stream)
         {
-            if (string.IsNullOrEmpty(data))
+            int twoDimensionArrayLength = 0;
+            string[] twoDimensionDatas = null;
+            if (!string.IsNullOrEmpty(data))
             {
-                // 未配置二维数据，默认长度默认为0
-                SerializNoneArrayData<intBuffer>("0", stream);
+                twoDimensionDatas = data.Split(ExcelDataConst.TwoDimensionSpliter);
+                twoDimensionArrayLength = twoDimensionDatas.Length;
             }
-            else
+            // 写入二维数组第一维度的长度字节数信息
+            SerializNoneArrayData<intBuffer>(twoDimensionArrayLength.ToString(), stream);
+            // 只有二维数组有数据时才序列化数据，反序列化同理(优化数组不配数据时的情况)
+            if (twoDimensionArrayLength != 0)
             {
-                var twoDimensionDatas = data.Split(ExcelDataConst.TwoDimensionSpliter);
-                // 写入二维数组第一维度的长度字节数信息
-                SerializNoneArrayData<intBuffer>(twoDimensionDatas.Length.ToString(), stream);
-
                 // 开始序列化第一维度数组数据
-                for(int index1 = 0, length1 = twoDimensionDatas.Length; index1 < length1; index1++)
+                for (int index1 = 0, length1 = twoDimensionDatas.Length; index1 < length1; index1++)
                 {
                     var twoDimensionData = twoDimensionDatas[index1];
-                    // 写入每一维度数据长度+每一维度的数据
-                    var oneDimensionDatas = twoDimensionData.Split(ExcelDataConst.OneDimensionSpliter);
+                    int oneDimensionArrayLength = 0;
+                    string[] oneDimensionDatas = null;
+                    if(!string.IsNullOrEmpty(twoDimensionData))
+                    {
+                        // 写入每一维度数据长度+每一维度的数据
+                        oneDimensionDatas = twoDimensionData.Split(ExcelDataConst.OneDimensionSpliter);
+                        oneDimensionArrayLength = oneDimensionDatas.Length;
+                    }
                     // 写入每一维度数组的长度字节数信息
                     SerializNoneArrayData<intBuffer>(oneDimensionDatas.Length.ToString(), stream);
-                    for(int index2 = 0, length2 = oneDimensionDatas.Length; index2 < length2; index2++)
+                    // 只有一维数组有数据时才序列化数据，反序列化同理(优化数组不配数据时的情况)
+                    if (oneDimensionArrayLength != 0)
                     {
-                        var oneDimensionData = oneDimensionDatas[index2];
-                        if (!SerializNoneArrayData<T>(oneDimensionData, stream))
+                        for (int index2 = 0, length2 = oneDimensionDatas.Length; index2 < length2; index2++)
                         {
-                            Console.WriteLine($"二维数组[{index1}][{index2}]数据:{data}配置有误，解析失败！");
-                            return false;
+                            var oneDimensionData = oneDimensionDatas[index2];
+                            if (!SerializNoneArrayData<T>(oneDimensionData, stream))
+                            {
+                                Console.WriteLine($"二维数组[{index1}][{index2}]数据:{data}配置有误，解析失败！");
+                                return false;
+                            }
                         }
                     }
                 }
-            }
+                }
             return true;
         }
 

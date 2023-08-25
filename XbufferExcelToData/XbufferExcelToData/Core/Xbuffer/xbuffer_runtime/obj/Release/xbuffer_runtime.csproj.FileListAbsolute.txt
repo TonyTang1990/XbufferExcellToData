@@ -19,4 +19,3 @@ E:\TonyTang\Work\Projects\MyGitHubProjects\XbuffExcelToData\XbufferExcelToData\X
 D:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\bin\Release\xbuffer_runtime.dll
 D:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\Core\Xbuffer\xbuffer_runtime\obj\Release\xbuffer_runtime.csproj.CoreCompileInputs.cache
 D:\TonyTang\Work\Projects\MyGitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\Core\Xbuffer\xbuffer_runtime\obj\Release\xbuffer_runtime.dll
-G:\Projects\GitHubProjects\XbufferExcellToData\XbufferExcelToData\XbufferExcelToData\Core\Xbuffer\xbuffer_runtime\obj\Release\xbuffer_runtime.csproj.AssemblyReference.cache

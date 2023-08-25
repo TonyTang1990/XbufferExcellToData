@@ -6,26 +6,26 @@ namespace xbuffer
         {
 
             // 是否为空数据
-            bool _null = boolBuffer.Deserialize(buffer, ref offset);
-            if (_null) return null;
+            bool isNull = boolBuffer.Deserialize(buffer, ref offset);
+            if (isNull) return null;
 
 			// WinName
-			string _WinName = stringBuffer.Deserialize(buffer, ref offset);
+			string WinName = stringBuffer.Deserialize(buffer, ref offset);
 
 			// ResPath
-			string _ResPath = stringBuffer.Deserialize(buffer, ref offset);
+			string ResPath = stringBuffer.Deserialize(buffer, ref offset);
 
 			// IsFullScreen
-			bool _IsFullScreen = boolBuffer.Deserialize(buffer, ref offset);
+			bool IsFullScreen = boolBuffer.Deserialize(buffer, ref offset);
 
 			// Layer
-			int _Layer = intBuffer.Deserialize(buffer, ref offset);
+			int Layer = intBuffer.Deserialize(buffer, ref offset);
 
 			return new t_ui(
-                _WinName,
-                _ResPath,
-                _IsFullScreen,
-                _Layer
+                WinName,
+                ResPath,
+                IsFullScreen,
+                Layer
             );
         }
 

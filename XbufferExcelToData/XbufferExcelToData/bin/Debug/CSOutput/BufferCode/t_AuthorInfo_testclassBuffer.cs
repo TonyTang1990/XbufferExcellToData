@@ -6,22 +6,22 @@ namespace xbuffer
         {
 
             // 是否为空数据
-            bool _null = boolBuffer.Deserialize(buffer, ref offset);
-            if (_null) return null;
+            bool isNull = boolBuffer.Deserialize(buffer, ref offset);
+            if (isNull) return null;
 
 			// id
-			int _id = intBuffer.Deserialize(buffer, ref offset);
+			int id = intBuffer.Deserialize(buffer, ref offset);
 
 			// num
-			int _num = intBuffer.Deserialize(buffer, ref offset);
+			int num = intBuffer.Deserialize(buffer, ref offset);
 
 			// des
-			string _des = stringBuffer.Deserialize(buffer, ref offset);
+			string des = stringBuffer.Deserialize(buffer, ref offset);
 
 			return new t_AuthorInfo_testclass(
-                _id,
-                _num,
-                _des
+                id,
+                num,
+                des
             );
         }
 

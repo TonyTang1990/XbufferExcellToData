@@ -85,36 +85,73 @@ public class GameLauncher : MonoBehaviour {
             Debug.Log($"authorinfo.money : {authorinfo.money}");
             Debug.Log($"authorinfo.pbutctime : {authorinfo.pbutctime}");
 
-            Debug.Log($"authorinfo.lucknumber.Length : {authorinfo.luckynumber.Length}");
-            foreach (var lucknumber in authorinfo.luckynumber)
+            if(authorinfo.luckynumber != null)
             {
-                Debug.Log($"authorinfo.lucknumber : {lucknumber}");
+                Debug.Log($"authorinfo.lucknumber.Length : {authorinfo.luckynumber.Length}");
+                foreach (var lucknumber in authorinfo.luckynumber)
+                {
+                    Debug.Log($"authorinfo.lucknumber : {lucknumber}");
+                }
+            }
+            else
+            {
+                Debug.Log($"authorinfo.lucknumber = null");
             }
 
             Debug.Log($"authorinfo.weekday:{authorinfo.weekday}");
 
-            Debug.Log($"authorinfo.testclass.id : {authorinfo.testclass.id}");
-            Debug.Log($"authorinfo.testclass.num : {authorinfo.testclass.num}");
-            Debug.Log($"authorinfo.testclass.des : {authorinfo.testclass.des}");
-
-            Debug.Log($"authorinfo.testclassarray.Length : {authorinfo.testclassarray.Length}");
-            foreach (var testclass in authorinfo.testclassarray)
+            if(authorinfo.testclass != null)
             {
-                Debug.Log($"authorinfo.testclassarray.testclass.param1 : {testclass.param1}");
-                Debug.Log($"authorinfo.testclassarray.testclass.param2 : {testclass.param2}");
-                Debug.Log($"authorinfo.testclassarray.testclass.param3 : {testclass.param3}");
+                Debug.Log($"authorinfo.testclass.id : {authorinfo.testclass.id}");
+                Debug.Log($"authorinfo.testclass.num : {authorinfo.testclass.num}");
+                Debug.Log($"authorinfo.testclass.des : {authorinfo.testclass.des}");
+            }
+            else
+            {
+                Debug.Log($"authorinfo.testclass = null");
             }
 
-            Debug.Log($"authorinfo.testclasstwoarray.Length : {authorinfo.testclasstwoarray.Length}");
-            foreach (var testclasstwo in authorinfo.testclasstwoarray)
+            if (authorinfo.testclassarray != null)
             {
-                Debug.Log($"testclasstwo.Length : {testclasstwo.Length}");
-                foreach(var testclass in testclasstwo)
+                Debug.Log($"authorinfo.testclassarray.Length : {authorinfo.testclassarray.Length}");
+                foreach (var testclass in authorinfo.testclassarray)
                 {
-                    Debug.Log($"authorinfo.testclasstwoarray.testclasstwo.testclass.param11 : {testclass.param11}");
-                    Debug.Log($"authorinfo.testclasstwoarray.testclasstwo..testclass.param22 : {testclass.param22}");
-                    Debug.Log($"authorinfo.testclasstwoarray.testclasstwo..testclass.param33 : {testclass.param33}");
+                    Debug.Log($"authorinfo.testclassarray.testclass.param1 : {testclass.param1}");
+                    Debug.Log($"authorinfo.testclassarray.testclass.param2 : {testclass.param2}");
+                    Debug.Log($"authorinfo.testclassarray.testclass.param3 : {testclass.param3}");
                 }
+            }
+            else
+            {
+                Debug.Log($"authorinfo.testclassarray = null");
+            }
+
+            if(authorinfo.testclasstwoarray != null)
+            {
+                Debug.Log($"authorinfo.testclasstwoarray.Length : {authorinfo.testclasstwoarray.Length}");
+                for(int index1 = 0, length1 = authorinfo.testclasstwoarray.Length; index1 < length1; index1++)
+                {
+                    var testclasstwo = authorinfo.testclasstwoarray[index1];
+                    if(testclasstwo != null)
+                    {
+                        Debug.Log($"testclasstwo.Length : {testclasstwo.Length}");
+                        for(int index2 = 0, length2 = testclasstwo.Length; index2 < length2; index2++)
+                        {
+                            var testclass = testclasstwo[index2];
+                            Debug.Log($"authorinfo.testclasstwoarray.testclasstwo.testclass.param11 : {testclass.param11}");
+                            Debug.Log($"authorinfo.testclasstwoarray.testclasstwo..testclass.param22 : {testclass.param22}");
+                            Debug.Log($"authorinfo.testclasstwoarray.testclasstwo..testclass.param33 : {testclass.param33}");
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log($"authorinfo.testclasstwoarray[{index1}] = null");
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log($"authorinfo.testclasstwoarray = null");
             }
         }
     }
